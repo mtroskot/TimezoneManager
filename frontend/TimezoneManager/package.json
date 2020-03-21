@@ -9,6 +9,18 @@
     "test": "jest",
     "lint": "eslint ."
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix --fix-type problem",
+      "git add"
+    ]
+  },
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.5"
