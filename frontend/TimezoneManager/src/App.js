@@ -1,12 +1,28 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import AppContainer from 'src/navigation';
+import { NavigationService } from 'src/services';
+import store, { getPersistor } from 'src/store';
 
-const App = () => {
+const persistor = getPersistor();
+
+export default function App() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
-      <Text style={{ textAlign: 'center' }}>App</Text>
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <PersistGate loading={null} persistor={persistor}>
+          <AppContainer ref={ref => NavigationService.setTopLevelNavigator(ref)} />
+        </PersistGate>
+      </View>
+    </Provider>
   );
-};
+}
 
-export default React.memo(App);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  }
+});
