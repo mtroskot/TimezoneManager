@@ -117,7 +117,7 @@ CustomButton.propTypes = {
   tOpacityStyle: ViewPropTypes.style,
   viewStyle: ViewPropTypes.style,
   // eslint-disable-next-line react/forbid-prop-types
-  textStyle: PropTypes.object,
+  textStyle: PropTypes.oneOfType(PropTypes.object, PropTypes.array),
   iconStyle: ViewPropTypes.style,
   animationProps: PropTypes.shape({
     animateIcon: PropTypes.bool,

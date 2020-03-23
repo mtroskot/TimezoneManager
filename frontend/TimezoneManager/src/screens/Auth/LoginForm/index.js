@@ -34,7 +34,7 @@ const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
         isLoading={isLoading}
         text={'Login'}
         tOpacityStyle={loginStyles.submitButton}
-        textStyle={[loginStyles.loginButtonText]}
+        textStyle={loginStyles.loginButtonText}
       />
     </View>
   );
