@@ -70,7 +70,7 @@ const Auth = () => {
   const switchFormButtonText = !showLoginForm ? 'Login' : 'Create Account';
   return (
     <SafeAreaView style={styles.safeArea}>
-      <KeyboardAvoidAndDismissView viewStyle={styles.container}>
+      <KeyboardAvoidAndDismissView viewStyle={styles.container} behavior={''}>
         {form}
         <View style={styles.switchFormContainer}>
           <Text style={styles.switchFormText}>{switchFormText}</Text>

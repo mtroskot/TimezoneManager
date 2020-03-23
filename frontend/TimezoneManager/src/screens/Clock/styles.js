@@ -3,6 +3,9 @@ import { dimensions } from 'src/styles';
 const { rem } = dimensions;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1
+  },
   container: {
     flex: 1,
     zIndex: 0,

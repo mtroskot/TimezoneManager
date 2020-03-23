@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import CurrentTimezoneClock from 'src/screens/Clock/CurrentTimezoneClock';
 import TimezoneEntries from 'src/screens/Clock/TimezoneEntries';
 import { CustomButton } from 'src/components';
@@ -117,19 +118,25 @@ const ClockManager = () => {
 
   const listEmpty = error || isLoading || entries.length === 0;
   return (
-    <View style={styles.container}>
-      <CurrentTimezoneClock
-        currTime={DateUtils.formatDate(date, clockFormat)}
-        month={DateUtils.formatDate(date, dateFormat)}
-        timezoneOffset={timezoneOffset}
-      />
-      <TimezoneEntries
-        {...{ minutes, seconds, entries, error, isLoading, loadingText: 'Loading Timezone Entries', animateIcon }}
-      />
-      <View style={!listEmpty ? styles.absolutePosition : null}>
-        <CustomButton iconProps={{ name: icons.GLOBE }} viewStyle={[styles.globeButton]} onPress={onAddTimezonePress} />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <CurrentTimezoneClock
+          currTime={DateUtils.formatDate(date, clockFormat)}
+          month={DateUtils.formatDate(date, dateFormat)}
+          timezoneOffset={timezoneOffset}
+        />
+        <TimezoneEntries
+          {...{ minutes, seconds, entries, error, isLoading, loadingText: 'Loading Timezone Entries', animateIcon }}
+        />
+        <View style={!listEmpty ? styles.absolutePosition : null}>
+          <CustomButton
+            iconProps={{ name: icons.GLOBE }}
+            viewStyle={[styles.globeButton]}
+            onPress={onAddTimezonePress}
+          />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
