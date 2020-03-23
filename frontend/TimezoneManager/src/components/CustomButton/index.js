@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Animated, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
+import Loader from 'src/components/Loader';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { AppUtils, HooksUtils } from 'src/utils';
 import { dimensions } from 'src/styles';
+import PropTypes from 'prop-types';
 const { rem } = dimensions;
 
 const CustomButton = props => {
   const [shakeAnimation] = useState(new Animated.Value(0));
-  const { iconProps, tOpacityStyle, viewStyle, textStyle, iconStyle, text, onPress, animationProps, disabled } = props;
+  const {
+    iconProps,
+    tOpacityStyle,
+    viewStyle,
+    textStyle,
+    iconStyle,
+    text,
+    onPress,
+    animationProps,
+    disabled,
+    isLoading
+  } = props;
 
   const buttonText = text ? <Text style={textStyle}>{text}</Text> : null;
 
@@ -36,6 +48,10 @@ const CustomButton = props => {
       shakeAnimation.setValue(0);
     }
   }, [animationProps?.animateIcon]);
+
+  if (isLoading) {
+    return <Loader viewStyle={[tOpacityStyle, { backgroundColor: 'transparent' }]} />;
+  }
 
   const buttonIcon = iconProps ? (
     <Animated.View
@@ -108,7 +124,8 @@ CustomButton.propTypes = {
     direction: PropTypes.oneOf(['horizontal', 'vertical']),
     duration: PropTypes.number
   }),
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  isLoading: PropTypes.bool
 };
 
 export default React.memo(CustomButton);
