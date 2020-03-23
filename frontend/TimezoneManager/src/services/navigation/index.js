@@ -1,4 +1,5 @@
 import { NavigationActions, StackActions } from 'react-navigation';
+import { DrawerActions } from 'react-navigation-drawer';
 
 let navigator;
 
@@ -66,6 +67,14 @@ function goBack() {
   navigator.dispatch(NavigationActions.back());
 }
 
+function closeDrawer() {
+  navigator.dispatch(DrawerActions.closeDrawer());
+}
+
+function openDrawer() {
+  navigator.dispatch(DrawerActions.openDrawer());
+}
+
 // add other navigation functions that you need and export them
 const NavigationService = {
   setTopLevelNavigator,
@@ -75,6 +84,8 @@ const NavigationService = {
   reset,
   pop,
   popToTop,
-  goBack
+  goBack,
+  closeDrawer,
+  openDrawer
 };
 export default NavigationService;
