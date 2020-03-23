@@ -45,7 +45,7 @@ const AppStack = createStackNavigator(
     [stackNames.CLOCK_STACK]: ClockStack
   },
   {
-    initialRouteName: stackNames.CLOCK_STACK,
+    initialRouteName: stackNames.AUTH_STACK,
     headerMode: 'none'
   }
 );

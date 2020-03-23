@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     margin: 10 * rem
   },
   topMargin: {
-    marginTop: 20 * rem
+    marginTop: 20 * rem,
+    bottom: -15 * rem
   }
 });
 
