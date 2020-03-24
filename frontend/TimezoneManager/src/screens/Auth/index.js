@@ -7,6 +7,7 @@ import { CustomButton, KeyboardAvoidAndDismissView } from 'src/components';
 import SafeAreaView from 'react-native-safe-area-view';
 import { screenNames } from 'src/constants/navigation';
 import NavigationService from 'src/services/navigation';
+import appStyles from 'src/styles/appStyles';
 
 const initialRegisterFormState = {
   firstName: '',
@@ -69,17 +70,19 @@ const Auth = () => {
   const switchFormText = showLoginForm ? `Don't have an account?` : `Already have an account?`;
   const switchFormButtonText = !showLoginForm ? 'Login' : 'Create Account';
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={appStyles.safeArea}>
       <KeyboardAvoidAndDismissView viewStyle={styles.container} behavior={''}>
         {form}
-        <View style={styles.switchFormContainer}>
-          <Text style={styles.switchFormText}>{switchFormText}</Text>
-          <CustomButton
-            onPress={onSwitchForm}
-            text={switchFormButtonText}
-            textStyle={[styles.loginButtonText, { color: '#EAA79E' }]}
-          />
-        </View>
+        {!isLoading && (
+          <View style={styles.switchFormContainer}>
+            <Text style={styles.switchFormText}>{switchFormText}</Text>
+            <CustomButton
+              onPress={onSwitchForm}
+              text={switchFormButtonText}
+              textStyle={[appStyles.buttonText, { color: '#EAA79E' }]}
+            />
+          </View>
+        )}
       </KeyboardAvoidAndDismissView>
     </SafeAreaView>
   );

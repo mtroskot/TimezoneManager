@@ -3,13 +3,14 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { CustomButton, FloatingLabelTextInput } from 'src/components';
 import loginStyles from 'src/screens/Auth/styles';
+import appStyles from 'src/styles/appStyles';
 
 const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
   const textInputRef = useRef(null);
   return (
     <View>
       <View style={loginStyles.headerView}>
-        <Text style={loginStyles.headerText}>Welcome Back</Text>
+        <Text style={appStyles.headerText}>Welcome Back</Text>
       </View>
       <FloatingLabelTextInput
         value={loginForm.email}
@@ -33,8 +34,8 @@ const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
         onPress={handleLogin}
         isLoading={isLoading}
         text={'Login'}
-        tOpacityStyle={loginStyles.submitButton}
-        textStyle={loginStyles.loginButtonText}
+        tOpacityStyle={appStyles.submitButton}
+        textStyle={appStyles.buttonText}
       />
     </View>
   );

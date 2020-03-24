@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { CustomButton, FloatingLabelTextInput } from 'src/components';
 import PropTypes from 'prop-types';
 import loginStyles from 'src/screens/Auth/styles';
+import appStyles from 'src/styles/appStyles';
 
 const RegisterForm = ({ registerForm, handleInput, handleRegister, isLoading }) => {
   const textInputRef1 = useRef(null);
@@ -11,7 +12,7 @@ const RegisterForm = ({ registerForm, handleInput, handleRegister, isLoading }) 
   return (
     <View>
       <View style={loginStyles.headerView} bounces={false}>
-        <Text style={loginStyles.headerText}>Create an Account</Text>
+        <Text style={appStyles.headerText}>Create an Account</Text>
       </View>
       <View style={loginStyles.formContainer}>
         <FloatingLabelTextInput
@@ -59,8 +60,8 @@ const RegisterForm = ({ registerForm, handleInput, handleRegister, isLoading }) 
         onPress={handleRegister}
         isLoading={isLoading}
         text={'Create Account'}
-        tOpacityStyle={loginStyles.submitButton}
-        textStyle={[loginStyles.loginButtonText]}
+        tOpacityStyle={appStyles.submitButton}
+        textStyle={appStyles.buttonText}
       />
     </View>
   );

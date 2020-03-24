@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#F2F2F2',
-    justifyContent: 'center'
+    backgroundColor: '#F2F2F2'
   },
   switchFormContainer: {
     flex: 1,
@@ -35,27 +34,6 @@ const styles = StyleSheet.create({
   },
   headerView: {
     marginVertical: 45 * rem
-  },
-  headerText: {
-    ...fonts.ubuntu.normal.medium,
-    fontSize: 22 * rem,
-    color: '#334144',
-    textAlign: 'center'
-  },
-  submitButton: {
-    backgroundColor: '#EAA79E',
-    marginTop: 10 * rem,
-    borderRadius: 5 * rem,
-    paddingHorizontal: 20 * rem,
-    paddingVertical: 15,
-    width: '90%',
-    alignSelf: 'center'
-  },
-  loginButtonText: {
-    ...fonts.ubuntu.normal.medium,
-    fontSize: 16 * rem,
-    textAlign: 'center',
-    color: '#fff'
   }
 });
 
