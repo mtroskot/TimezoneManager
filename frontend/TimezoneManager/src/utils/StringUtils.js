@@ -14,11 +14,16 @@ function areNotEmpty(...strings) {
   return !areEmpty(...strings);
 }
 
+function isString(str) {
+  return typeof str === 'string';
+}
+
 const StringUtils = {
   isEmpty,
   isNotEmpty,
   areEmpty,
-  areNotEmpty
+  areNotEmpty,
+  isString
 };
 
 export default StringUtils;
