@@ -1,4 +1,5 @@
 export { default as CustomButton } from 'src/components/CustomButton';
+export { default as Dropdown } from 'src/components/Dropdown';
 export { default as Error404 } from 'src/components/Error404';
 export { default as FloatingLabelTextInput } from 'src/components/FloatingLabelTextInput';
 export { default as KeyboardAvoidAndDismissView } from 'src/components/KeyboardAvoidAndDismissView';

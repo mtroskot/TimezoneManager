@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { AppUtils, HooksUtils } from 'src/utils';
 import { dimensions } from 'src/styles';
 import PropTypes from 'prop-types';
+import styles from 'src/components/CustomButton/styles';
 const { rem } = dimensions;
 
 const CustomButton = props => {
@@ -22,7 +23,7 @@ const CustomButton = props => {
     isLoading
   } = props;
 
-  const buttonText = text ? <Text style={textStyle}>{text}</Text> : null;
+  const buttonText = text ? <Text style={[styles.text, textStyle]}>{text}</Text> : null;
 
   HooksUtils.useDidMountUnmount(
     () => {
@@ -117,7 +118,7 @@ CustomButton.propTypes = {
   tOpacityStyle: ViewPropTypes.style,
   viewStyle: ViewPropTypes.style,
   // eslint-disable-next-line react/forbid-prop-types
-  textStyle: PropTypes.oneOfType(PropTypes.object, PropTypes.array),
+  textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   iconStyle: ViewPropTypes.style,
   animationProps: PropTypes.shape({
     animateIcon: PropTypes.bool,
