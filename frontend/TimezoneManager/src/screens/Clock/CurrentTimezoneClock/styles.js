@@ -5,7 +5,7 @@ const { rem } = dimensions;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginVertical: 20 * rem
+    marginTop: 20 * rem
   },
   currentTimezone: {
     ...fonts.ubuntu.normal.light,

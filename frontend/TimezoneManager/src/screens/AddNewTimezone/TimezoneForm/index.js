@@ -17,7 +17,7 @@ const TimezoneForm = ({
   dropdown,
   toggleDropdown
 }) => {
-  const textInputRef1 = useRef(null);
+  const textInputRef = useRef(null);
   const { name, cityName, differenceToGMT } = timezoneForm;
   return (
     <KeyboardAvoidAndDismissView viewStyle={styles.container}>
@@ -29,20 +29,20 @@ const TimezoneForm = ({
         placeholderTextColor="#949EA0"
         returnKeyType={'next'}
         onChangeText={value => handleInput(value, 'name')}
-        onSubmitEditing={() => textInputRef1.current.focus()}
+        onSubmitEditing={() => textInputRef.current.focus()}
       />
       <FloatingLabelTextInput
-        textInputRef={textInputRef1}
+        textInputRef={textInputRef}
         value={cityName.value}
         error={cityName.error}
         floatingLabel={'City Name'}
         placeholderTextColor="#949EA0"
         returnKeyType={'go'}
         onChangeText={value => handleInput(value, 'cityName')}
+        onSubmitEditing={handleSubmit}
       />
       <View style={Platform.OS === 'ios' ? styles.gmtSelectForm : null}>
         <FloatingLabelTextInput
-          textInputRef={textInputRef1}
           label={'Difference to GMT time'}
           value={differenceToGMT}
           placeholderTextColor="#949EA0"

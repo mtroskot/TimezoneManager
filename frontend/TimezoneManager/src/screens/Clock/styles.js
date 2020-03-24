@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     zIndex: 0,
     backgroundColor: '#f6f6f6'
   },
+  searchButton: {
+    alignSelf: 'flex-end',
+    marginRight: 15 * rem,
+    marginBottom: 15 * rem
+  },
   globeButton: {
     marginVertical: 15 * rem,
     alignSelf: 'center',

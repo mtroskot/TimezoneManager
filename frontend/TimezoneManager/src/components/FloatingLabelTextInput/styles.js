@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     ...fonts.ubuntu.normal.light,
-    fontSize: 10 * rem,
+    fontSize: 11 * rem,
     marginBottom: 10 * rem,
     color: 'red'
   },

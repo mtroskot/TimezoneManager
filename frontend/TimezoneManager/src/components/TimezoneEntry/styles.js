@@ -11,17 +11,24 @@ const styles = StyleSheet.create({
     ...fonts.ubuntu.normal.medium,
     textAlign: 'center',
     fontSize: 18 * rem,
-    marginBottom: 5 * rem
+    marginBottom: 7 * rem
   },
   inlineView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20 * rem
   },
+  cityTimeView: {
+    justifyContent: 'center'
+  },
   timezoneInfo: {
     ...fonts.ubuntu.normal.regular,
     fontSize: 16 * rem,
     marginBottom: 4 * rem
+  },
+  highlightText: {
+    ...fonts.ubuntu.normal.medium,
+    fontSize: 17 * rem
   }
 });
 

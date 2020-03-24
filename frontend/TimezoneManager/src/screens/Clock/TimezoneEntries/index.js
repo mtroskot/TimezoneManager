@@ -1,35 +1,15 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import EmptyTimezoneEntries from 'src/screens/Clock/TimezoneEntries/EmptyTimezoneEntries';
-import TimezoneEntry from 'src/screens/Clock/TimezoneEntries/TimezoneEntry';
 import { ListItemSeparator } from 'src/components';
-import { DateUtils } from 'src/utils';
 import PropTypes from 'prop-types';
 import styles from 'src/screens/Clock/TimezoneEntries/styles';
 
-const date = new Date();
-const TimezoneEntries = ({ minutes, entries, error, isLoading, loadingText }) => {
+const TimezoneEntries = ({ minutes, entries, renderItem, error, isLoading, loadingText }) => {
   return (
     <FlatList
       data={entries}
-      renderItem={({ item }) => {
-        const { name, city, differenceToGMT } = item;
-        const convertedTime = DateUtils.convertTimeToSelectedTimezoneTime(date, differenceToGMT);
-        const timezoneHours = new Date(convertedTime).getHours();
-        const differenceToBrowser = timezoneHours - new Date().getHours();
-        return (
-          <TimezoneEntry
-            {...{
-              minutes,
-              name,
-              city,
-              differenceToGMT,
-              differenceToBrowser,
-              timezoneTime: DateUtils.convertShortTimeToLongTime(timezoneHours)
-            }}
-          />
-        );
-      }}
+      renderItem={({ item }) => renderItem(item, minutes)}
       ListEmptyComponent={<EmptyTimezoneEntries {...{ error, isLoading, loadingText, animateIcon: true }} />}
       ItemSeparatorComponent={ListItemSeparator}
       keyExtractor={item => item.id.toString()}
@@ -43,6 +23,7 @@ const TimezoneEntries = ({ minutes, entries, error, isLoading, loadingText }) =>
 
 TimezoneEntries.propTypes = {
   minutes: PropTypes.string.isRequired,
+  renderItem: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(
     PropTypes.exact({
       id: PropTypes.number.isRequired,

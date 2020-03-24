@@ -11,7 +11,7 @@ const DrawerActionButtons = ({ handleLogout, closeDrawer }) => {
       <CustomButton
         viewStyle={styles.drawerItem}
         iconStyle={styles.drawerItemIcon}
-        iconProps={{ name: icons.CLOSE, color: '#aaa' }}
+        iconProps={{ name: icons.CLOSE_CIRCLE, color: '#aaa' }}
         text={'Close'}
         onPress={closeDrawer}
       />
