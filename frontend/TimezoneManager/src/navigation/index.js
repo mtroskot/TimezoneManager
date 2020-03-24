@@ -1,47 +1,10 @@
-import React from 'react';
-import { Text } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import { CustomButton } from 'src/components';
 import SideDrawer from 'src/screens/SideDrawer';
-import ClockScreen from 'src/screens/Clock';
-import AddNewTimezoneScreen from 'src/screens/AddNewTimezone';
-import AuthScreen from 'src/screens/Auth';
-import { screenNames, stackNames } from 'src/constants/navigation';
-import styles from 'src/navigation/styles';
-import { icons } from 'src/constants/icons';
-import { NavigationService } from 'src/services';
-
-const AuthStack = createStackNavigator(
-  {
-    [screenNames.AUTH]: {
-      screen: AuthScreen
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
-
-const ClockStack = createStackNavigator({
-  [screenNames.CLOCK]: {
-    screen: ClockScreen,
-    navigationOptions: () => ({
-      headerLeft: <Text style={styles.headerLeft}>Clock</Text>,
-      headerRight: (
-        <CustomButton
-          iconProps={{ name: icons.SETTINGS, color: '#000' }}
-          viewStyle={styles.headerRight}
-          onPress={NavigationService.openDrawer}
-        />
-      )
-    })
-  },
-  [screenNames.ADD_NEW_TIMEZONE]: {
-    screen: AddNewTimezoneScreen
-  }
-});
+import { stackNames } from 'src/constants/navigation';
+import AuthStack from 'src/navigation/AuthStack';
+import ClockStack from 'src/navigation/ClockStack';
 
 const AppStack = createStackNavigator(
   {
