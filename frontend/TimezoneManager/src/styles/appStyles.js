@@ -26,7 +26,8 @@ const appStyles = StyleSheet.create({
     ...fonts.ubuntu.normal.medium,
     fontSize: 22 * rem,
     color: '#334144',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 10 * rem
   }
 });
 
