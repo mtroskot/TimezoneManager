@@ -6,11 +6,23 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { CustomButton } from 'src/components';
 import SideDrawer from 'src/screens/SideDrawer';
 import ClockScreen from 'src/screens/Clock';
+import AddNewTimezoneScreen from 'src/screens/AddNewTimezone';
 import AuthScreen from 'src/screens/Auth';
 import { screenNames, stackNames } from 'src/constants/navigation';
 import styles from 'src/navigation/styles';
 import { icons } from 'src/constants/icons';
 import { NavigationService } from 'src/services';
+
+const AuthStack = createStackNavigator(
+  {
+    [screenNames.AUTH]: {
+      screen: AuthScreen
+    }
+  },
+  {
+    headerMode: 'none'
+  }
+);
 
 const ClockStack = createStackNavigator({
   [screenNames.CLOCK]: {
@@ -25,19 +37,11 @@ const ClockStack = createStackNavigator({
         />
       )
     })
+  },
+  [screenNames.ADD_NEW_TIMEZONE]: {
+    screen: AddNewTimezoneScreen
   }
 });
-
-const AuthStack = createStackNavigator(
-  {
-    [screenNames.AUTH]: {
-      screen: AuthScreen
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
 
 const AppStack = createStackNavigator(
   {
@@ -45,7 +49,7 @@ const AppStack = createStackNavigator(
     [stackNames.CLOCK_STACK]: ClockStack
   },
   {
-    initialRouteName: stackNames.AUTH_STACK,
+    initialRouteName: stackNames.CLOCK_STACK,
     headerMode: 'none'
   }
 );

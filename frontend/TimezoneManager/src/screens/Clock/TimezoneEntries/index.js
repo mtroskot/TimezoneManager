@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import styles from 'src/screens/Clock/TimezoneEntries/styles';
 
 const date = new Date();
-const TimezoneEntries = ({ minutes, entries, error, isLoading, loadingText, animateIcon }) => {
+const TimezoneEntries = ({ minutes, entries, error, isLoading, loadingText }) => {
   return (
     <FlatList
       data={entries}
@@ -30,7 +30,7 @@ const TimezoneEntries = ({ minutes, entries, error, isLoading, loadingText, anim
           />
         );
       }}
-      ListEmptyComponent={<EmptyTimezoneEntries {...{ error, isLoading, loadingText, animateIcon }} />}
+      ListEmptyComponent={<EmptyTimezoneEntries {...{ error, isLoading, loadingText, animateIcon: true }} />}
       ItemSeparatorComponent={ListItemSeparator}
       keyExtractor={item => item.id.toString()}
       contentContainerStyle={[
@@ -53,8 +53,7 @@ TimezoneEntries.propTypes = {
   ).isRequired,
   error: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  loadingText: PropTypes.string.isRequired,
-  animateIcon: PropTypes.bool.isRequired
+  loadingText: PropTypes.string.isRequired
 };
 
 export default React.memo(TimezoneEntries);

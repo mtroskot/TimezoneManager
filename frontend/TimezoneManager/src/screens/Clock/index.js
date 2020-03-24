@@ -4,10 +4,13 @@ import SafeAreaView from 'react-native-safe-area-view';
 import CurrentTimezoneClock from 'src/screens/Clock/CurrentTimezoneClock';
 import TimezoneEntries from 'src/screens/Clock/TimezoneEntries';
 import { CustomButton } from 'src/components';
+import { NavigationService } from 'src/services';
 import { DateUtils, HooksUtils } from 'src/utils';
 import { clockFormat, dateFormat } from 'src/constants/date';
 import styles from 'src/screens/Clock/styles';
 import { icons } from 'src/constants/icons';
+import { screenNames } from 'src/constants/navigation';
+import appStyles from 'src/styles/appStyles';
 
 const mockEntries = [
   {
@@ -74,7 +77,6 @@ const ClockManager = () => {
   const [date, setDate] = useState(new Date());
   const [minutes, setMinutes] = useState('');
   const [seconds, setSeconds] = useState('');
-  const [animateIcon, setAnimateIcon] = useState(true);
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -113,12 +115,12 @@ const ClockManager = () => {
   }
 
   function onAddTimezonePress() {
-    setAnimateIcon(!animateIcon);
+    NavigationService.navigate(screenNames.ADD_NEW_TIMEZONE);
   }
 
   const listEmpty = error || isLoading || entries.length === 0;
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={appStyles.safeArea}>
       <View style={styles.container}>
         <CurrentTimezoneClock
           currTime={DateUtils.formatDate(date, clockFormat)}
@@ -126,7 +128,7 @@ const ClockManager = () => {
           timezoneOffset={timezoneOffset}
         />
         <TimezoneEntries
-          {...{ minutes, seconds, entries, error, isLoading, loadingText: 'Loading Timezone Entries', animateIcon }}
+          {...{ minutes, seconds, entries, error, isLoading, loadingText: 'Loading Timezone Entries' }}
         />
         <View style={!listEmpty ? styles.absolutePosition : null}>
           <CustomButton

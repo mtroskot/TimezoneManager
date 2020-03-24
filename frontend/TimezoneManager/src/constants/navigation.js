@@ -1,5 +1,6 @@
 export const screenNames = Object.freeze({
   CLOCK: 'CLOCK',
+  ADD_NEW_TIMEZONE: 'ADD_NEW_TIMEZONE',
   AUTH: 'AUTH'
 });
 
