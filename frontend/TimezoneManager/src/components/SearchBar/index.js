@@ -1,10 +1,10 @@
 import React from 'react';
 import { TextInput, View, ViewPropTypes } from 'react-native';
 import { CustomButton } from 'src/components';
+import { StringUtils } from 'src/utils';
 import PropTypes from 'prop-types';
 import { icons } from 'src/constants/icons';
 import styles from 'src/components/SearchBar/styles';
-import StringUtils from 'src/utils/StringUtils';
 import { dimensions } from 'src/styles';
 const { rem } = dimensions;
 

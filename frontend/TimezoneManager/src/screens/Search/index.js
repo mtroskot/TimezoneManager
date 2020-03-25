@@ -9,6 +9,8 @@ import { mockEntries, mockUsers } from 'src/constants/mockData';
 import { ListUtils } from 'src/utils';
 import appStyles from 'src/styles/appStyles';
 import styles from 'src/screens/Search/styles';
+import { NavigationService } from 'src/services';
+import { screenNames } from 'src/constants/navigation';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -36,8 +38,16 @@ const Search = () => {
   }
 
   function onEdit(itemId) {
-    console.log('itemId', itemId);
+    const isUserEdit = !selectedOption.label.includes('entries');
+    if (isUserEdit) {
+      const user = mockUsers.find(user => user.id === itemId);
+      NavigationService.push(screenNames.AUTH_EDIT, { user });
+    } else {
+      const timezoneEntry = mockEntries.find(entry => entry.id === itemId);
+      NavigationService.push(screenNames.TIMEZONE_EDIT, { timezoneEntry });
+    }
   }
+
   function onDelete(itemId) {
     Alert.alert(
       'Item delete',

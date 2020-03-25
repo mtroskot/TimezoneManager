@@ -60,12 +60,13 @@ export const mockUsers = [
     id: 1,
     firstName: 'Marko',
     lastName: 'Troskot',
-    emailAddress: 'marko.troskot@hotmail.commarko.troskot@hotmail.com'
+    emailAddress: 'marko.troskot@hotmail.commarko.troskot@hotmail.com',
+    password: 'password'
   },
-  { id: 2, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com' },
-  { id: 3, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com' },
-  { id: 4, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com' },
-  { id: 5, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com' },
-  { id: 6, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com' },
-  { id: 7, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com' }
+  { id: 2, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com', password: '123' },
+  { id: 3, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com', password: '123' },
+  { id: 4, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com', password: '123' },
+  { id: 5, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com', password: '123' },
+  { id: 6, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com', password: '123' },
+  { id: 7, firstName: 'Marko', lastName: 'Troskot', emailAddress: 'marko.troskot@hotmail.com', password: '123' }
 ];

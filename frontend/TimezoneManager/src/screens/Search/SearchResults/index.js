@@ -10,7 +10,7 @@ const SearchResults = ({ data, renderItem, searchType, onEdit, onDelete }) => {
     <FlatList
       data={data}
       ListHeaderComponent={<Text style={appStyles.headerText}>Search results for {searchType}</Text>}
-      renderItem={({ item }) => ListUtils.withEditButtons(renderItem(item), onEdit, onDelete)}
+      renderItem={({ item }) => ListUtils.withEditButtons(renderItem(item), item.id, onEdit, onDelete)}
       ItemSeparatorComponent={ListItemSeparator}
       keyExtractor={item => item.id.toString()}
     />

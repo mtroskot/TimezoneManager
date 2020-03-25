@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import LoginForm from 'src/screens/Auth/LoginForm';
 import RegisterForm from 'src/screens/Auth/RegisterForm';
@@ -10,22 +10,37 @@ import NavigationService from 'src/services/navigation';
 import appStyles from 'src/styles/appStyles';
 
 const initialRegisterFormState = {
+  id: null,
   firstName: '',
   lastName: '',
-  birthDate: '',
-  email: '',
+  emailAddress: '',
   password: ''
 };
 
 const initialLoginFormState = {
-  email: '',
+  emailAddress: '',
   password: ''
 };
 
-const Auth = () => {
+function mapUserData(isEdit, userForEdit) {
+  let mappedState = { ...initialRegisterFormState };
+  if (isEdit) {
+    mappedState.id = userForEdit.id;
+    mappedState.firstName = userForEdit.firstName;
+    mappedState.lastName = userForEdit.lastName;
+    mappedState.emailAddress = userForEdit.emailAddress;
+    mappedState.password = userForEdit.password;
+  }
+  return mappedState;
+}
+
+const Auth = props => {
+  const isEdit = NavigationService.getCurrentScreenName() === screenNames.AUTH_EDIT;
+  const userForEdit = props.navigation.getParam('user');
+  const registerInitialState = useMemo(() => mapUserData(isEdit, userForEdit), [isEdit, userForEdit]);
   const [loginForm, setLoginForm] = useState(initialLoginFormState);
-  const [registerForm, setRegisterForm] = useState(initialRegisterFormState);
-  const [showLoginForm, setShowLoginForm] = useState(true);
+  const [registerForm, setRegisterForm] = useState(registerInitialState);
+  const [showLoginForm, setShowLoginForm] = useState(true && !isEdit);
   const [isLoading, setIsLoading] = useState(false);
 
   function handleRegisterInput(value, fieldName) {
@@ -37,8 +52,8 @@ const Auth = () => {
   }
 
   function handleLogin() {
-    const { email, password } = loginForm;
-    if (email.toLowerCase() === 'test' && password === 'test') {
+    const { emailAddress, password } = loginForm;
+    if (emailAddress.toLowerCase() === 'test' && password === 'test') {
       NavigationService.navigate(screenNames.CLOCK);
       return;
     }
@@ -62,18 +77,29 @@ const Auth = () => {
   }
 
   //RENDER
+  const registerHeaderText = isEdit ? 'Update user account' : 'Create an Account';
+  const registerSubmitText = isEdit ? 'Update Account' : 'Create Account';
   const form = showLoginForm ? (
     <LoginForm {...{ loginForm, handleInput: handleLoginInput, handleLogin, isLoading }} />
   ) : (
-    <RegisterForm {...{ registerForm, handleInput: handleRegisterInput, handleRegister, isLoading }} />
+    <RegisterForm
+      {...{
+        headerText: registerHeaderText,
+        submitButtonText: registerSubmitText,
+        registerForm,
+        handleInput: handleRegisterInput,
+        handleRegister,
+        isLoading
+      }}
+    />
   );
-  const switchFormText = showLoginForm ? `Don't have an account?` : `Already have an account?`;
+  const switchFormText = showLoginForm ? "Don't have an account?" : 'Already have an account?';
   const switchFormButtonText = !showLoginForm ? 'Login' : 'Create Account';
   return (
     <SafeAreaView style={appStyles.safeArea}>
       <KeyboardAvoidAndDismissView viewStyle={styles.container} behavior={''}>
         {form}
-        {!isLoading && (
+        {!isLoading && !isEdit && (
           <View style={styles.switchFormContainer}>
             <Text style={styles.switchFormText}>{switchFormText}</Text>
             <CustomButton

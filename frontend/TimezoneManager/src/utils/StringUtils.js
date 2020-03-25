@@ -23,13 +23,18 @@ function getNameInitials(name) {
   return splitName.length === 1 ? splitName[0][0] : `${splitName[0][0]} ${splitName[splitName.length - 1][0]}`;
 }
 
+function convertGMTDIffToString(gmtDIff) {
+  return gmtDIff <= 0 ? `${gmtDIff}` : `+${gmtDIff}`;
+}
+
 const StringUtils = {
   isEmpty,
   isNotEmpty,
   areEmpty,
   areNotEmpty,
   isString,
-  getNameInitials
+  getNameInitials,
+  convertGMTDIffToString
 };
 
 export default StringUtils;

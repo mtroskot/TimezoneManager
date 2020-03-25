@@ -8,6 +8,7 @@ import appStyles from 'src/styles/appStyles';
 import { icons } from 'src/constants/icons';
 
 const TimezoneForm = ({
+  headerTitle,
   timezoneForm,
   handleInput,
   handleSubmit,
@@ -15,13 +16,14 @@ const TimezoneForm = ({
   gmtDifferenceOptions,
   onGmtDifferenceSelect,
   dropdown,
-  toggleDropdown
+  toggleDropdown,
+  submitButtonText
 }) => {
   const textInputRef = useRef(null);
   const { name, cityName, differenceToGMT } = timezoneForm;
   return (
     <KeyboardAvoidAndDismissView viewStyle={styles.container}>
-      <Text style={[appStyles.headerText, styles.headerMargin]}>Add new Timezone entry</Text>
+      <Text style={[appStyles.headerText, styles.headerMargin]}>{headerTitle}</Text>
       <FloatingLabelTextInput
         value={name.value}
         error={name.error}
@@ -70,7 +72,7 @@ const TimezoneForm = ({
         <CustomButton
           onPress={handleSubmit}
           isLoading={isLoading}
-          text={'Add entry'}
+          text={submitButtonText}
           tOpacityStyle={appStyles.submitButton}
           textStyle={appStyles.buttonText}
         />
@@ -80,7 +82,8 @@ const TimezoneForm = ({
 };
 
 TimezoneForm.propTypes = {
-  timezoneForm: PropTypes.exact({
+  headerTitle: PropTypes.string.isRequired,
+  timezoneForm: PropTypes.shape({
     name: PropTypes.exact({
       value: PropTypes.string,
       error: PropTypes.bool
@@ -100,7 +103,8 @@ TimezoneForm.propTypes = {
   dropdown: PropTypes.exact({
     showDropdown: PropTypes.bool.isRequired,
     initialScrollIndex: PropTypes.number.isRequired
-  })
+  }),
+  submitButtonText: PropTypes.string.isRequired
 };
 
 export default React.memo(TimezoneForm);

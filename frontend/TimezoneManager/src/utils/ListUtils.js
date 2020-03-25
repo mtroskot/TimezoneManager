@@ -34,15 +34,18 @@ function renderEntries(item, minutes) {
   );
 }
 
-function withEditButtons(component, onEdit, onDelete) {
+function withEditButtons(component, itemId, onEdit, onDelete) {
   return (
     <View style={styles.inlineView}>
       <View style={{ flex: 1 }}>{component}</View>
       <View style={styles.buttonContainer}>
-        <CustomButton iconProps={{ name: icons.CREATE, color: '#04c2dc', size: 40 * rem }} onPress={onEdit} />
+        <CustomButton
+          iconProps={{ name: icons.CREATE, color: '#04c2dc', size: 40 * rem }}
+          onPress={() => onEdit(itemId)}
+        />
         <CustomButton
           iconProps={{ name: icons.TRASH, color: '#f64812', size: 40 * rem }}
-          onPress={onDelete}
+          onPress={() => onDelete(itemId)}
           tOpacityStyle={styles.deleteButton}
         />
       </View>

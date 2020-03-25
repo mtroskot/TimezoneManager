@@ -9,6 +9,7 @@ import { icons } from 'src/constants/icons';
 import { NavigationService } from 'src/services';
 import AddNewTimezoneScreen from 'src/screens/AddNewTimezone';
 import SearchScreen from 'src/screens/Search';
+import AuthScreen from 'src/screens/Auth';
 
 const ClockStack = createStackNavigator({
   [screenNames.CLOCK]: {
@@ -27,8 +28,14 @@ const ClockStack = createStackNavigator({
   [screenNames.ADD_NEW_TIMEZONE]: {
     screen: AddNewTimezoneScreen
   },
+  [screenNames.TIMEZONE_EDIT]: {
+    screen: AddNewTimezoneScreen
+  },
   [screenNames.SEARCH]: {
     screen: SearchScreen
+  },
+  [screenNames.AUTH_EDIT]: {
+    screen: AuthScreen
   }
 });
 

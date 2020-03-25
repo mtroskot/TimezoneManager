@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import loginStyles from 'src/screens/Auth/styles';
 import appStyles from 'src/styles/appStyles';
 
-const RegisterForm = ({ registerForm, handleInput, handleRegister, isLoading }) => {
+const RegisterForm = ({ submitButtonText, headerText, registerForm, handleInput, handleRegister, isLoading }) => {
   const textInputRef1 = useRef(null);
   const textInputRef2 = useRef(null);
   const textInputRef3 = useRef(null);
   return (
     <View>
       <View style={loginStyles.headerView} bounces={false}>
-        <Text style={appStyles.headerText}>Create an Account</Text>
+        <Text style={appStyles.headerText}>{headerText}</Text>
       </View>
       <View style={loginStyles.formContainer}>
         <FloatingLabelTextInput
@@ -39,11 +39,11 @@ const RegisterForm = ({ registerForm, handleInput, handleRegister, isLoading }) 
       </View>
       <FloatingLabelTextInput
         textInputRef={textInputRef2}
-        value={registerForm.email}
+        value={registerForm.emailAddress}
         floatingLabel={'Email Address'}
         placeholderTextColor="#949EA0"
         returnKeyType={'next'}
-        onChangeText={value => handleInput(value, 'email')}
+        onChangeText={value => handleInput(value, 'emailAddress')}
         onSubmitEditing={() => textInputRef3.current.focus()}
       />
       <FloatingLabelTextInput
@@ -59,7 +59,7 @@ const RegisterForm = ({ registerForm, handleInput, handleRegister, isLoading }) 
       <CustomButton
         onPress={handleRegister}
         isLoading={isLoading}
-        text={'Create Account'}
+        text={submitButtonText}
         tOpacityStyle={appStyles.submitButton}
         textStyle={appStyles.buttonText}
       />
@@ -68,11 +68,12 @@ const RegisterForm = ({ registerForm, handleInput, handleRegister, isLoading }) 
 };
 
 RegisterForm.propTypes = {
-  registerForm: PropTypes.exact({
+  submitButtonText: PropTypes.string.isRequired,
+  headerText: PropTypes.string.isRequired,
+  registerForm: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    birthDate: PropTypes.string,
-    email: PropTypes.string,
+    emailAddress: PropTypes.string,
     password: PropTypes.string
   }).isRequired,
   handleInput: PropTypes.func.isRequired,

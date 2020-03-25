@@ -13,11 +13,11 @@ const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
         <Text style={appStyles.headerText}>Welcome Back</Text>
       </View>
       <FloatingLabelTextInput
-        value={loginForm.email}
+        value={loginForm.emailAddress}
         floatingLabel={'Email Address'}
         placeholderTextColor="#949EA0"
         returnKeyType={'next'}
-        onChangeText={value => handleInput(value, 'email')}
+        onChangeText={value => handleInput(value, 'emailAddress')}
         onSubmitEditing={() => textInputRef.current.focus()}
       />
       <FloatingLabelTextInput
@@ -43,7 +43,7 @@ const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
 
 LoginForm.propTypes = {
   loginForm: PropTypes.exact({
-    email: PropTypes.string,
+    emailAddress: PropTypes.string,
     password: PropTypes.string
   }).isRequired,
   handleInput: PropTypes.func.isRequired,

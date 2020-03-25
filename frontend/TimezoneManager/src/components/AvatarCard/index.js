@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { StringUtils } from 'src/utils';
 import PropTypes from 'prop-types';
 import styles from 'src/components/AvatarCard/styles';
-import StringUtils from 'src/utils/StringUtils';
 
 const AvatarCard = ({ name, emailAddress }) => {
   return (

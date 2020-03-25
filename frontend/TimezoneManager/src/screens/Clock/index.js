@@ -59,7 +59,7 @@ const ClockManager = () => {
   }
 
   function onAddTimezonePress() {
-    NavigationService.navigate(screenNames.ADD_NEW_TIMEZONE);
+    NavigationService.push(screenNames.ADD_NEW_TIMEZONE);
   }
 
   function onSearchPress() {

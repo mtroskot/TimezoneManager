@@ -75,6 +75,14 @@ function openDrawer() {
   navigator.dispatch(DrawerActions.openDrawer());
 }
 
+function getCurrentScreenName() {
+  let route = navigator.state.nav;
+  while (route.routes) {
+    route = route.routes[route.index];
+  }
+  return route.routeName;
+}
+
 // add other navigation functions that you need and export them
 const NavigationService = {
   setTopLevelNavigator,
@@ -86,6 +94,7 @@ const NavigationService = {
   popToTop,
   goBack,
   closeDrawer,
-  openDrawer
+  openDrawer,
+  getCurrentScreenName
 };
 export default NavigationService;
