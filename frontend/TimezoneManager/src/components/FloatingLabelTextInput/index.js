@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import styles from 'src/components/FloatingLabelTextInput/styles';
-import StringUtils from 'src/utils/StringUtils';
-import { dimensions } from 'src/styles';
-import HooksUtils from 'src/utils/HooksUtils';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { AppUtils } from 'src/utils';
+import { AppUtils, HooksUtils, StringUtils } from 'src/utils';
+import styles from 'src/components/FloatingLabelTextInput/styles';
+import { dimensions } from 'src/styles';
 
 const { rem } = dimensions;
 
@@ -24,9 +22,17 @@ const FloatingLabelTextInput = ({
 }) => {
   const [floatAnim] = useState(new Animated.Value(0));
   const [focused, setFocused] = useState(false);
+  const [focusOnMount, setFocusOnMount] = useState(false);
+
+  HooksUtils.useDidMountUnmount(() => {
+    if (StringUtils.isNotEmpty(value)) {
+      setFocusOnMount(true);
+      setFocused(true);
+    }
+  });
 
   HooksUtils.useDidUpdate(() => {
-    if (StringUtils.isEmpty(value)) {
+    if (StringUtils.isEmpty(value) || focusOnMount) {
       Animated.timing(floatAnim, {
         toValue: focused ? -25 * rem : 0,
         duration: 250,
@@ -37,6 +43,7 @@ const FloatingLabelTextInput = ({
 
   const handleFocus = () => {
     setFocused(true);
+    setFocusOnMount(false);
   };
 
   const handleBlur = () => {
