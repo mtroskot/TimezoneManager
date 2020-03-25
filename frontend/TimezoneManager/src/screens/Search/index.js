@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, View } from 'react-native';
-import { CustomButton, SearchBar } from 'src/components';
+import { CustomButton, KeyboardAvoidAndDismissView, SearchBar } from 'src/components';
 import FilterOptions from 'src/screens/Search/FilterOptions';
 import SearchResults from 'src/screens/Search/SearchResults';
 import { icons } from 'src/constants/icons';
@@ -11,7 +11,6 @@ import appStyles from 'src/styles/appStyles';
 import styles from 'src/screens/Search/styles';
 import { NavigationService } from 'src/services';
 import { screenNames } from 'src/constants/navigation';
-import KeyboardAvoidAndDismissView from 'src/components/KeyboardAvoidAndDismissView';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
