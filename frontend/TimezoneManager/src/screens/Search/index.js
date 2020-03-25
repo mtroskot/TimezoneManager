@@ -11,6 +11,7 @@ import appStyles from 'src/styles/appStyles';
 import styles from 'src/screens/Search/styles';
 import { NavigationService } from 'src/services';
 import { screenNames } from 'src/constants/navigation';
+import KeyboardAvoidAndDismissView from 'src/components/KeyboardAvoidAndDismissView';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -75,20 +76,22 @@ const Search = () => {
   const renderItem = areEntriesSelected ? ListUtils.renderEntries : ListUtils.renderAvatars;
   return (
     <SafeAreaView style={appStyles.safeArea}>
-      <View style={styles.container}>
-        <SearchBar
-          viewStyle={styles.searchBar}
-          placeholder={'Type something to search'}
-          clearInput={() => setSearchInput('')}
-          searchInput={searchInput}
-          handleInput={setSearchInput}
-        />
-        <CustomButton
-          iconProps={{ name: icons.FILTER, color: showFilterOptions ? '#f64812' : '#000' }}
-          onPress={toggleFilterOptions}
-          tOpacityStyle={styles.filterButton}
-        />
-      </View>
+      <KeyboardAvoidAndDismissView>
+        <View style={styles.container}>
+          <SearchBar
+            viewStyle={styles.searchBar}
+            placeholder={'Type something to search'}
+            clearInput={() => setSearchInput('')}
+            searchInput={searchInput}
+            handleInput={setSearchInput}
+          />
+          <CustomButton
+            iconProps={{ name: icons.FILTER, color: showFilterOptions ? '#f64812' : '#000' }}
+            onPress={toggleFilterOptions}
+            tOpacityStyle={styles.filterButton}
+          />
+        </View>
+      </KeyboardAvoidAndDismissView>
       <FilterOptions {...{ showFilterOptions, filterOptions, onFilterChange }} />
       <SearchResults {...{ data, renderItem, searchType: selectedOption.label.toLowerCase(), onEdit, onDelete }} />
     </SafeAreaView>
