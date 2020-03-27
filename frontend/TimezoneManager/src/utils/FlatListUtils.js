@@ -17,7 +17,7 @@ function renderEntries(item, minutes) {
   if (!minutes) {
     minutes = DateUtils.convertShortTimeToLongTime(new Date().getHours());
   }
-  const { name, city, differenceToGMT } = item;
+  const { name, cityName, differenceToGMT } = item;
   const convertedTime = DateUtils.convertTimeToSelectedTimezoneTime(date, differenceToGMT);
   const timezoneHours = new Date(convertedTime).getHours();
   const differenceToBrowser = timezoneHours - date.getHours();
@@ -25,7 +25,7 @@ function renderEntries(item, minutes) {
     <TimezoneEntry
       {...{
         name,
-        city,
+        cityName,
         differenceToGMT,
         differenceToBrowser,
         time: `${DateUtils.convertShortTimeToLongTime(timezoneHours)}:${minutes}`
