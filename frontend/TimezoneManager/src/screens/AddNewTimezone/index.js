@@ -1,54 +1,54 @@
 import React, { useMemo, useState } from 'react';
-import { Keyboard, View } from 'react-native';
+import { Keyboard } from 'react-native';
 import TimezoneForm from 'src/screens/AddNewTimezone/TimezoneForm';
-import { StringUtils } from 'src/utils';
-import { NavigationService } from 'src/services';
+import { ValidationUtils } from 'src/utils';
 import { gmtDifferenceOptions } from 'src/constants/date';
 import styles from 'src/screens/AddNewTimezone/styles';
 import { screenNames } from 'src/constants/navigation';
+import PropTypes from 'prop-types';
+import { checkIfLoadingSelector } from 'src/store/ui/uiSelectors';
+import { timezoneActionTypes } from 'src/constants/actionTypes';
+import { addTimezoneEntry, updateTimezoneEntry } from 'src/store/timezone/timezoneActions';
+import { connect } from 'react-redux';
+import KeyboardAvoidAndDismissView from 'src/components/KeyboardAvoidAndDismissView';
 
-const initialTimezoneState = {
-  id: null,
-  name: {
-    value: null,
-    error: false
-  },
-  cityName: {
-    value: null,
-    error: false
-  },
+const initialTimezoneState = Object.freeze({
+  timezoneEntryId: null,
+  name: '',
+  cityName: '',
   differenceToGMT: '0'
-};
+});
 
 function mapPreviousAddedEntry(isEdit, timezoneEntryForEdit) {
-  let mappedState = JSON.parse(JSON.stringify(initialTimezoneState));
+  let mappedState = { ...initialTimezoneState };
   if (isEdit) {
-    mappedState.id = timezoneEntryForEdit.id;
-    mappedState.name.value = timezoneEntryForEdit.name;
-    mappedState.cityName.value = timezoneEntryForEdit.city;
-    mappedState.differenceToGMT = StringUtils.convertGMTDIffToString(timezoneEntryForEdit.differenceToGMT);
+    mappedState.timezoneEntryId = timezoneEntryForEdit.timezoneEntryId;
+    mappedState.name = timezoneEntryForEdit.name;
+    mappedState.cityName = timezoneEntryForEdit.cityName;
+    mappedState.differenceToGMT = timezoneEntryForEdit.differenceToGMT;
   }
   return mappedState;
 }
 
 const AddNewTimezone = props => {
   //STATE
-  const isEdit = NavigationService.getCurrentScreenName() === screenNames.TIMEZONE_EDIT;
+  const { navigation, isLoading } = props;
+  const isEdit = navigation.state.routeName === screenNames.TIMEZONE_EDIT;
   const timezoneEntryForEdit = props.navigation.getParam('timezoneEntry');
   const timezoneInitialState = useMemo(() => mapPreviousAddedEntry(isEdit, timezoneEntryForEdit), [
     isEdit,
     timezoneEntryForEdit
   ]);
   const [timezoneForm, setTimezoneForm] = useState(timezoneInitialState);
-  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const [dropdown, setDropdown] = useState({
     showDropdown: false,
     initialScrollIndex: gmtDifferenceOptions.indexOf('0')
   });
 
-  //FUNCTIONS
+  //METHODS
   function handleInput(value, fieldName) {
-    setTimezoneForm({ ...timezoneForm, [fieldName]: { ...timezoneForm[fieldName], value } });
+    setTimezoneForm({ ...timezoneForm, [fieldName]: value });
   }
 
   function onGmtDifferenceSelect(value) {
@@ -62,38 +62,35 @@ const AddNewTimezone = props => {
   }
 
   function handleSubmit() {
-    const { name, cityName } = timezoneForm;
-    const isNameEmpty = StringUtils.isEmpty(name.value);
-    const isCityNameEmpty = StringUtils.isEmpty(cityName.value);
-
-    if (isNameEmpty || isCityNameEmpty) {
-      setTimezoneForm({
-        ...timezoneForm,
-        name: { ...timezoneForm.name, error: isNameEmpty },
-        cityName: { ...timezoneForm.cityName, error: isCityNameEmpty }
-      });
-      return;
-    } else {
-      setTimezoneForm({
-        ...timezoneForm,
-        name: { ...timezoneForm.name, error: false },
-        cityName: { ...timezoneForm.cityName, error: false }
-      });
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
+    if (validateForm()) {
+      isEdit ? props.updateTimezoneEntry(timezoneForm) : props.addTimezoneEntry(timezoneForm);
     }
   }
+
+  function onOutsideOfFormPress() {
+    Keyboard.dismiss();
+    setDropdown({ ...dropdown, showDropdown: false });
+  }
+
+  function validateForm() {
+    const { name, cityName } = timezoneForm;
+    const errorObject = {};
+    const isNameValid = ValidationUtils.isValidField('name', name, errorObject);
+    const isCityNameValid = ValidationUtils.isValidField('cityName', cityName, errorObject);
+    setErrors(errorObject);
+    return isNameValid && isCityNameValid;
+  }
+
   //RENDER
   const submitButtonText = isEdit ? 'Update entry' : 'Add entry';
   const headerTitle = isEdit ? 'Update Timezone entry' : 'Add new Timezone entry';
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidAndDismissView viewStyle={styles.container} onPress={onOutsideOfFormPress}>
       <TimezoneForm
         {...{
           headerTitle,
           timezoneForm,
+          errors,
           handleInput,
           handleSubmit,
           isLoading,
@@ -104,10 +101,29 @@ const AddNewTimezone = props => {
           submitButtonText
         }}
       />
-    </View>
+    </KeyboardAvoidAndDismissView>
   );
 };
 
-AddNewTimezone.propTypes = {};
+AddNewTimezone.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  addTimezoneEntry: PropTypes.func.isRequired,
+  updateTimezoneEntry: PropTypes.func.isRequired
+};
 
-export default React.memo(AddNewTimezone);
+const mapStateToProps = state => ({
+  isLoading: checkIfLoadingSelector(state)([
+    timezoneActionTypes.ADD_NEW_TIMEZONE_ENTRY,
+    timezoneActionTypes.UPDATE_TIMEZONE_ENTRY
+  ])
+});
+
+const mapDispatchToProps = {
+  addTimezoneEntry,
+  updateTimezoneEntry
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(React.memo(AddNewTimezone));

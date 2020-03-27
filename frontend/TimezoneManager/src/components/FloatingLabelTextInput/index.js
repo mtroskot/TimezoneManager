@@ -5,8 +5,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { AppUtils, HooksUtils, StringUtils } from 'src/utils';
 import styles from 'src/components/FloatingLabelTextInput/styles';
 import { dimensions } from 'src/styles';
+import { errorPropTypes } from 'src/constants/propTypes';
 
 const { rem } = dimensions;
+
+function renderError(error, fieldName) {
+  if (!error || !error.display) {
+    return null;
+  }
+  const errorMessage = error.errorMessage || `${fieldName} is required`;
+  return <Text style={styles.errorText}>{errorMessage}</Text>;
+}
 
 const FloatingLabelTextInput = ({
   onSubmitEditing,
@@ -91,7 +100,7 @@ const FloatingLabelTextInput = ({
           )}
         </View>
       </View>
-      {error && <Text style={styles.errorText}>{floatingLabel || label} is required</Text>}
+      {renderError(error, floatingLabel || label)}
     </View>
   );
 };
@@ -109,7 +118,7 @@ FloatingLabelTextInput.propTypes = {
   floatingLabel: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
-  error: PropTypes.bool,
+  error: errorPropTypes,
   textInputStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   customContainerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   iconProps: PropTypes.shape({

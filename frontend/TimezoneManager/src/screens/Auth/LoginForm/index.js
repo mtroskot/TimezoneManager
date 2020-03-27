@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 import { CustomButton, FloatingLabelTextInput } from 'src/components';
 import loginStyles from 'src/screens/Auth/styles';
 import appStyles from 'src/styles/appStyles';
+import { errorPropTypes } from 'src/constants/propTypes';
 
-const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
+const LoginForm = ({ loginForm, errors, handleInput, handleLogin, isLoading }) => {
   const textInputRef = useRef(null);
+  const { emailAddress, password } = loginForm;
   return (
     <View>
       <View style={loginStyles.headerView}>
         <Text style={appStyles.headerText}>Welcome Back</Text>
       </View>
       <FloatingLabelTextInput
-        value={loginForm.emailAddress}
+        value={emailAddress}
+        error={errors.emailAddress}
         floatingLabel={'Email Address'}
         placeholderTextColor="#949EA0"
         returnKeyType={'next'}
@@ -22,8 +25,9 @@ const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
       />
       <FloatingLabelTextInput
         textInputRef={textInputRef}
+        value={password}
+        error={errors.password}
         floatingLabel={'Password'}
-        value={loginForm.password}
         secureTextEntry
         placeholderTextColor="#949EA0"
         returnKeyType={'go'}
@@ -42,6 +46,7 @@ const LoginForm = ({ loginForm, handleInput, handleLogin, isLoading }) => {
 };
 
 LoginForm.propTypes = {
+  errors: PropTypes.objectOf(errorPropTypes).isRequired,
   loginForm: PropTypes.exact({
     emailAddress: PropTypes.string,
     password: PropTypes.string

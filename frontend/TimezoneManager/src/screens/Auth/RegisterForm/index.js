@@ -4,11 +4,22 @@ import { CustomButton, FloatingLabelTextInput } from 'src/components';
 import PropTypes from 'prop-types';
 import loginStyles from 'src/screens/Auth/styles';
 import appStyles from 'src/styles/appStyles';
+import { errorPropTypes } from 'src/constants/propTypes';
 
-const RegisterForm = ({ submitButtonText, headerText, registerForm, handleInput, handleRegister, isLoading }) => {
+const RegisterForm = ({
+  submitButtonText,
+  headerText,
+  registerForm,
+  errors,
+  handleInput,
+  handleRegister,
+  isLoading
+}) => {
   const textInputRef1 = useRef(null);
   const textInputRef2 = useRef(null);
   const textInputRef3 = useRef(null);
+  const { firstName, lastName, emailAddress, password } = registerForm;
+
   return (
     <View>
       <View style={loginStyles.headerView} bounces={false}>
@@ -17,7 +28,8 @@ const RegisterForm = ({ submitButtonText, headerText, registerForm, handleInput,
       <View style={loginStyles.formContainer}>
         <FloatingLabelTextInput
           customContainerStyle={loginStyles.firstNameInputView}
-          value={registerForm.firstName}
+          value={firstName}
+          error={errors.firstName}
           floatingLabel={'First Name'}
           placeholderTextColor="#949EA0"
           returnKeyType={'next'}
@@ -28,7 +40,8 @@ const RegisterForm = ({ submitButtonText, headerText, registerForm, handleInput,
         <FloatingLabelTextInput
           textInputRef={textInputRef1}
           customContainerStyle={loginStyles.lastNameInputView}
-          value={registerForm.lastName}
+          value={lastName}
+          error={errors.lastName}
           floatingLabel={'Last Name'}
           placeholderTextColor="#949EA0"
           returnKeyType={'next'}
@@ -39,7 +52,8 @@ const RegisterForm = ({ submitButtonText, headerText, registerForm, handleInput,
       </View>
       <FloatingLabelTextInput
         textInputRef={textInputRef2}
-        value={registerForm.emailAddress}
+        value={emailAddress}
+        error={errors.emailAddress}
         floatingLabel={'Email Address'}
         placeholderTextColor="#949EA0"
         returnKeyType={'next'}
@@ -49,7 +63,8 @@ const RegisterForm = ({ submitButtonText, headerText, registerForm, handleInput,
       <FloatingLabelTextInput
         textInputRef={textInputRef3}
         floatingLabel={'Password'}
-        value={registerForm.password}
+        value={password}
+        error={errors.password}
         secureTextEntry
         placeholderTextColor="#949EA0"
         returnKeyType={'go'}
@@ -68,6 +83,7 @@ const RegisterForm = ({ submitButtonText, headerText, registerForm, handleInput,
 };
 
 RegisterForm.propTypes = {
+  errors: PropTypes.objectOf(errorPropTypes).isRequired,
   submitButtonText: PropTypes.string.isRequired,
   headerText: PropTypes.string.isRequired,
   registerForm: PropTypes.shape({

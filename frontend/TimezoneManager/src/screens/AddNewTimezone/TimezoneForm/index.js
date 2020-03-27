@@ -1,15 +1,16 @@
 import React, { useRef } from 'react';
 import { Platform, Text, View } from 'react-native';
-import { Dropdown, KeyboardAvoidAndDismissView } from 'src/components';
+import { CustomButton, Dropdown, FloatingLabelTextInput } from 'src/components';
 import PropTypes from 'prop-types';
 import styles from 'src/screens/AddNewTimezone/TimezoneForm/styles';
-import { CustomButton, FloatingLabelTextInput } from 'src/components';
 import appStyles from 'src/styles/appStyles';
 import { icons } from 'src/constants/icons';
+import { errorPropTypes } from 'src/constants/propTypes';
 
 const TimezoneForm = ({
   headerTitle,
   timezoneForm,
+  errors,
   handleInput,
   handleSubmit,
   isLoading,
@@ -22,11 +23,11 @@ const TimezoneForm = ({
   const textInputRef = useRef(null);
   const { name, cityName, differenceToGMT } = timezoneForm;
   return (
-    <KeyboardAvoidAndDismissView viewStyle={styles.container}>
+    <View>
       <Text style={[appStyles.headerText, styles.headerMargin]}>{headerTitle}</Text>
       <FloatingLabelTextInput
-        value={name.value}
-        error={name.error}
+        value={name}
+        error={errors.name}
         floatingLabel={'Name'}
         placeholderTextColor="#949EA0"
         returnKeyType={'next'}
@@ -35,8 +36,8 @@ const TimezoneForm = ({
       />
       <FloatingLabelTextInput
         textInputRef={textInputRef}
-        value={cityName.value}
-        error={cityName.error}
+        value={cityName}
+        error={errors.cityName}
         floatingLabel={'City Name'}
         placeholderTextColor="#949EA0"
         returnKeyType={'go'}
@@ -77,21 +78,16 @@ const TimezoneForm = ({
           textStyle={appStyles.buttonText}
         />
       </View>
-    </KeyboardAvoidAndDismissView>
+    </View>
   );
 };
 
 TimezoneForm.propTypes = {
+  errors: PropTypes.objectOf(errorPropTypes).isRequired,
   headerTitle: PropTypes.string.isRequired,
   timezoneForm: PropTypes.shape({
-    name: PropTypes.exact({
-      value: PropTypes.string,
-      error: PropTypes.bool
-    }),
-    cityName: PropTypes.exact({
-      value: PropTypes.string,
-      error: PropTypes.bool
-    }),
+    name: PropTypes.string,
+    cityName: PropTypes.string,
     differenceToGMT: PropTypes.string
   }).isRequired,
   handleInput: PropTypes.func.isRequired,
