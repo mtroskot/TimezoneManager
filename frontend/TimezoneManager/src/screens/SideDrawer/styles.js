@@ -2,6 +2,13 @@ import { Platform, StyleSheet } from 'react-native';
 import { dimensions, fonts } from 'src/styles';
 const { rem, width } = dimensions;
 
+const picker = {
+  justifyContent: 'center',
+  height: Platform.OS === 'ios' ? 100 * rem : 50 * rem,
+  overflow: 'hidden',
+  marginTop: 10 * rem,
+  marginLeft: Platform.OS === 'ios' ? 0 : 10 * rem
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -12,12 +19,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20 * rem
   },
-  picker: {
-    justifyContent: 'center',
-    height: Platform.OS === 'ios' ? 100 * rem : 50 * rem,
-    overflow: 'hidden',
-    marginTop: 10 * rem,
-    marginLeft: Platform.OS === 'ios' ? 0 : 10 * rem
+  picker: picker,
+  loader: {
+    flex: 0,
+    ...picker
   },
   regular: {
     ...fonts.ubuntu.normal.regular,

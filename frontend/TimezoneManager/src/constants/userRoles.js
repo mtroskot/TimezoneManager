@@ -1,5 +1,9 @@
-export const roles = Object.freeze([
-  { label: 'Regular', value: 'REGULAR' },
-  { label: 'Manager', value: 'MANAGER' },
-  { label: 'Admin', value: 'ADMIN' }
+export const USER = 'USER';
+export const MANAGER = 'MANAGER';
+export const ADMIN = 'ADMIN';
+
+export const rolePicker = Object.freeze([
+  { label: 'Regular', value: USER },
+  { label: 'Manager', value: MANAGER },
+  { label: 'Admin', value: ADMIN }
 ]);
