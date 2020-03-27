@@ -1,20 +1,22 @@
 import { StyleSheet } from 'react-native';
-import { dimensions } from 'src/styles';
+import { dimensions, fonts } from 'src/styles';
 const { rem } = dimensions;
 
 const styles = StyleSheet.create({
-  inlineView: {
-    flexDirection: 'row'
+  emptyContainer: {
+    flex: 1
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
+  container: {
+    flex: 1,
+    justifyContent: 'center'
   },
-  deleteButton: {
-    marginHorizontal: 5 * rem
+  infoText: {
+    ...fonts.ubuntu.normal.medium,
+    textAlign: 'center',
+    fontSize: 20 * rem
   },
   listContentContainerStyle: {
-    alignSelf: 'center'
+    flexGrow: 1
   }
 });
 

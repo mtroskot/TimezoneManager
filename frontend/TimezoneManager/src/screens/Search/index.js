@@ -1,49 +1,108 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, View } from 'react-native';
 import { CustomButton, KeyboardAvoidAndDismissView, SearchBar } from 'src/components';
 import FilterOptions from 'src/screens/Search/FilterOptions';
 import SearchResults from 'src/screens/Search/SearchResults';
-import { icons } from 'src/constants/icons';
 import SafeAreaView from 'react-native-safe-area-view';
-import { mockEntries, mockUsers } from 'src/constants/mockData';
-import { ListUtils } from 'src/utils';
+import { searchSelector } from 'src/store/search/searchSelectors';
+import { deleteTimezoneEntry } from 'src/store/timezone/timezoneActions';
+import { clearSearch, searchTimezoneEntries, searchUsers } from 'src/store/search/searchActions';
+import { connect } from 'react-redux';
+import { userInfoSelector } from 'src/store/user/userSelectors';
+import { checkIfLoadingSelector, updatingItemIdSelector } from 'src/store/ui/uiSelectors';
+import axios from 'axios';
+import { NavigationService } from 'src/services';
+import { AppUtils, FlatListUtils, HooksUtils, StringUtils } from 'src/utils';
+import PropTypes from 'prop-types';
+import { screenNames } from 'src/constants/navigation';
+import { timezoneEntryPropTypes, userPropTypes } from 'src/constants/propTypes';
+import { searchActionTypes, timezoneActionTypes } from 'src/constants/actionTypes';
+import { filterOptions } from 'src/constants/search';
+import { idNames } from 'src/constants/idKeyNames';
+import { icons } from 'src/constants/icons';
 import appStyles from 'src/styles/appStyles';
 import styles from 'src/screens/Search/styles';
-import { NavigationService } from 'src/services';
-import { screenNames } from 'src/constants/navigation';
 
-const Search = () => {
+const filterOptionsInitialState = [
+  Object.freeze({ value: filterOptions.OWN_ENTRIES, label: 'Own entries', enabled: true, selected: true }),
+  Object.freeze({ value: filterOptions.USERS, label: 'Users', enabled: true, selected: false }),
+  Object.freeze({ value: filterOptions.ALL_ENTRIES, label: 'All entries', enabled: true, selected: false })
+];
+const CancelToken = axios.CancelToken;
+let source = null;
+
+const Search = props => {
+  //STATE
+  const { deletingItemId, updatingItemId, isSearching, search, userRole } = props;
   const [searchInput, setSearchInput] = useState('');
-  const [filterOptions, setFilterOptions] = useState([
-    { value: 'OWN_ENTRIES', label: 'Own entries', enabled: true, selected: true },
-    { value: 'USERS', label: 'Users', enabled: true, selected: false },
-    { value: 'ALL_ENTRIES', label: 'All entries', enabled: true, selected: false }
-  ]);
+  const [filterOptions, setFilterOptions] = useState(filterOptionsInitialState);
   const [showFilterOptions, setShowFilterOptions] = useState(false);
+  const selectedOption = filterOptions.find(option => option.selected === true);
+  const areEntriesSelected = selectedOption.label.includes('entries');
+
+  //LIFECYCLE METHODS
+  HooksUtils.useDidMountUnmount(
+    () => {},
+    () => {
+      props.clearSearch();
+    }
+  );
+
+  useEffect(() => {
+    source = CancelToken.source();
+    let handler = null;
+    if (StringUtils.isNotEmpty(searchInput)) {
+      handler = setTimeout(() => {
+        areEntriesSelected
+          ? props.searchTimezoneEntries(searchInput, source.token)
+          : props.searchUsers(searchInput, source.token);
+      }, 500);
+    } else if (StringUtils.isEmpty(searchInput)) {
+      props.clearSearch();
+    }
+    return () => {
+      source.cancel();
+      clearTimeout(handler);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchInput, filterOptions]);
+
+  //METHODS
 
   function toggleFilterOptions() {
     setShowFilterOptions(!showFilterOptions);
   }
 
+  /**
+   *
+   * @param switchValue Bool
+   * @param filterValue String
+   */
   function onFilterChange(switchValue, filterValue) {
-    const newFilterOptions = [...filterOptions];
-    newFilterOptions.forEach(option => {
-      if (filterValue === option.value) {
-        option.selected = true;
+    if (!AppUtils.checkIfUserHasRightsForFilterOptions(filterValue, userRole)) {
+      alert('Unauthorized action');
+      return;
+    }
+    const newFilterOptions = filterOptions.map(option => {
+      const newOption = { ...option };
+      if (filterValue === newOption.value) {
+        newOption.selected = true;
       } else {
-        option.selected = false;
+        newOption.selected = false;
       }
+      return newOption;
     });
     setFilterOptions(newFilterOptions);
   }
 
   function onEdit(itemId) {
-    const isUserEdit = !selectedOption.label.includes('entries');
-    if (isUserEdit) {
-      const user = mockUsers.find(user => user.id === itemId);
+    if (!areEntriesSelected) {
+      const user = search.userSearchData.searchResults.find(item => item[idNames.USER_ID] === itemId);
       NavigationService.push(screenNames.AUTH_EDIT, { user });
     } else {
-      const timezoneEntry = mockEntries.find(entry => entry.id === itemId);
+      const timezoneEntry = search.timezoneEntriesSearchData.searchResults.find(
+        item => item[idNames.TIMEZONE_ENTRY_ID] === itemId
+      );
       NavigationService.push(screenNames.TIMEZONE_EDIT, { timezoneEntry });
     }
   }
@@ -65,14 +124,19 @@ const Search = () => {
   }
 
   function deleteItem(itemId) {
-    console.log('item', itemId);
+    if (areEntriesSelected) {
+      props.deleteTimezoneEntry(itemId);
+    }
   }
 
   //RENDER
-  const selectedOption = filterOptions.find(option => option.selected === true);
-  const areEntriesSelected = selectedOption.label.includes('entries');
-  const data = areEntriesSelected ? mockEntries : mockUsers;
-  const renderItem = areEntriesSelected ? ListUtils.renderEntries : ListUtils.renderAvatars;
+  const data = areEntriesSelected
+    ? search.timezoneEntriesSearchData.searchResults
+    : search.userSearchData.searchResults;
+  const loadingText = areEntriesSelected ? 'Searching entries' : 'Searching users';
+  const searchMessage = areEntriesSelected ? search.timezoneEntriesSearchData.message : search.userSearchData.message;
+  const renderItem = areEntriesSelected ? FlatListUtils.renderEntries : FlatListUtils.renderAvatars;
+  const idName = areEntriesSelected ? idNames.TIMEZONE_ENTRY_ID : idNames.USER_ID;
   return (
     <SafeAreaView style={appStyles.safeArea}>
       <KeyboardAvoidAndDismissView>
@@ -92,11 +156,65 @@ const Search = () => {
         </View>
       </KeyboardAvoidAndDismissView>
       <FilterOptions {...{ showFilterOptions, filterOptions, onFilterChange }} />
-      <SearchResults {...{ data, renderItem, searchType: selectedOption.label.toLowerCase(), onEdit, onDelete }} />
+      <SearchResults
+        {...{
+          data,
+          renderItem,
+          searchType: selectedOption.label.toLowerCase(),
+          onEdit,
+          onDelete,
+          idName,
+          updatingItemId,
+          deletingItemId,
+          isSearching,
+          loadingText,
+          searchMessage
+        }}
+      />
     </SafeAreaView>
   );
 };
 
-Search.propTypes = {};
+Search.propTypes = {
+  userRole: PropTypes.string.isRequired,
+  isSearching: PropTypes.bool.isRequired,
+  deletingItemId: PropTypes.number,
+  updatingItemId: PropTypes.number,
+  search: PropTypes.exact({
+    userSearchData: PropTypes.exact({
+      searchResults: PropTypes.arrayOf(userPropTypes.isRequired).isRequired,
+      message: PropTypes.string
+    }).isRequired,
+    timezoneEntriesSearchData: PropTypes.exact({
+      searchResults: PropTypes.arrayOf(timezoneEntryPropTypes.isRequired).isRequired,
+      message: PropTypes.string
+    }).isRequired
+  }).isRequired,
+  deleteTimezoneEntry: PropTypes.func.isRequired,
+  searchTimezoneEntries: PropTypes.func.isRequired,
+  searchUsers: PropTypes.func.isRequired,
+  clearSearch: PropTypes.func.isRequired
+};
 
-export default React.memo(Search);
+const mapStateToProps = state => ({
+  userRole: userInfoSelector(state).role,
+  isSearching: checkIfLoadingSelector(state)([
+    searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
+    searchActionTypes.SEARCH_USERS
+  ]),
+  deletingItemId: updatingItemIdSelector(state)(timezoneActionTypes.DELETE_TIMEZONE_ENTRY),
+  updatingItemId: updatingItemIdSelector(state)(timezoneActionTypes.UPDATE_TIMEZONE_ENTRY),
+  search: searchSelector(state)
+});
+
+const mapDispatchToProps = {
+  deleteTimezoneEntry,
+  searchTimezoneEntries,
+  searchUsers,
+  clearSearch
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(React.memo(Search));
