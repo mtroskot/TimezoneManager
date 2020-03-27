@@ -18,8 +18,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20 * rem
   },
-  cityTimeView: {
-    justifyContent: 'center'
+  columnDirection: {
+    flexDirection: 'column'
+  },
+  column: {
+    flex: 0.45
   },
   timezoneInfo: {
     ...fonts.ubuntu.normal.regular,

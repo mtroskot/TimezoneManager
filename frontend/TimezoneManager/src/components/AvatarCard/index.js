@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { StringUtils } from 'src/utils';
+import StringUtils from 'src/utils/StringUtils';
 import PropTypes from 'prop-types';
 import styles from 'src/components/AvatarCard/styles';
 

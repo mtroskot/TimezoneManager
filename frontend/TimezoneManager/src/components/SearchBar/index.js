@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View, ViewPropTypes } from 'react-native';
-import { CustomButton } from 'src/components';
+import CustomButton from 'src/components/CustomButton';
 import { StringUtils } from 'src/utils';
 import PropTypes from 'prop-types';
 import { icons } from 'src/constants/icons';
