@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import { screenNames } from 'src/constants/navigation';
+import { screenNames, stackNames } from 'src/constants/navigation';
 import ClockScreen from 'src/screens/Clock';
 import { Text } from 'react-native';
 import styles from 'src/navigation/styles';
@@ -10,6 +10,8 @@ import { NavigationService } from 'src/services';
 import AddNewTimezoneScreen from 'src/screens/AddNewTimezone';
 import SearchScreen from 'src/screens/Search';
 import AuthScreen from 'src/screens/Auth';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import SideDrawer from 'src/screens/SideDrawer';
 
 const ClockStack = createStackNavigator({
   [screenNames.CLOCK]: {
@@ -39,4 +41,23 @@ const ClockStack = createStackNavigator({
   }
 });
 
-export default ClockStack;
+ClockStack.navigationOptions = ({ navigation }) => {
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    drawerLockMode
+  };
+};
+
+const ClockStackDrawer = createDrawerNavigator(
+  {
+    [stackNames.CLOCK_STACK_WITH_DRAWER]: ClockStack
+  },
+  {
+    contentComponent: SideDrawer
+  }
+);
+
+export default ClockStackDrawer;
