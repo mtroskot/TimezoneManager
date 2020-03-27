@@ -4,6 +4,7 @@ import { Animated, Text } from 'react-native';
 import { HooksUtils, StringUtils } from 'src/utils';
 import { popupMessagePropTypes } from 'src/constants/propTypes';
 import styles from 'src/components/PopupMessage/styles';
+import { popupMessageSelector } from 'src/store/ui/uiSelectors';
 
 let handler = null;
 const PopupMessage = props => {
@@ -51,7 +52,7 @@ PopupMessage.defaultProps = {
   position: 'top'
 };
 const mapStateToProps = state => ({
-  popupMessage: state.ui.popupMessage
+  popupMessage: popupMessageSelector(state)
 });
 export default connect(
   mapStateToProps,
