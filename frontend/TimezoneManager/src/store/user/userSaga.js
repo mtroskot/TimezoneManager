@@ -134,7 +134,7 @@ export function* updateUserInfoSaga({ type, payload }) {
   try {
     const { updatedUserInfo } = payload;
     yield put(startAction(type, { id: updatedUserInfo.userId }));
-    yield delay(1000);
+    yield delay(3000);
     let userInfo = yield select(userInfoSelector);
     userInfo = {
       ...userInfo,

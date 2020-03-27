@@ -33,10 +33,10 @@ export const checkIfErrorSelector = createSelector(
 export const updatingItemIdSelector = createSelector(
   loadingActionsSelector,
   loadingActions =>
-    memoize(actionToCheck => {
+    memoize(actionsToCheck => {
       const action = loadingActions.find(
         action =>
-          actionToCheck === action.name &&
+          actionsToCheck.includes(action.name) &&
           (Number.isInteger(action.params?.id) || typeof action.params?.id === 'string')
       );
       return action?.params.id;

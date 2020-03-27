@@ -16,7 +16,7 @@ import { AppUtils, FlatListUtils, HooksUtils, StringUtils } from 'src/utils';
 import PropTypes from 'prop-types';
 import { screenNames } from 'src/constants/navigation';
 import { timezoneEntryPropTypes, userPropTypes } from 'src/constants/propTypes';
-import { searchActionTypes, timezoneActionTypes } from 'src/constants/actionTypes';
+import { searchActionTypes, timezoneActionTypes, userActionTypes } from 'src/constants/actionTypes';
 import { filterOptions } from 'src/constants/search';
 import { idNames } from 'src/constants/idKeyNames';
 import { icons } from 'src/constants/icons';
@@ -202,8 +202,14 @@ const mapStateToProps = state => ({
     searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
     searchActionTypes.SEARCH_USERS
   ]),
-  deletingItemId: updatingItemIdSelector(state)(timezoneActionTypes.DELETE_TIMEZONE_ENTRY),
-  updatingItemId: updatingItemIdSelector(state)(timezoneActionTypes.UPDATE_TIMEZONE_ENTRY),
+  deletingItemId: updatingItemIdSelector(state)([
+    timezoneActionTypes.DELETE_TIMEZONE_ENTRY,
+    userActionTypes.DELETE_USER
+  ]),
+  updatingItemId: updatingItemIdSelector(state)([
+    timezoneActionTypes.UPDATE_TIMEZONE_ENTRY,
+    userActionTypes.UPDATE_USER_INFO
+  ]),
   search: searchSelector(state)
 });
 
