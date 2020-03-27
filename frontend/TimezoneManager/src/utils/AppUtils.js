@@ -1,4 +1,6 @@
 import { Animated, Platform } from 'react-native';
+import { ADMIN, MANAGER } from 'src/constants/userRoles';
+import { filterOptions } from 'src/constants/search';
 import { dimensions } from 'src/styles';
 const { rem } = dimensions;
 
@@ -25,7 +27,21 @@ function startShake(shakeAnimation) {
   ).start();
 }
 
+function checkIfUserHasRightsForFilterOptions(filterOption, userRole) {
+  if (userRole === ADMIN) {
+    return true;
+  }
+  if (filterOption === filterOptions.USERS && userRole === MANAGER) {
+    return true;
+  }
+  if (filterOption === filterOptions.OWN_ENTRIES) {
+    return true;
+  }
+  return false;
+}
+
 export default {
   getIconForPlatform,
-  startShake
+  startShake,
+  checkIfUserHasRightsForFilterOptions
 };

@@ -1,11 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
-import { AvatarCard, CustomButton, TimezoneEntry } from 'src/components';
+import { StyleSheet, View } from 'react-native';
+import { AvatarCard, EditItemButtons, TimezoneEntry } from 'src/components';
 import DateUtils from 'src/utils/DateUtils';
-import { icons } from 'src/constants/icons';
-import styles from 'src/screens/Search/SearchResults/styles';
-import { dimensions } from 'src/styles';
-const { rem } = dimensions;
 
 function renderAvatars(item) {
   const { firstName, lastName, emailAddress } = item;
@@ -18,9 +14,9 @@ function renderEntries(item, minutes) {
     minutes = DateUtils.convertShortTimeToLongTime(new Date().getHours());
   }
   const { name, cityName, differenceToGMT } = item;
-  const convertedTime = DateUtils.convertTimeToSelectedTimezoneTime(date, differenceToGMT);
-  const timezoneHours = new Date(convertedTime).getHours();
-  const differenceToBrowser = timezoneHours - date.getHours();
+  const timezoneTime = DateUtils.convertTimeToSelectedTimezoneTime(date, differenceToGMT);
+  const timezoneHours = timezoneTime.getHours();
+  const differenceToBrowser = DateUtils.getDifferenceInHours(timezoneTime, new Date());
   return (
     <TimezoneEntry
       {...{
@@ -34,21 +30,15 @@ function renderEntries(item, minutes) {
   );
 }
 
-function withEditButtons(component, itemId, onEdit, onDelete) {
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  inlineView: { flexDirection: 'row' }
+});
+function withEditButtons(component, itemId, onEdit, onDelete, deletingItemId, updatingItemId) {
   return (
     <View style={styles.inlineView}>
-      <View style={{ flex: 1 }}>{component}</View>
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          iconProps={{ name: icons.CREATE, color: '#04c2dc', size: 40 * rem }}
-          onPress={() => onEdit(itemId)}
-        />
-        <CustomButton
-          iconProps={{ name: icons.TRASH, color: '#f64812', size: 40 * rem }}
-          onPress={() => onDelete(itemId)}
-          tOpacityStyle={styles.deleteButton}
-        />
-      </View>
+      <View style={styles.container}>{component}</View>
+      <EditItemButtons {...{ itemId, onEdit, onDelete, deletingItemId, updatingItemId }} />
     </View>
   );
 }

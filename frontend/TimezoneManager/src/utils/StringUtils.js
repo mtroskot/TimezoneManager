@@ -23,8 +23,33 @@ function getNameInitials(name) {
   return splitName.length === 1 ? splitName[0][0] : `${splitName[0][0]} ${splitName[splitName.length - 1][0]}`;
 }
 
-function convertGMTDIffToString(gmtDIff) {
+/**
+ * Converts number or string to GMT string
+ * @param diff Number or String
+ * @returns {string}
+ */
+function convertGMTDIffToString(diff) {
+  const gmtDIff = parseInt(String(diff).replace('+', ''), 10);
   return gmtDIff <= 0 ? `${gmtDIff}` : `+${gmtDIff}`;
+}
+
+function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
+}
+
+function camelCaseToWords(str) {
+  let newString = '';
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    if (i === 0) {
+      newString += char.toUpperCase();
+    } else if (char === char.toUpperCase()) {
+      newString += ' ' + char;
+    } else {
+      newString += char;
+    }
+  }
+  return newString;
 }
 
 const StringUtils = {
@@ -34,7 +59,9 @@ const StringUtils = {
   areNotEmpty,
   isString,
   getNameInitials,
-  convertGMTDIffToString
+  convertGMTDIffToString,
+  capitalizeFirstLetter,
+  camelCaseToWords
 };
 
 export default StringUtils;
