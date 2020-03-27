@@ -1,16 +1,16 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 import { CustomButton, Error404, Loader } from 'src/components';
 import styles from 'src/screens/Clock/TimezoneEntries/EmptyTimezoneEntries/styles';
+import PropTypes from 'prop-types';
 import { dimensions } from 'src/styles';
 const { rem } = dimensions;
 
-const EmptyTimezoneEntries = ({ error, isLoading, loadingText, animateIcon }) => {
+const EmptyTimezoneEntries = ({ isError, isLoading, loadingText, animateIcon }) => {
   if (isLoading) {
     return <Loader text={loadingText} />;
   }
-  if (error) {
+  if (isError) {
     return <Error404 size={100 * rem} />;
   }
   return (
@@ -28,7 +28,7 @@ const EmptyTimezoneEntries = ({ error, isLoading, loadingText, animateIcon }) =>
 };
 
 EmptyTimezoneEntries.propTypes = {
-  error: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   loadingText: PropTypes.string.isRequired,
   animateIcon: PropTypes.bool.isRequired

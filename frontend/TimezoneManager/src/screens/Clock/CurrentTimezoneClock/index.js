@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 import AnalogClock from 'react-native-clock-analog';
 import styles from 'src/screens/Clock/CurrentTimezoneClock/styles';
+import PropTypes from 'prop-types';
 import { dimensions } from 'src/styles';
 const { rem } = dimensions;
 

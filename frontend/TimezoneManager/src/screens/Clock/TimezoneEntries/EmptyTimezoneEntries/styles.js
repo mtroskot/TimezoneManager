@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   },
   infoText: {
     ...fonts.ubuntu.normal.regular,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 16 * rem
   },
   arrow: {
     alignSelf: 'center',

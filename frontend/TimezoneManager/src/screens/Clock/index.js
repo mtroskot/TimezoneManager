@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import CurrentTimezoneClock from 'src/screens/Clock/CurrentTimezoneClock';
 import TimezoneEntries from 'src/screens/Clock/TimezoneEntries';
 import { CustomButton } from 'src/components';
 import { NavigationService } from 'src/services';
-import { DateUtils, HooksUtils, ListUtils } from 'src/utils';
+import { DateUtils, FlatListUtils, HooksUtils } from 'src/utils';
+import { checkIfErrorSelector, checkIfLoadingSelector, checkIfRefreshingSelector } from 'src/store/ui/uiSelectors';
+import { timezoneActionTypes } from 'src/constants/actionTypes';
+import { connect } from 'react-redux';
+import { timezoneEntriesSelector } from 'src/store/timezone/timezoneSelectors';
+import { fetchTimezoneEntries } from 'src/store/timezone/timezoneActions';
 import { clockFormat, dateFormat } from 'src/constants/date';
 import { icons } from 'src/constants/icons';
 import { screenNames } from 'src/constants/navigation';
-import { mockEntries } from 'src/constants/mockData';
 import styles from 'src/screens/Clock/styles';
 import { appStyles, dimensions } from 'src/styles';
+import PropTypes from 'prop-types';
+import { timezoneEntryPropTypes } from 'src/constants/propTypes';
 const { rem } = dimensions;
 
 let intervalHandler = null;
@@ -19,44 +25,36 @@ let timezoneOffset = new Date().getTimezoneOffset() / -60;
 timezoneOffset =
   timezoneOffset > 0 ? `+${timezoneOffset}` : timezoneOffset < 0 ? `-${timezoneOffset}` : `${timezoneOffset}`;
 
-const ClockManager = () => {
+const ClockManager = props => {
+  //STATE
+  const { timezoneEntries, isLoading, isError, isRefreshing } = props;
   const [date, setDate] = useState(new Date());
   const [minutes, setMinutes] = useState('');
-  const [entries, setEntries] = useState([]);
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
+  //LIFECYCLE METHODS
   HooksUtils.useDidMountUnmount(
     () => {
       clockInterval();
-      fetchTimezoneEntries();
+      props.fetchTimezoneEntries();
     },
     () => {
       clearInterval(intervalHandler);
     }
   );
 
+  // METHODS
   function clockInterval() {
     intervalHandler = setInterval(() => {
-      const date = new Date();
-      setDate(date);
-      setMinutes(DateUtils.convertShortTimeToLongTime(date.getMinutes()));
+      const newDate = new Date();
+      setDate(newDate);
+      setMinutes(DateUtils.convertShortTimeToLongTime(newDate.getMinutes()));
     }, 1000);
   }
 
-  function fetchTimezoneEntries() {
-    try {
-      setIsLoading(true);
-      setError(false);
-      setTimeout(() => {
-        setEntries(mockEntries);
-        setIsLoading(false);
-      }, 3000);
-    } catch (error) {
-      setError(true);
-      console.log('fetchTimezoneEntries error', error);
-    }
-  }
+  const onRefresh = useCallback(() => {
+    const refresh = true;
+    props.fetchTimezoneEntries(refresh);
+  }, [props]);
 
   function onAddTimezonePress() {
     NavigationService.push(screenNames.ADD_NEW_TIMEZONE);
@@ -66,7 +64,8 @@ const ClockManager = () => {
     NavigationService.navigate(screenNames.SEARCH);
   }
 
-  const listEmpty = error || isLoading || entries.length === 0;
+  //RENDER
+  const listEmpty = isError || isLoading || timezoneEntries.length === 0;
   return (
     <SafeAreaView style={appStyles.safeArea}>
       <View style={styles.container}>
@@ -83,11 +82,13 @@ const ClockManager = () => {
         <TimezoneEntries
           {...{
             minutes,
-            entries,
-            renderItem: ListUtils.renderEntries,
-            error,
+            timezoneEntries,
+            renderItem: FlatListUtils.renderEntries,
+            isError,
             isLoading,
-            loadingText: 'Loading Timezone Entries'
+            loadingText: 'Loading Timezone Entries',
+            isRefreshing,
+            onRefresh
           }}
         />
         <View style={!listEmpty ? styles.absolutePosition : null}>
@@ -102,4 +103,26 @@ const ClockManager = () => {
   );
 };
 
-export default React.memo(ClockManager);
+ClockManager.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  isRefreshing: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
+  timezoneEntries: PropTypes.arrayOf(timezoneEntryPropTypes).isRequired,
+  fetchTimezoneEntries: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  isLoading: checkIfLoadingSelector(state)([timezoneActionTypes.FETCH_TIMEZONE_ENTRIES]),
+  isRefreshing: checkIfRefreshingSelector(state)(timezoneActionTypes.FETCH_TIMEZONE_ENTRIES),
+  isError: checkIfErrorSelector(state)([timezoneActionTypes.FETCH_TIMEZONE_ENTRIES]),
+  timezoneEntries: timezoneEntriesSelector(state)
+});
+
+const mapDispatchToProps = {
+  fetchTimezoneEntries
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(React.memo(ClockManager));
