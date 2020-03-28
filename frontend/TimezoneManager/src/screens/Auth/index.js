@@ -126,7 +126,7 @@ const Auth = props => {
   const switchFormButtonText = !showLoginForm ? 'Login' : 'Create Account';
   return (
     <SafeAreaView style={appStyles.safeArea}>
-      <KeyboardAvoidAndDismissView viewStyle={styles.container} behavior={''}>
+      <KeyboardAvoidAndDismissView viewStyle={styles.container}>
         {form}
         {!isLoading && !isEdit && (
           <View style={styles.switchFormContainer}>

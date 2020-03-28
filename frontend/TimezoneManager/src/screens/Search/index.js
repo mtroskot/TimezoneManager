@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert } from 'react-native';
 import { CustomButton, KeyboardAvoidAndDismissView, SearchBar } from 'src/components';
 import FilterOptions from 'src/screens/Search/FilterOptions';
 import SearchResults from 'src/screens/Search/SearchResults';
 import SafeAreaView from 'react-native-safe-area-view';
 import { searchSelector } from 'src/store/search/searchSelectors';
 import { deleteTimezoneEntry } from 'src/store/timezone/timezoneActions';
-import { clearSearch, searchTimezoneEntries, searchUsers } from 'src/store/search/searchActions';
+import { clearAllSearches, searchTimezoneEntries, searchUsers } from 'src/store/search/searchActions';
 import { connect } from 'react-redux';
 import { userInfoSelector } from 'src/store/user/userSelectors';
 import { checkIfLoadingSelector, updatingItemIdSelector } from 'src/store/ui/uiSelectors';
@@ -15,7 +15,7 @@ import { NavigationService } from 'src/services';
 import { AppUtils, FlatListUtils, HooksUtils, StringUtils } from 'src/utils';
 import PropTypes from 'prop-types';
 import { screenNames } from 'src/constants/navigation';
-import { timezoneEntryPropTypes, userPropTypes } from 'src/constants/propTypes';
+import { timezoneEntriesSearchDataPropTypes, userSearchDataPropTypes } from 'src/constants/propTypes';
 import { searchActionTypes, timezoneActionTypes, userActionTypes } from 'src/constants/actionTypes';
 import { filterOptions } from 'src/constants/search';
 import { idNames } from 'src/constants/idKeyNames';
@@ -44,7 +44,7 @@ const Search = props => {
   HooksUtils.useDidMountUnmount(
     () => {},
     () => {
-      props.clearSearch();
+      props.clearAllSearches();
     }
   );
 
@@ -58,7 +58,7 @@ const Search = props => {
           : props.searchUsers(searchInput, source.token);
       }, 500);
     } else if (StringUtils.isEmpty(searchInput)) {
-      props.clearSearch();
+      props.clearAllSearches();
     }
     return () => {
       source.cancel();
@@ -139,21 +139,19 @@ const Search = props => {
   const idName = areEntriesSelected ? idNames.TIMEZONE_ENTRY_ID : idNames.USER_ID;
   return (
     <SafeAreaView style={appStyles.safeArea}>
-      <KeyboardAvoidAndDismissView>
-        <View style={styles.container}>
-          <SearchBar
-            viewStyle={styles.searchBar}
-            placeholder={'Type something to search'}
-            clearInput={() => setSearchInput('')}
-            searchInput={searchInput}
-            handleInput={setSearchInput}
-          />
-          <CustomButton
-            iconProps={{ name: icons.FILTER, color: showFilterOptions ? '#f64812' : '#000' }}
-            onPress={toggleFilterOptions}
-            tOpacityStyle={styles.filterButton}
-          />
-        </View>
+      <KeyboardAvoidAndDismissView viewStyle={styles.container}>
+        <SearchBar
+          viewStyle={styles.searchBar}
+          placeholder={'Type something to search'}
+          clearInput={() => setSearchInput('')}
+          searchInput={searchInput}
+          handleInput={setSearchInput}
+        />
+        <CustomButton
+          iconProps={{ name: icons.FILTER, color: showFilterOptions ? '#f64812' : '#000' }}
+          onPress={toggleFilterOptions}
+          tOpacityStyle={styles.filterButton}
+        />
       </KeyboardAvoidAndDismissView>
       <FilterOptions {...{ showFilterOptions, filterOptions, onFilterChange }} />
       <SearchResults
@@ -181,19 +179,13 @@ Search.propTypes = {
   deletingItemId: PropTypes.number,
   updatingItemId: PropTypes.number,
   search: PropTypes.exact({
-    userSearchData: PropTypes.exact({
-      searchResults: PropTypes.arrayOf(userPropTypes.isRequired).isRequired,
-      message: PropTypes.string
-    }).isRequired,
-    timezoneEntriesSearchData: PropTypes.exact({
-      searchResults: PropTypes.arrayOf(timezoneEntryPropTypes.isRequired).isRequired,
-      message: PropTypes.string
-    }).isRequired
+    userSearchData: userSearchDataPropTypes.isRequired,
+    timezoneEntriesSearchData: timezoneEntriesSearchDataPropTypes.isRequired
   }).isRequired,
   deleteTimezoneEntry: PropTypes.func.isRequired,
   searchTimezoneEntries: PropTypes.func.isRequired,
   searchUsers: PropTypes.func.isRequired,
-  clearSearch: PropTypes.func.isRequired
+  clearAllSearches: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -217,7 +209,7 @@ const mapDispatchToProps = {
   deleteTimezoneEntry,
   searchTimezoneEntries,
   searchUsers,
-  clearSearch
+  clearAllSearches
 };
 
 export default connect(

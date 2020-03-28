@@ -10,7 +10,7 @@ const FilterOptions = ({ showFilterOptions, filterOptions, onFilterChange }) => 
   }
   return (
     <View style={styles.container}>
-      <Text style={appStyles.headerText}>FilterOptions</Text>
+      <Text style={appStyles.headerText}>Filter Options</Text>
       {filterOptions.map(option => {
         return (
           <View key={option.value} style={styles.switchContainer}>

@@ -5,10 +5,12 @@ import { idNames } from 'src/constants/idKeyNames';
 const initialState = {
   userSearchData: {
     searchResults: [],
+    searchQuery: '',
     message: ''
   },
   timezoneEntriesSearchData: {
     searchResults: [],
+    searchQuery: '',
     message: ''
   }
 };
@@ -73,10 +75,20 @@ const searchReducer = (state = initialState, { type, payload }) => {
           )
         }
       };
-    case searchActionTypes.CLEAR_SEARCH:
+    case searchActionTypes.CLEAR_ALL_SEARCHES:
       return {
         ...state,
         userSearchData: initialState.userSearchData,
+        timezoneEntriesSearchData: initialState.timezoneEntriesSearchData
+      };
+    case searchActionTypes.CLEAR_USERS_SEARCH:
+      return {
+        ...state,
+        userSearchData: initialState.userSearchData
+      };
+    case searchActionTypes.CLEAR_TIMEZONE_ENTRIES_SEARCH:
+      return {
+        ...state,
         timezoneEntriesSearchData: initialState.timezoneEntriesSearchData
       };
     default:

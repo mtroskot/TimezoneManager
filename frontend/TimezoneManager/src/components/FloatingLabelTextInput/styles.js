@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { dimensions, fonts } from 'src/styles';
 const { rem } = dimensions;
 const paddingLeft = 15 * rem;
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     ...fonts.ubuntu.normal.regular,
     fontSize: 16 * rem,
     color: '#334144',
-    padding: 0
+    padding: 0,
+    bottom: Platform.OS !== 'ios' ? -5 * rem : 0
   },
   iconContainer: {
     justifyContent: 'center',

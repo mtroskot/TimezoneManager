@@ -1,6 +1,7 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { ListItemSeparator, Loader } from 'src/components';
+import { FlatList, Text } from 'react-native';
+import { ListItemSeparator } from 'src/components';
+import EmptySearchResults from 'src/screens/Search/SearchResults/EmptySearchResults';
 import PropTypes from 'prop-types';
 import { appStyles } from 'src/styles';
 import { FlatListUtils } from 'src/utils';
@@ -19,21 +20,11 @@ const SearchResults = ({
   loadingText,
   searchMessage
 }) => {
-  if (isSearching || searchMessage) {
-    return (
-      <View style={styles.emptyContainer}>
-        <Text style={appStyles.headerText}>Search results for {searchType}</Text>
-        <View style={styles.container}>
-          {isSearching ? <Loader text={loadingText} /> : <Text style={styles.infoText}>{searchMessage}</Text>}
-        </View>
-      </View>
-    );
-  }
-
   return (
     <FlatList
       data={data}
       ListHeaderComponent={<Text style={appStyles.headerText}>Search results for {searchType}</Text>}
+      ListEmptyComponent={<EmptySearchResults {...{ isSearching, searchMessage, loadingText }} />}
       renderItem={({ item }) =>
         FlatListUtils.withEditButtons(renderItem(item), item[idName], onEdit, onDelete, deletingItemId, updatingItemId)
       }

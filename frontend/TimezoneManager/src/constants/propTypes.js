@@ -24,3 +24,15 @@ export const timezoneEntryPropTypes = PropTypes.exact({
   cityName: PropTypes.string.isRequired,
   differenceToGMT: PropTypes.string.isRequired
 });
+
+export const userSearchDataPropTypes = PropTypes.exact({
+  searchResults: PropTypes.arrayOf(userPropTypes.isRequired).isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  message: PropTypes.string
+});
+
+export const timezoneEntriesSearchDataPropTypes = PropTypes.exact({
+  searchResults: PropTypes.arrayOf(timezoneEntryPropTypes.isRequired).isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  message: PropTypes.string
+});
