@@ -30,24 +30,24 @@ const searchReducer = (state = initialState, { type, payload }) => {
     case userActionTypes.UPDATE_USER_INFO_SUCCESS:
       return {
         ...state,
-        timezoneEntriesSearchData: {
-          ...state.timezoneEntriesSearchData,
+        userSearchData: {
+          ...state.userSearchData,
           searchResults: ArrayUtils.updateItemInList(
-            state.timezoneEntriesSearchData.searchResults,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? idNames.USER_ID : idNames.TIMEZONE_ENTRY_ID,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? payload.updatedUserInfo : payload.timezoneEntry
+            state.userSearchData.searchResults,
+            idNames.USER_ID,
+            payload.updatedUserInfo
           )
         }
       };
     case timezoneActionTypes.UPDATE_TIMEZONE_ENTRY_SUCCESS:
       return {
         ...state,
-        userSearchData: {
-          ...state.userSearchData,
+        timezoneEntriesSearchData: {
+          ...state.timezoneEntriesSearchData,
           searchResults: ArrayUtils.updateItemInList(
-            state.userSearchData.searchResults,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? idNames.USER_ID : idNames.TIMEZONE_ENTRY_ID,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? payload.updatedUserInfo : payload.timezoneEntry
+            state.timezoneEntriesSearchData.searchResults,
+            idNames.TIMEZONE_ENTRY_ID,
+            payload.timezoneEntry
           )
         }
       };
@@ -58,8 +58,8 @@ const searchReducer = (state = initialState, { type, payload }) => {
           ...state.userSearchData,
           searchResults: ArrayUtils.removeItemFromList(
             state.userSearchData.searchResults,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? idNames.USER_ID : idNames.TIMEZONE_ENTRY_ID,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? payload.userId : payload.timezoneEntryId
+            idNames.USER_ID,
+            payload.userId
           )
         }
       };
@@ -70,8 +70,8 @@ const searchReducer = (state = initialState, { type, payload }) => {
           ...state.timezoneEntriesSearchData,
           searchResults: ArrayUtils.removeItemFromList(
             state.timezoneEntriesSearchData.searchResults,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? idNames.USER_ID : idNames.TIMEZONE_ENTRY_ID,
-            type === userActionTypes.UPDATE_USER_INFO_SUCCESS ? payload.userId : payload.timezoneEntryId
+            idNames.TIMEZONE_ENTRY_ID,
+            payload.timezoneEntryId
           )
         }
       };

@@ -15,11 +15,12 @@ import appStyles from 'src/styles/appStyles';
 import styles from 'src/screens/Auth/styles';
 
 const initialRegisterFormState = Object.freeze({
-  userId: null,
+  id: null,
   firstName: '',
   lastName: '',
   emailAddress: '',
-  password: ''
+  password: '',
+  matchingPassword: ''
 });
 
 const initialLoginFormState = Object.freeze({
@@ -30,11 +31,12 @@ const initialLoginFormState = Object.freeze({
 function mapUserData(isEdit, userForEdit) {
   let mappedState = { ...initialRegisterFormState };
   if (isEdit) {
-    mappedState.userId = userForEdit.userId;
+    mappedState.id = userForEdit.id;
     mappedState.firstName = userForEdit.firstName;
     mappedState.lastName = userForEdit.lastName;
     mappedState.emailAddress = userForEdit.emailAddress;
-    mappedState.password = userForEdit.password || 'password';
+    mappedState.password = '';
+    mappedState.matchingPassword = '';
   }
   return mappedState;
 }
@@ -67,32 +69,53 @@ const Auth = props => {
   }
 
   function handleRegister() {
-    if (validateRegisterForm()) {
+    const validateAllFields = !isEdit;
+    if (validateRegisterForm(validateAllFields)) {
       if (isEdit) {
         props.updateUserInfo(registerForm);
       } else {
-        const { firstName, lastName, emailAddress, password } = registerForm;
-        props.registerUser(firstName, lastName, emailAddress, password);
+        props.registerUser(registerForm);
       }
     }
   }
 
-  function validateRegisterForm() {
-    const { firstName, lastName, emailAddress, password } = registerForm;
+  function validateRegisterForm(validateAllFields) {
+    const { firstName, lastName, emailAddress, password, matchingPassword } = registerForm;
     const errorObject = {};
-    const isFirstNameValid = ValidationUtils.isValidField('firstName', firstName, errorObject);
-    const isLastNameValid = ValidationUtils.isValidField('lastName', lastName, errorObject);
-    const isEmailValid = ValidationUtils.isValidField('emailAddress', emailAddress, errorObject);
-    const isPasswordValid = ValidationUtils.isValidField('password', password, errorObject);
+    const isFirstNameValid = ValidationUtils.validate('firstName', errorObject, ValidationUtils.isValidName(firstName));
+    const isLastNameValid = ValidationUtils.validate('lastName', errorObject, ValidationUtils.isValidName(lastName));
+    const isEmailValid = ValidationUtils.validate(
+      'emailAddress',
+      errorObject,
+      ValidationUtils.isValidEmail(emailAddress)
+    );
+    let isPasswordValid = true;
+    let isMatchingPasswordValid = true;
+    if (validateAllFields) {
+      isPasswordValid = ValidationUtils.validate('password', errorObject, ValidationUtils.isValidPassword(password));
+      isMatchingPasswordValid = ValidationUtils.validate(
+        'matchingPassword',
+        errorObject,
+        ValidationUtils.isValidMatchingPassword(password, matchingPassword)
+      );
+    }
     setErrors(errorObject);
-    return isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid;
+    return isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isMatchingPasswordValid;
   }
 
   function validateLoginForm() {
     const { emailAddress, password } = loginForm;
     const errorObject = {};
-    const isEmailValid = ValidationUtils.isValidField('emailAddress', emailAddress, errorObject);
-    const isPasswordValid = ValidationUtils.isValidField('password', password, errorObject);
+    const isEmailValid = ValidationUtils.validate(
+      'emailAddress',
+      errorObject,
+      ValidationUtils.isValidEmail(emailAddress)
+    );
+    const isPasswordValid = ValidationUtils.validate(
+      'password',
+      errorObject,
+      ValidationUtils.isValidPassword(password)
+    );
     setErrors(errorObject);
     return isEmailValid && isPasswordValid;
   }
@@ -116,6 +139,7 @@ const Auth = props => {
         submitButtonText: registerSubmitText,
         registerForm,
         errors,
+        isEdit,
         handleInput: handleRegisterInput,
         handleRegister,
         isLoading

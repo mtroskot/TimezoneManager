@@ -10,17 +10,20 @@ import { startAction, stopAction, togglePopupMessage } from 'src/store/ui/uiActi
 import { userActionTypes } from 'src/constants/actionTypes';
 import { NavigationService } from 'src/services';
 import { DEFAULT_ERROR, LOGIN_FAIL, REGISTRATION_SUCCESS } from 'src/constants/messages';
-// import { userRequests } from 'src/services/api';
-import { stackNames } from 'src/constants/navigation';
+import ApiService, { userRequests } from 'src/services/api';
+import { screenNames, stackNames } from 'src/constants/navigation';
 import { USER } from 'src/constants/userRoles';
 import { getPersistor } from 'src/store';
 import { userInfoSelector, userSelector } from 'src/store/user/userSelectors';
+import { idNames } from 'src/constants/idKeyNames';
 
-export function* registerUserSaga({ type }) {
+export function* registerUserSaga({ type, payload }) {
   try {
-    // const { firstName, lastName, emailAddress, password } = payload;
+    const { registerData } = payload;
     yield put(startAction(type));
-    yield delay(1000);
+    // yield delay(1000);
+    const res = yield call(ApiService.callApiAndCheckResponse, userRequests.register(registerData));
+    console.log('res', res);
     yield put(togglePopupMessage(REGISTRATION_SUCCESS, 'top'));
   } catch (error) {
     yield put(togglePopupMessage(DEFAULT_ERROR, 'top'));
@@ -41,11 +44,11 @@ export function* authenticateUserSaga({ type, payload }) {
     // const authResponse = yield call(ApiService.callApiAndCheckResponse, userRequests.login(emailAddress, password));
     let authResponse = null;
     yield delay(1000);
-    if (emailAddress.toLowerCase() === 'test' && password.toLowerCase() === 'test') {
+    if (emailAddress.toLowerCase() === 'marko.troskot@hotmail.com' && password.toLowerCase() === 'test123') {
       authResponse = {
         status: 200,
         user: {
-          userId: 1,
+          id: 1,
           firstName: 'Marko',
           lastName: 'Troskot',
           emailAddress: 'marko.troskot@hotmail.com',
@@ -133,7 +136,7 @@ export function* watchAuthAutoSignInSaga() {
 export function* updateUserInfoSaga({ type, payload }) {
   try {
     const { updatedUserInfo } = payload;
-    yield put(startAction(type, { id: updatedUserInfo.userId }));
+    yield put(startAction(type, { id: updatedUserInfo[idNames.USER_ID] }));
     yield delay(3000);
     let userInfo = yield select(userInfoSelector);
     userInfo = {
@@ -143,6 +146,7 @@ export function* updateUserInfoSaga({ type, payload }) {
       emailAddress: updatedUserInfo.emailAddress
     };
     yield put(updateUserInfoSuccess(userInfo));
+    yield call(NavigationService.navigate, screenNames.SEARCH);
   } catch (error) {
     yield put(togglePopupMessage(DEFAULT_ERROR, 'top'));
     console.log('updateUserInfoSaga error', error);

@@ -1,13 +1,14 @@
 import axios from 'axios';
+import { BASE_URL } from 'react-native-dotenv';
 const CancelToken = axios.CancelToken;
 
 const defaultOptions = {
-  baseURL: 'https://flowrspot-api.herokuapp.com/api/v1/',
+  baseURL: BASE_URL,
   headers: {
     Accept: 'application/json'
   },
   validateStatus(status) {
-    return status === 200; // Accept only status code 200
+    return [200, 201, 202, 204].includes(status); // Accept only status code 2xx
   },
   timeout: 5000
 };

@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import KeyboardAvoidAndDismissView from 'src/components/KeyboardAvoidAndDismissView';
 
 const initialTimezoneState = Object.freeze({
-  timezoneEntryId: null,
+  id: null,
   name: '',
   cityName: '',
   differenceToGMT: '0'
@@ -22,7 +22,7 @@ const initialTimezoneState = Object.freeze({
 function mapPreviousAddedEntry(isEdit, timezoneEntryForEdit) {
   let mappedState = { ...initialTimezoneState };
   if (isEdit) {
-    mappedState.timezoneEntryId = timezoneEntryForEdit.timezoneEntryId;
+    mappedState.id = timezoneEntryForEdit.id;
     mappedState.name = timezoneEntryForEdit.name;
     mappedState.cityName = timezoneEntryForEdit.cityName;
     mappedState.differenceToGMT = timezoneEntryForEdit.differenceToGMT;
@@ -75,8 +75,8 @@ const AddNewTimezone = props => {
   function validateForm() {
     const { name, cityName } = timezoneForm;
     const errorObject = {};
-    const isNameValid = ValidationUtils.isValidField('name', name, errorObject);
-    const isCityNameValid = ValidationUtils.isValidField('cityName', cityName, errorObject);
+    const isNameValid = ValidationUtils.validate('name', errorObject, ValidationUtils.isValidName(name));
+    const isCityNameValid = ValidationUtils.validate('cityName', errorObject, ValidationUtils.isValidName(cityName));
     setErrors(errorObject);
     return isNameValid && isCityNameValid;
   }

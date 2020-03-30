@@ -5,6 +5,7 @@ import { ListItemSeparator } from 'src/components';
 import PropTypes from 'prop-types';
 import styles from 'src/screens/Clock/TimezoneEntries/styles';
 import { timezoneEntryPropTypes } from 'src/constants/propTypes';
+import { idNames } from 'src/constants/idKeyNames';
 
 const TimezoneEntries = ({
   minutes,
@@ -22,7 +23,7 @@ const TimezoneEntries = ({
       renderItem={({ item }) => renderItem(item, minutes)}
       ListEmptyComponent={<EmptyTimezoneEntries {...{ isError, isLoading, loadingText, animateIcon: true }} />}
       ItemSeparatorComponent={ListItemSeparator}
-      keyExtractor={item => item.timezoneEntryId.toString()}
+      keyExtractor={item => item[idNames.TIMEZONE_ENTRY_ID].toString()}
       refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
       contentContainerStyle={[
         styles.contentContainer,

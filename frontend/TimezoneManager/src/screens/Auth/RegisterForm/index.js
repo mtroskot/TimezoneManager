@@ -13,12 +13,14 @@ const RegisterForm = ({
   errors,
   handleInput,
   handleRegister,
-  isLoading
+  isLoading,
+  isEdit
 }) => {
   const textInputRef1 = useRef(null);
   const textInputRef2 = useRef(null);
   const textInputRef3 = useRef(null);
-  const { firstName, lastName, emailAddress, password } = registerForm;
+  const textInputRef4 = useRef(null);
+  const { firstName, lastName, emailAddress, password, matchingPassword } = registerForm;
 
   return (
     <View>
@@ -60,17 +62,32 @@ const RegisterForm = ({
         onChangeText={value => handleInput(value, 'emailAddress')}
         onSubmitEditing={() => textInputRef3.current.focus()}
       />
-      <FloatingLabelTextInput
-        textInputRef={textInputRef3}
-        floatingLabel={'Password'}
-        value={password}
-        error={errors.password}
-        secureTextEntry
-        placeholderTextColor="#949EA0"
-        returnKeyType={'go'}
-        onChangeText={value => handleInput(value, 'password')}
-        onSubmitEditing={handleRegister}
-      />
+      {!isEdit && (
+        <>
+          <FloatingLabelTextInput
+            textInputRef={textInputRef3}
+            floatingLabel={'Password'}
+            value={password}
+            error={errors.password}
+            secureTextEntry
+            placeholderTextColor="#949EA0"
+            returnKeyType={'go'}
+            onChangeText={value => handleInput(value, 'password')}
+            onSubmitEditing={() => textInputRef4.current.focus()}
+          />
+          <FloatingLabelTextInput
+            textInputRef={textInputRef4}
+            floatingLabel={'Matching Password'}
+            value={matchingPassword}
+            error={errors.matchingPassword}
+            secureTextEntry
+            placeholderTextColor="#949EA0"
+            returnKeyType={'go'}
+            onChangeText={value => handleInput(value, 'matchingPassword')}
+            onSubmitEditing={handleRegister}
+          />
+        </>
+      )}
       <CustomButton
         onPress={handleRegister}
         isLoading={isLoading}
@@ -90,11 +107,13 @@ RegisterForm.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     emailAddress: PropTypes.string,
-    password: PropTypes.string
+    password: PropTypes.string,
+    matchingPassword: PropTypes.string
   }).isRequired,
   handleInput: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  isEdit: PropTypes.bool.isRequired
 };
 
 export default React.memo(RegisterForm);

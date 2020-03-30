@@ -3,7 +3,7 @@ import { userActionTypes } from 'src/constants/actionTypes';
 const initialState = {
   isAuthenticated: false,
   user: {
-    userId: null,
+    id: null,
     firstName: null,
     lastName: null,
     emailAddress: null,

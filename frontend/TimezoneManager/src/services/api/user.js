@@ -1,5 +1,6 @@
+const prefix = 'users';
 const login = (emailAddress, password) => ({
-  url: `users/login`,
+  url: `${prefix}/login`,
   options: {
     method: 'POST',
     headers: {
@@ -12,21 +13,25 @@ const login = (emailAddress, password) => ({
   }
 });
 
-const register = (firstName, lastName, emailAddress, password) => ({
-  url: `users/register`,
-  options: {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    data: {
-      firstName,
-      lastName,
-      emailAddress,
-      password
+const register = registerData => {
+  const { firstName, lastName, emailAddress, password, matchingPassword } = registerData;
+  return {
+    url: `${prefix}/register`,
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        firstName,
+        lastName,
+        emailAddress,
+        password,
+        matchingPassword
+      }
     }
-  }
-});
+  };
+};
 
 const getUserInfo = authToken => ({
   url: `/users/me`,

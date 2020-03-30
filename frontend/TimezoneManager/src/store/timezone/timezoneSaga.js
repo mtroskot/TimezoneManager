@@ -19,13 +19,14 @@ import { timezoneActionTypes } from 'src/constants/actionTypes';
 import { NavigationService } from 'src/services';
 import { screenNames } from 'src/constants/navigation';
 import { timezoneEntriesSelector } from 'src/store/timezone/timezoneSelectors';
+import { idNames } from 'src/constants/idKeyNames';
 
 export function* addNewTimezoneEntrySaga({ type, payload }) {
   try {
     const { timezoneEntry } = payload;
     yield put(startAction(type));
     yield delay(1000);
-    const timezoneEntryFromResponse = { ...timezoneEntry, timezoneEntryId: new Date().getTime() };
+    const timezoneEntryFromResponse = { ...timezoneEntry, [idNames.TIMEZONE_ENTRY_ID]: new Date().getTime() };
     yield put(addTimezoneEntrySuccess(timezoneEntryFromResponse));
     yield call(NavigationService.navigate, screenNames.CLOCK);
   } catch (error) {
@@ -43,7 +44,7 @@ export function* watchAddNewTimezoneEntrySaga() {
 export function* updateTimezoneEntrySaga({ type, payload }) {
   try {
     const { timezoneEntry } = payload;
-    yield put(startAction(type, { id: timezoneEntry.timezoneEntryId }));
+    yield put(startAction(type, { id: timezoneEntry[idNames.TIMEZONE_ENTRY_ID] }));
     yield delay(3000);
     const timezoneEntryFromResponse = { ...timezoneEntry };
     yield put(updateTimezoneEntrySuccess(timezoneEntryFromResponse));

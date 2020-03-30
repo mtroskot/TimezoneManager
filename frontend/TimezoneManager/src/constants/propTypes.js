@@ -11,7 +11,7 @@ export const errorPropTypes = PropTypes.exact({
 });
 
 export const userPropTypes = PropTypes.exact({
-  userId: PropTypes.number,
+  id: PropTypes.number,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   emailAddress: PropTypes.string,
@@ -19,7 +19,7 @@ export const userPropTypes = PropTypes.exact({
 });
 
 export const timezoneEntryPropTypes = PropTypes.exact({
-  timezoneEntryId: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   cityName: PropTypes.string.isRequired,
   differenceToGMT: PropTypes.string.isRequired

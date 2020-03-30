@@ -14,10 +14,10 @@ export const authenticateUserSuccess = (user, accessToken, refreshToken) => {
   };
 };
 
-export function registerUser(firstName, lastName, emailAddress, password) {
+export function registerUser(registerData) {
   return {
     type: userActionTypes.REGISTER_USER,
-    payload: { firstName, lastName, emailAddress, password }
+    payload: { registerData }
   };
 }
 
