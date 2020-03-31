@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { BASE_URL } from 'react-native-dotenv';
 const CancelToken = axios.CancelToken;
+import store from 'src/store';
+import { accessTokenSelector, userSelector } from 'src/store/user/userSelectors';
+import { logoutUser, refreshTokenSuccess } from 'src/store/user/userActions';
 
 const defaultOptions = {
   baseURL: BASE_URL,
@@ -8,7 +11,7 @@ const defaultOptions = {
     Accept: 'application/json'
   },
   validateStatus(status) {
-    return [200, 201, 202, 204].includes(status); // Accept only status code 2xx
+    return [200, 201].includes(status); // Accept only status code 2xx or 401 if token expired
   },
   timeout: 5000
 };
@@ -21,35 +24,62 @@ const defaultOptions = {
  * @param {object} options The request options.
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function callApiAndCheckResponse({ url, options }) {
+async function callApi({ url, includeAuthorizationHeader = true, options }) {
   let source = CancelToken.source();
   setTimeout(() => {
     source.cancel();
   }, 6000);
-  const fetchOptions = { ...defaultOptions, cancelToken: source.token, ...options };
+  let fetchOptions = { ...defaultOptions, cancelToken: source.token, ...options };
+  if (includeAuthorizationHeader) {
+    const accessToken = accessTokenSelector(store.getState());
+    fetchOptions = {
+      ...fetchOptions,
+      headers: { ...fetchOptions.headers, Authorization: `Bearer ${accessToken}` }
+    };
+  }
   const response = await axios(url, fetchOptions);
-  return response.data;
+  return { data: response.data, status: response.status };
 }
 
-/**
- * Calls api without checking the response and returns whole response
- * @param url The api endpoint
- * @param options The request options.
- * @returns {Promise<AxiosResponse<any>>}
- */
-async function callApi({ url, options }) {
-  let source = CancelToken.source();
-  setTimeout(() => {
-    source.cancel();
-  }, 6000);
-  const fetchOptions = { ...defaultOptions, ...options, ...{ validate: null } };
-  const response = await axios(url, fetchOptions);
-  return response;
-}
+// Add a response interceptor
+axios.interceptors.response.use(
+  function(response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  },
+  function(error) {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && originalRequest.url.includes('auth/refresh')) {
+      store.dispatch(logoutUser());
+      return Promise.reject(error);
+    }
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const user = userSelector(store.getState());
+      return axios
+        .post(`${BASE_URL}auth/refresh?userId=${user.user.id}`, {
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken
+        })
+        .then(res => {
+          if ([200, 201].includes(res.status)) {
+            const { accessToken, refreshToken } = res.data;
+            store.dispatch(refreshTokenSuccess(accessToken, refreshToken));
+
+            originalRequest.headers['Authorization'] = 'Bearer ' + accessToken;
+            return axios(originalRequest);
+          }
+        });
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default {
-  callApiAndCheckResponse,
   callApi
 };
 
 export { default as userRequests } from 'src/services/api/user';
+export { default as authRequests } from 'src/services/api/auth';
+export { default as timezoneRequests } from 'src/services/api/timezone';

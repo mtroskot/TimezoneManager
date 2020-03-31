@@ -4,10 +4,11 @@ const initialState = {
   isAuthenticated: false,
   user: {
     id: null,
+    username: null,
     firstName: null,
     lastName: null,
     emailAddress: null,
-    role: null
+    roles: []
   },
   accessToken: null,
   refreshToken: null
@@ -28,13 +29,19 @@ const userReducer = (state = initialState, { type, payload }) => {
         ...state,
         user: {
           ...state.user,
-          role: payload.role
+          roles: payload.roles
         }
       };
     case userActionTypes.UPDATE_USER_INFO_SUCCESS:
       return {
         ...state,
         user: payload.updatedUserInfo
+      };
+    case userActionTypes.REFRESH_TOKEN_SUCCESS:
+      return {
+        ...state,
+        accessToken: payload.accessToken,
+        refreshToken: payload.refreshToken
       };
     default:
       return state;

@@ -1,50 +1,44 @@
 const prefix = 'users';
-const login = (emailAddress, password) => ({
-  url: `${prefix}/login`,
+
+const changeUserRole = (userId, role) => ({
+  url: `${prefix}/changeRole?userId=${userId}&role=${role}`,
   options: {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    validateStatus(status) {
-      return status === 200 || status === 400; // Accept only status code 200
-    },
-    data: { emailAddress, password }
+    method: 'PUT'
   }
 });
 
-const register = registerData => {
-  const { firstName, lastName, emailAddress, password, matchingPassword } = registerData;
+const filterUsers = (input, cancelToken) => ({
+  url: `${prefix}/filter?input=${input}`,
+  options: {
+    method: 'GET',
+    cancelToken
+  }
+});
+
+const updateUserInfo = updateUserInfoForm => {
+  const { id, firstName, lastName, emailAddress } = updateUserInfoForm;
   return {
-    url: `${prefix}/register`,
+    url: `${prefix}`,
     options: {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
+      method: 'PUT',
+      validateStatus(status) {
+        return [200, 400].includes(status);
       },
-      data: {
-        firstName,
-        lastName,
-        emailAddress,
-        password,
-        matchingPassword
-      }
+      data: { id, firstName, lastName, emailAddress }
     }
   };
 };
 
-const getUserInfo = authToken => ({
-  url: `/users/me`,
+const deleteUser = userId => ({
+  url: `${prefix}?userId=${userId}`,
   options: {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${authToken}`
-    }
+    method: 'DELETE'
   }
 });
 
 export default {
-  login,
-  register,
-  getUserInfo
+  changeUserRole,
+  filterUsers,
+  updateUserInfo,
+  deleteUser
 };

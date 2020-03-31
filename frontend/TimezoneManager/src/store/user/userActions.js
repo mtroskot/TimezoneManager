@@ -36,9 +36,9 @@ export const changeUserRole = role => ({
   payload: { role }
 });
 
-export const changeUserRoleSuccess = role => ({
+export const changeUserRoleSuccess = roles => ({
   type: userActionTypes.CHANGE_USER_ROLE_SUCCESS,
-  payload: { role }
+  payload: { roles }
 });
 
 export const authAutoSignIn = navigation => ({
@@ -46,10 +46,10 @@ export const authAutoSignIn = navigation => ({
   payload: { navigation }
 });
 
-export function updateUserInfo(updatedUserInfo) {
+export function updateUserInfo(updateUserInfoForm) {
   return {
     type: userActionTypes.UPDATE_USER_INFO,
-    payload: { updatedUserInfo }
+    payload: { updateUserInfoForm }
   };
 }
 
@@ -71,5 +71,12 @@ export function deleteUserSuccess(userId) {
   return {
     type: userActionTypes.DELETE_USER_SUCCESS,
     payload: { userId }
+  };
+}
+
+export function refreshTokenSuccess(accessToken, refreshToken) {
+  return {
+    type: userActionTypes.REFRESH_TOKEN_SUCCESS,
+    payload: { accessToken, refreshToken }
   };
 }

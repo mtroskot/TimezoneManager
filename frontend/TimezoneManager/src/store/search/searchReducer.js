@@ -27,7 +27,7 @@ const searchReducer = (state = initialState, { type, payload }) => {
         ...state,
         userSearchData: payload.searchData
       };
-    case userActionTypes.UPDATE_USER_INFO_SUCCESS:
+    case searchActionTypes.UPDATE_SEARCHED_USER_INFO_SUCCESS:
       return {
         ...state,
         userSearchData: {

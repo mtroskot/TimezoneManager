@@ -1,9 +1,9 @@
 import { searchActionTypes } from 'src/constants/actionTypes';
 
-export function searchTimezoneEntries(searchInput, cancelToken) {
+export function searchTimezoneEntries(searchInput, cancelToken, fromAllUsers) {
   return {
     type: searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
-    payload: { searchInput, cancelToken }
+    payload: { searchInput, cancelToken, fromAllUsers }
   };
 }
 
@@ -27,6 +27,13 @@ export const searchUsersSuccess = searchData => {
     payload: { searchData }
   };
 };
+
+export function updateSearchedUserInfoSuccess(updatedUserInfo) {
+  return {
+    type: searchActionTypes.UPDATE_SEARCHED_USER_INFO_SUCCESS,
+    payload: { updatedUserInfo }
+  };
+}
 
 export const clearAllSearches = () => {
   return {

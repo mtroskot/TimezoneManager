@@ -72,7 +72,8 @@ const Auth = props => {
     const validateAllFields = !isEdit;
     if (validateRegisterForm(validateAllFields)) {
       if (isEdit) {
-        props.updateUserInfo(registerForm);
+        const { id, firstName, lastName, emailAddress } = registerForm;
+        props.updateUserInfo({ id, firstName, lastName, emailAddress });
       } else {
         props.registerUser(registerForm);
       }

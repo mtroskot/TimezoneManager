@@ -1,6 +1,6 @@
 import StringUtils from 'src/utils/StringUtils';
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-const nameRegex = /^(?! )[a-zA-Z ]{2,20}(?<! )$/;
+const nameRegex = /^[a-zA-Z ]{2,20}$/;
 
 export function validate(fieldName, errorObject, validationStatus) {
   if (!validationStatus.isValid) {
