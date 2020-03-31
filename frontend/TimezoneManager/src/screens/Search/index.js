@@ -5,10 +5,11 @@ import FilterOptions from 'src/screens/Search/FilterOptions';
 import SearchResults from 'src/screens/Search/SearchResults';
 import SafeAreaView from 'react-native-safe-area-view';
 import { searchSelector } from 'src/store/search/searchSelectors';
-import { deleteTimezoneEntry } from 'src/store/timezone/timezoneActions';
 import { clearAllSearches, searchTimezoneEntries, searchUsers } from 'src/store/search/searchActions';
+import { deleteTimezoneEntry } from 'src/store/timezone/timezoneActions';
+import { deleteUser } from 'src/store/user/userActions';
 import { connect } from 'react-redux';
-import { userInfoSelector } from 'src/store/user/userSelectors';
+import { mainUserRoleSelector } from 'src/store/user/userSelectors';
 import { checkIfLoadingSelector, updatingItemIdSelector } from 'src/store/ui/uiSelectors';
 import axios from 'axios';
 import { NavigationService } from 'src/services';
@@ -17,16 +18,16 @@ import PropTypes from 'prop-types';
 import { screenNames } from 'src/constants/navigation';
 import { timezoneEntriesSearchDataPropTypes, userSearchDataPropTypes } from 'src/constants/propTypes';
 import { searchActionTypes, timezoneActionTypes, userActionTypes } from 'src/constants/actionTypes';
-import { filterOptions } from 'src/constants/search';
+import { filters } from 'src/constants/search';
 import { idNames } from 'src/constants/idKeyNames';
 import { icons } from 'src/constants/icons';
 import appStyles from 'src/styles/appStyles';
 import styles from 'src/screens/Search/styles';
 
 const filterOptionsInitialState = [
-  Object.freeze({ value: filterOptions.OWN_ENTRIES, label: 'Own entries', enabled: true, selected: true }),
-  Object.freeze({ value: filterOptions.USERS, label: 'Users', enabled: true, selected: false }),
-  Object.freeze({ value: filterOptions.ALL_ENTRIES, label: 'All entries', enabled: true, selected: false })
+  Object.freeze({ value: filters.OWN_ENTRIES, label: 'Own entries', enabled: true, selected: true }),
+  Object.freeze({ value: filters.USERS, label: 'Users', enabled: true, selected: false }),
+  Object.freeze({ value: filters.ALL_ENTRIES, label: 'All entries', enabled: true, selected: false })
 ];
 const CancelToken = axios.CancelToken;
 let source = null;
@@ -53,8 +54,9 @@ const Search = props => {
     let handler = null;
     if (StringUtils.isNotEmpty(searchInput)) {
       handler = setTimeout(() => {
+        const fromAllUsers = selectedOption.value === filters.ALL_ENTRIES;
         areEntriesSelected
-          ? props.searchTimezoneEntries(searchInput, source.token)
+          ? props.searchTimezoneEntries(searchInput, source.token, fromAllUsers)
           : props.searchUsers(searchInput, source.token);
       }, 500);
     } else if (StringUtils.isEmpty(searchInput)) {
@@ -124,9 +126,7 @@ const Search = props => {
   }
 
   function deleteItem(itemId) {
-    if (areEntriesSelected) {
-      props.deleteTimezoneEntry(itemId);
-    }
+    areEntriesSelected ? props.deleteTimezoneEntry(itemId) : props.deleteUser(itemId);
   }
 
   //RENDER
@@ -185,11 +185,12 @@ Search.propTypes = {
   deleteTimezoneEntry: PropTypes.func.isRequired,
   searchTimezoneEntries: PropTypes.func.isRequired,
   searchUsers: PropTypes.func.isRequired,
-  clearAllSearches: PropTypes.func.isRequired
+  clearAllSearches: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  userRole: userInfoSelector(state).role,
+  userRole: mainUserRoleSelector(state),
   isSearching: checkIfLoadingSelector(state)([
     searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
     searchActionTypes.SEARCH_USERS
@@ -209,7 +210,8 @@ const mapDispatchToProps = {
   deleteTimezoneEntry,
   searchTimezoneEntries,
   searchUsers,
-  clearAllSearches
+  clearAllSearches,
+  deleteUser
 };
 
 export default connect(

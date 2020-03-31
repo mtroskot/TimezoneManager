@@ -12,10 +12,11 @@ export const errorPropTypes = PropTypes.exact({
 
 export const userPropTypes = PropTypes.exact({
   id: PropTypes.number,
+  username: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   emailAddress: PropTypes.string,
-  role: PropTypes.string
+  roles: PropTypes.arrayOf(PropTypes.string).isRequired
 });
 
 export const timezoneEntryPropTypes = PropTypes.exact({
