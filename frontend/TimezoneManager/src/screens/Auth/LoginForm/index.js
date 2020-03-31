@@ -37,6 +37,7 @@ const LoginForm = ({ loginForm, errors, handleInput, handleLogin, isLoading }) =
       <CustomButton
         onPress={handleLogin}
         isLoading={isLoading}
+        loaderStyle={[appStyles.submitButton, { backgroundColor: 'transparent' }]}
         text={'Login'}
         tOpacityStyle={appStyles.submitButton}
         textStyle={appStyles.buttonText}

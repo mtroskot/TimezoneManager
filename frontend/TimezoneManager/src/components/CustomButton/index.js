@@ -15,6 +15,7 @@ const CustomButton = props => {
     iconProps,
     tOpacityStyle,
     viewStyle,
+    loaderStyle,
     textStyle,
     iconStyle,
     text,
@@ -52,7 +53,7 @@ const CustomButton = props => {
   }, [animationProps?.animateIcon]);
 
   if (isLoading) {
-    return <Loader viewStyle={[tOpacityStyle, { backgroundColor: 'transparent' }]} />;
+    return <Loader viewStyle={loaderStyle} />;
   }
 
   const buttonIcon = iconProps ? (
@@ -117,6 +118,7 @@ CustomButton.propTypes = {
   }),
   text: PropTypes.string,
   tOpacityStyle: ViewPropTypes.style,
+  loaderStyle: ViewPropTypes.style,
   viewStyle: ViewPropTypes.style,
   // eslint-disable-next-line react/forbid-prop-types
   textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),

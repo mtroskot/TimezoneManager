@@ -73,6 +73,7 @@ const TimezoneForm = ({
         <CustomButton
           onPress={handleSubmit}
           isLoading={isLoading}
+          loaderStyle={[appStyles.submitButton, { backgroundColor: 'transparent' }]}
           text={submitButtonText}
           tOpacityStyle={appStyles.submitButton}
           textStyle={appStyles.buttonText}

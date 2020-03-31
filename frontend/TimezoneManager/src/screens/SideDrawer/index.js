@@ -2,6 +2,7 @@ import React from 'react';
 import { Picker, Text } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import DrawerActionButtons from 'src/screens/SideDrawer/DrawerActionButtons';
+import { Loader } from 'src/components';
 import { changeUserRole, logoutUser } from 'src/store/user/userActions';
 import { connect } from 'react-redux';
 import { NavigationService } from 'src/services';
@@ -10,14 +11,13 @@ import styles from 'src/screens/SideDrawer/styles';
 import PropTypes from 'prop-types';
 import { checkIfLoadingSelector } from 'src/store/ui/uiSelectors';
 import { userActionTypes } from 'src/constants/actionTypes';
-import { userInfoSelector } from 'src/store/user/userSelectors';
+import { mainUserRoleSelector, userInfoSelector } from 'src/store/user/userSelectors';
 import { userPropTypes } from 'src/constants/propTypes';
-import Loader from 'src/components/Loader';
 
 const SideDrawer = props => {
   //STATE
-  const { user, isLoading } = props;
-  const { firstName, lastName, role } = user;
+  const { user, isLoading, isSigningOut, role } = props;
+  const { firstName, lastName } = user;
 
   const handleRoleChange = selectedRole => {
     if (selectedRole !== role) {
@@ -38,9 +38,9 @@ const SideDrawer = props => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.regular}>
         Logged in as
-        <Text style={styles.italic}>{` ${firstName}${lastName}`}</Text>
+        <Text style={styles.italic}>{` ${firstName} ${lastName}`}</Text>
       </Text>
-      <DrawerActionButtons {...{ handleLogout, closeDrawer }} />
+      <DrawerActionButtons {...{ handleLogout, closeDrawer, isSigningOut }} />
       {isLoading ? (
         <Loader viewStyle={styles.loader} />
       ) : (
@@ -59,14 +59,18 @@ const SideDrawer = props => {
 
 SideDrawer.propTypes = {
   user: userPropTypes.isRequired,
+  role: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  changeUserRole: PropTypes.func.isRequired
+  changeUserRole: PropTypes.func.isRequired,
+  isSigningOut: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   user: userInfoSelector(state),
-  isLoading: checkIfLoadingSelector(state)([userActionTypes.CHANGE_USER_ROLE])
+  role: mainUserRoleSelector(state),
+  isLoading: checkIfLoadingSelector(state)([userActionTypes.CHANGE_USER_ROLE]),
+  isSigningOut: checkIfLoadingSelector(state)([userActionTypes.LOGOUT])
 });
 
 const mapDispatchToProps = {

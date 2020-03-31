@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
   },
   drawerItemIcon: {
     marginRight: 10 * rem
+  },
+  loaderStyle: {
+    marginTop: 20 * rem,
+    padding: 10 * rem
   }
 });
 
