@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthScreen wrapper AuthScreen renders correctly, Login form shown, isLoading=false  1`] = `
+<SafeAreaView
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Memo(KeyboardAvoidAndDismissView)
+    viewStyle={
+      Object {
+        "backgroundColor": "#F2F2F2",
+        "flex": 1,
+      }
+    }
+  >
+    <Memo(LoginForm)
+      errors={Object {}}
+      handleInput={[Function]}
+      handleLogin={[Function]}
+      isLoading={false}
+      loginForm={
+        Object {
+          "emailAddress": "",
+          "password": "",
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "marginTop": 59.21052631578947,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontFamily": "Ubuntu-Regular",
+            "fontSize": 27.63157894736842,
+            "marginBottom": 9.868421052631579,
+          }
+        }
+      >
+        Don't have an account?
+      </Text>
+      <Memo(CustomButton)
+        onPress={[Function]}
+        text="Create Account"
+        textStyle={
+          Array [
+            Object {
+              "color": "#fff",
+              "fontFamily": "Ubuntu-Medium",
+              "fontSize": 31.57894736842105,
+              "textAlign": "center",
+            },
+            Object {
+              "color": "#EAA79E",
+            },
+          ]
+        }
+      />
+    </View>
+  </Memo(KeyboardAvoidAndDismissView)>
+</SafeAreaView>
+`;

@@ -1,0 +1,471 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`INITIAL STATE 1returns initial state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 2returns searchTimezoneEntriesSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abc",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 3returns searchUsersSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abc",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 4returns updateSearchedUserInfoSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 5returns updateTimezoneEntrySuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 6returns deleteUserSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 7returns deleteTimezoneEntrySuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 8returns clearAllSearches action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 9returns clearUsersSearch action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 10returns clearTimezoneEntriesSearch action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 1returns initial state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 2returns searchTimezoneEntriesSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abcdef",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 3returns searchUsersSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abc",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 4returns updateSearchedUserInfoSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 5returns updateTimezoneEntrySuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "NewBar",
+        "differenceToGMT": "-5",
+        "id": 2,
+        "name": "NewFoo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 6returns deleteUserSuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 7returns deleteTimezoneEntrySuccess action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 8returns clearAllSearches action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 9returns clearUsersSearch action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 10returns clearTimezoneEntriesSearch action state 1`] = `
+Object {
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;

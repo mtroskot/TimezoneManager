@@ -1,0 +1,597 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterForm wrapper renders correctly, form empty, isEdit false 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "marginVertical": 88.8157894736842,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#334144",
+          "fontFamily": "Ubuntu-Medium",
+          "fontSize": 43.421052631578945,
+          "marginBottom": 19.736842105263158,
+          "textAlign": "center",
+        }
+      }
+    >
+      Register Account
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "width": "90%",
+      }
+    }
+  >
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+        }
+      }
+      floatingLabel="First Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      value=""
+    />
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+          "marginLeft": 19.736842105263158,
+        }
+      }
+      floatingLabel="Last Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      textInputRef={
+        Object {
+          "current": null,
+        }
+      }
+      value=""
+    />
+  </View>
+  <Memo(FloatingLabelTextInput)
+    floatingLabel="Email Address"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="next"
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(FloatingLabelTextInput)
+    floatingLabel="Password"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="next"
+    secureTextEntry={true}
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(FloatingLabelTextInput)
+    floatingLabel="Matching Password"
+    onChangeText={[Function]}
+    onSubmitEditing={[MockFunction]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="go"
+    secureTextEntry={true}
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(CustomButton)
+    isLoading={false}
+    loaderStyle={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#EAA79E",
+          "borderRadius": 9.868421052631579,
+          "marginTop": 19.736842105263158,
+          "paddingHorizontal": 39.473684210526315,
+          "paddingVertical": 15,
+          "width": "90%",
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+      ]
+    }
+    onPress={[MockFunction]}
+    tOpacityStyle={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EAA79E",
+        "borderRadius": 9.868421052631579,
+        "marginTop": 19.736842105263158,
+        "paddingHorizontal": 39.473684210526315,
+        "paddingVertical": 15,
+        "width": "90%",
+      }
+    }
+    text="Register"
+    textStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Ubuntu-Medium",
+        "fontSize": 31.57894736842105,
+        "textAlign": "center",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`RegisterForm wrapper renders correctly, form empty, isEdit true 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "marginVertical": 88.8157894736842,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#334144",
+          "fontFamily": "Ubuntu-Medium",
+          "fontSize": 43.421052631578945,
+          "marginBottom": 19.736842105263158,
+          "textAlign": "center",
+        }
+      }
+    >
+      Register Account
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "width": "90%",
+      }
+    }
+  >
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+        }
+      }
+      floatingLabel="First Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      value=""
+    />
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+          "marginLeft": 19.736842105263158,
+        }
+      }
+      floatingLabel="Last Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      textInputRef={
+        Object {
+          "current": null,
+        }
+      }
+      value=""
+    />
+  </View>
+  <Memo(FloatingLabelTextInput)
+    floatingLabel="Email Address"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="go"
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(CustomButton)
+    isLoading={false}
+    loaderStyle={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#EAA79E",
+          "borderRadius": 9.868421052631579,
+          "marginTop": 19.736842105263158,
+          "paddingHorizontal": 39.473684210526315,
+          "paddingVertical": 15,
+          "width": "90%",
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+      ]
+    }
+    onPress={[MockFunction]}
+    tOpacityStyle={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EAA79E",
+        "borderRadius": 9.868421052631579,
+        "marginTop": 19.736842105263158,
+        "paddingHorizontal": 39.473684210526315,
+        "paddingVertical": 15,
+        "width": "90%",
+      }
+    }
+    text="Register"
+    textStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Ubuntu-Medium",
+        "fontSize": 31.57894736842105,
+        "textAlign": "center",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`RegisterForm wrapper renders correctly, form filled, isEdit false 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "marginVertical": 88.8157894736842,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#334144",
+          "fontFamily": "Ubuntu-Medium",
+          "fontSize": 43.421052631578945,
+          "marginBottom": 19.736842105263158,
+          "textAlign": "center",
+        }
+      }
+    >
+      Register Account
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "width": "90%",
+      }
+    }
+  >
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+        }
+      }
+      error={
+        Object {
+          "display": true,
+          "errorMessage": "errorMessage",
+        }
+      }
+      floatingLabel="First Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      value=""
+    />
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+          "marginLeft": 19.736842105263158,
+        }
+      }
+      error={
+        Object {
+          "display": true,
+          "errorMessage": "errorMessage",
+        }
+      }
+      floatingLabel="Last Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      textInputRef={
+        Object {
+          "current": null,
+        }
+      }
+      value=""
+    />
+  </View>
+  <Memo(FloatingLabelTextInput)
+    error={
+      Object {
+        "display": true,
+        "errorMessage": "errorMessage",
+      }
+    }
+    floatingLabel="Email Address"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="next"
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(FloatingLabelTextInput)
+    error={
+      Object {
+        "display": true,
+        "errorMessage": "errorMessage",
+      }
+    }
+    floatingLabel="Password"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="next"
+    secureTextEntry={true}
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(FloatingLabelTextInput)
+    error={
+      Object {
+        "display": true,
+        "errorMessage": "errorMessage",
+      }
+    }
+    floatingLabel="Matching Password"
+    onChangeText={[Function]}
+    onSubmitEditing={[MockFunction]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="go"
+    secureTextEntry={true}
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(CustomButton)
+    isLoading={true}
+    loaderStyle={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#EAA79E",
+          "borderRadius": 9.868421052631579,
+          "marginTop": 19.736842105263158,
+          "paddingHorizontal": 39.473684210526315,
+          "paddingVertical": 15,
+          "width": "90%",
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+      ]
+    }
+    onPress={[MockFunction]}
+    tOpacityStyle={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EAA79E",
+        "borderRadius": 9.868421052631579,
+        "marginTop": 19.736842105263158,
+        "paddingHorizontal": 39.473684210526315,
+        "paddingVertical": 15,
+        "width": "90%",
+      }
+    }
+    text="Register"
+    textStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Ubuntu-Medium",
+        "fontSize": 31.57894736842105,
+        "textAlign": "center",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`RegisterForm wrapper renders correctly, form filled, isEdit true 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "marginVertical": 88.8157894736842,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#334144",
+          "fontFamily": "Ubuntu-Medium",
+          "fontSize": 43.421052631578945,
+          "marginBottom": 19.736842105263158,
+          "textAlign": "center",
+        }
+      }
+    >
+      Register Account
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "width": "90%",
+      }
+    }
+  >
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+        }
+      }
+      error={
+        Object {
+          "display": true,
+          "errorMessage": "errorMessage",
+        }
+      }
+      floatingLabel="First Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      value=""
+    />
+    <Memo(FloatingLabelTextInput)
+      autoCapitalize="words"
+      customContainerStyle={
+        Object {
+          "flex": 1,
+          "marginLeft": 19.736842105263158,
+        }
+      }
+      error={
+        Object {
+          "display": true,
+          "errorMessage": "errorMessage",
+        }
+      }
+      floatingLabel="Last Name"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholderTextColor="#949EA0"
+      returnKeyType="next"
+      textInputRef={
+        Object {
+          "current": null,
+        }
+      }
+      value=""
+    />
+  </View>
+  <Memo(FloatingLabelTextInput)
+    error={
+      Object {
+        "display": true,
+        "errorMessage": "errorMessage",
+      }
+    }
+    floatingLabel="Email Address"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="go"
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(CustomButton)
+    isLoading={false}
+    loaderStyle={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#EAA79E",
+          "borderRadius": 9.868421052631579,
+          "marginTop": 19.736842105263158,
+          "paddingHorizontal": 39.473684210526315,
+          "paddingVertical": 15,
+          "width": "90%",
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+      ]
+    }
+    onPress={[MockFunction]}
+    tOpacityStyle={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EAA79E",
+        "borderRadius": 9.868421052631579,
+        "marginTop": 19.736842105263158,
+        "paddingHorizontal": 39.473684210526315,
+        "paddingVertical": 15,
+        "width": "90%",
+      }
+    }
+    text="Register"
+    textStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Ubuntu-Medium",
+        "fontSize": 31.57894736842105,
+        "textAlign": "center",
+      }
+    }
+  />
+</View>
+`;
