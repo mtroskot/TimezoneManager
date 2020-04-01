@@ -24,7 +24,7 @@ const RegisterForm = ({
 
   return (
     <View>
-      <View style={loginStyles.headerView} bounces={false}>
+      <View style={loginStyles.headerView}>
         <Text style={appStyles.headerText}>{headerText}</Text>
       </View>
       <View style={loginStyles.formContainer}>
@@ -58,7 +58,7 @@ const RegisterForm = ({
         error={errors.emailAddress}
         floatingLabel={'Email Address'}
         placeholderTextColor="#949EA0"
-        returnKeyType={'next'}
+        returnKeyType={isEdit ? 'go' : 'next'}
         onChangeText={value => handleInput(value, 'emailAddress')}
         onSubmitEditing={() => textInputRef3.current.focus()}
       />
@@ -71,7 +71,7 @@ const RegisterForm = ({
             error={errors.password}
             secureTextEntry
             placeholderTextColor="#949EA0"
-            returnKeyType={'go'}
+            returnKeyType={'next'}
             onChangeText={value => handleInput(value, 'password')}
             onSubmitEditing={() => textInputRef4.current.focus()}
           />

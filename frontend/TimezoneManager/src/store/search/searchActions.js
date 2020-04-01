@@ -41,12 +41,14 @@ export const clearAllSearches = () => {
     payload: {}
   };
 };
+
 export const clearTimezoneEntriesSearch = () => {
   return {
     type: searchActionTypes.CLEAR_TIMEZONE_ENTRIES_SEARCH,
     payload: {}
   };
 };
+
 export const clearUsersSearch = () => {
   return {
     type: searchActionTypes.CLEAR_USERS_SEARCH,

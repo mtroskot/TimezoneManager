@@ -1,4 +1,5 @@
 import StringUtils from 'src/utils/StringUtils';
+import ObjectUtils from 'src/utils/ObjectUtils';
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const nameRegex = /^[a-zA-Z ]{2,20}$/;
 
@@ -14,17 +15,23 @@ export function validate(fieldName, errorObject, validationStatus) {
 }
 
 export function isValidName(field) {
-  return {
-    isValid: nameRegex.test(field),
-    message: null
-  };
+  if (!ObjectUtils.exists(field)) {
+    return { isValid: false, message: null };
+  }
+  return { isValid: nameRegex.test(field), message: null };
 }
 
 export function isValidEmail(email) {
+  if (!ObjectUtils.exists(email)) {
+    return { isValid: false, message: null };
+  }
   return { isValid: emailRegex.test(email), message: null };
 }
 
 export function isValidPassword(password) {
+  if (!ObjectUtils.exists(password)) {
+    return { isValid: false, message: null };
+  }
   return { isValid: password.length >= 6 && password.length <= 20, message: null };
 }
 
@@ -33,7 +40,8 @@ export function isValidMatchingPassword(password, matchingPassword) {
   if (!isValidFormat.isValid) {
     return isValidFormat;
   }
-  return { isValid: password === matchingPassword, message: "Passwords don't match" };
+  const isValid = password === matchingPassword;
+  return { isValid, message: isValid ? null : "Passwords don't match" };
 }
 
 export default {

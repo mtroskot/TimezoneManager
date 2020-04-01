@@ -1,6 +1,6 @@
 import { userActionTypes } from 'src/constants/actionTypes';
 
-const initialState = {
+export const initialState = {
   isAuthenticated: false,
   user: {
     id: null,

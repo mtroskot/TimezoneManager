@@ -21,10 +21,10 @@ export function updateTimezoneEntry(timezoneEntry) {
   };
 }
 
-export const updateTimezoneEntrySuccess = timezoneEntry => {
+export const updateTimezoneEntrySuccess = updatedTimezoneEntry => {
   return {
     type: timezoneActionTypes.UPDATE_TIMEZONE_ENTRY_SUCCESS,
-    payload: { timezoneEntry }
+    payload: { updatedTimezoneEntry }
   };
 };
 

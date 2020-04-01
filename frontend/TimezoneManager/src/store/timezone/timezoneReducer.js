@@ -2,7 +2,7 @@ import { timezoneActionTypes } from 'src/constants/actionTypes';
 import { ArrayUtils } from 'src/utils';
 import { idNames } from 'src/constants/idKeyNames';
 
-const initialState = {
+export const initialState = {
   timezoneEntries: []
 };
 
@@ -24,7 +24,7 @@ const timezoneReducer = (state = initialState, { type, payload }) => {
         timezoneEntries: ArrayUtils.updateItemInList(
           state.timezoneEntries,
           idNames.TIMEZONE_ENTRY_ID,
-          payload.timezoneEntry
+          payload.updatedTimezoneEntry
         )
       };
     case timezoneActionTypes.DELETE_TIMEZONE_ENTRY_SUCCESS:

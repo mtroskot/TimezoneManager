@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import { createMigrate, persistReducer, persistStore } from 'redux-persist';
+import createEncryptor from 'redux-persist-transform-encrypt';
 import AsyncStorage from '@react-native-community/async-storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
@@ -9,6 +10,15 @@ import rootReducer from 'src/store/rootReducer';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import migrations from 'src/store/migrations';
 
+// encryption
+const encryptor = createEncryptor({
+  secretKey: 'mtroskot.t1mezon3Manag3r.3ncrypt',
+  onError: function(error) {
+    // Handle the error.
+    console.log('encryptor error', error);
+  }
+});
+
 // redux-persist
 const persistConfig = {
   key: 'mtroskot.timezoneManager',
@@ -16,6 +26,7 @@ const persistConfig = {
   version: 0,
   migrate: createMigrate(migrations, { debug: true }),
   blacklist: ['ui'], //  will not be persisted,
+  transforms: [encryptor],
   stateReconciler: autoMergeLevel2
 };
 

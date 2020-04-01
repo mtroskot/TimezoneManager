@@ -37,8 +37,7 @@ async function callApi({ url, includeAuthorizationHeader = true, options }) {
       headers: { ...fetchOptions.headers, Authorization: `Bearer ${accessToken}` }
     };
   }
-  const response = await axios(url, fetchOptions);
-  return { data: response.data, status: response.status };
+  return axios(url, fetchOptions);
 }
 
 // Add a response interceptor
@@ -50,27 +49,29 @@ axios.interceptors.response.use(
   },
   function(error) {
     const originalRequest = error.config;
-    if (error.response.status === 401 && originalRequest.url.includes('auth/refresh')) {
-      store.dispatch(logoutUser());
-      return Promise.reject(error);
-    }
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      const user = userSelector(store.getState());
-      return axios
-        .post(`${BASE_URL}auth/refresh?userId=${user.user.id}`, {
-          accessToken: user.accessToken,
-          refreshToken: user.refreshToken
-        })
-        .then(res => {
-          if ([200, 201].includes(res.status)) {
-            const { accessToken, refreshToken } = res.data;
-            store.dispatch(refreshTokenSuccess(accessToken, refreshToken));
+    if (!error.message.toString().includes('Network')) {
+      if (error.response.status === 401 && originalRequest.url.includes('auth/refresh')) {
+        store.dispatch(logoutUser());
+        return Promise.reject(error);
+      }
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        const user = userSelector(store.getState());
+        return axios
+          .post(`${BASE_URL}auth/refresh?userId=${user.user.id}`, {
+            accessToken: user.accessToken,
+            refreshToken: user.refreshToken
+          })
+          .then(res => {
+            if ([200, 201].includes(res.status)) {
+              const { accessToken, refreshToken } = res.data;
+              store.dispatch(refreshTokenSuccess(accessToken, refreshToken));
 
-            originalRequest.headers['Authorization'] = 'Bearer ' + accessToken;
-            return axios(originalRequest);
-          }
-        });
+              originalRequest.headers['Authorization'] = 'Bearer ' + accessToken;
+              return axios(originalRequest);
+            }
+          });
+      }
     }
     return Promise.reject(error);
   }

@@ -1,6 +1,6 @@
-import { call, delay, put, select, takeLeading } from '@redux-saga/core/effects';
-import { refreshActionStop, startAction, stopAction, togglePopupMessage } from 'src/store/ui/uiActions';
-import { DEFAULT_ERROR, NO_RESULTS } from 'src/constants/messages';
+import { call, put, select, takeLeading } from '@redux-saga/core/effects';
+import { startAction, stopAction, togglePopupMessage } from 'src/store/ui/uiActions';
+import { NO_RESULTS } from 'src/constants/messages';
 import {
   clearTimezoneEntriesSearch,
   clearUsersSearch,
@@ -10,7 +10,7 @@ import {
 import { searchActionTypes } from 'src/constants/actionTypes';
 import { timezoneEntriesSearchDataSelector, userSearchDataSelector } from 'src/store/search/searchSelectors';
 import ApiService, { timezoneRequests, userRequests } from 'src/services/api';
-import { ParseUtils } from 'src/utils';
+import { AppUtils, ParseUtils } from 'src/utils';
 
 export function* searchTimezoneEntriesSaga({ type, payload }) {
   try {
@@ -21,7 +21,6 @@ export function* searchTimezoneEntriesSaga({ type, payload }) {
     }
     yield put(clearTimezoneEntriesSearch());
     yield put(startAction(type));
-    yield delay(1000);
     const response = yield call(
       ApiService.callApi,
       fromAllUsers
@@ -36,10 +35,10 @@ export function* searchTimezoneEntriesSaga({ type, payload }) {
     };
     yield put(searchTimezoneEntriesSuccess(searchData));
   } catch (error) {
-    yield put(togglePopupMessage(DEFAULT_ERROR, 'top'));
     console.log('searchTimezoneEntriesSaga error', error);
+    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
   } finally {
-    yield put(payload.refreshing ? refreshActionStop(type) : stopAction(type));
+    yield put(stopAction(type));
   }
 }
 
@@ -56,7 +55,6 @@ export function* searchUsersSaga({ type, payload }) {
     }
     yield put(clearUsersSearch());
     yield put(startAction(type));
-    // yield delay(1000);
     const response = yield call(ApiService.callApi, userRequests.filterUsers(searchInput, cancelToken));
     const matchingUsers = response.data.map(user => ({ ...user, roles: ParseUtils.parseRoles(user.roles) }));
     const searchData = {
@@ -66,10 +64,10 @@ export function* searchUsersSaga({ type, payload }) {
     };
     yield put(searchUsersSuccess(searchData));
   } catch (error) {
-    yield put(togglePopupMessage(DEFAULT_ERROR, 'top'));
     console.log('searchUsersSaga error', error);
+    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
   } finally {
-    yield put(payload.refreshing ? refreshActionStop(type) : stopAction(type));
+    yield put(stopAction(type));
   }
 }
 

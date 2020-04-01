@@ -2,7 +2,7 @@ import { searchActionTypes, timezoneActionTypes, userActionTypes } from 'src/con
 import { ArrayUtils } from 'src/utils';
 import { idNames } from 'src/constants/idKeyNames';
 
-const initialState = {
+export const initialState = {
   userSearchData: {
     searchResults: [],
     searchQuery: '',
@@ -20,12 +20,20 @@ const searchReducer = (state = initialState, { type, payload }) => {
     case searchActionTypes.SEARCH_TIMEZONE_ENTRIES_SUCCESS:
       return {
         ...state,
-        timezoneEntriesSearchData: payload.searchData
+        timezoneEntriesSearchData: {
+          searchResults: payload.searchData.searchResults,
+          searchQuery: payload.searchData.searchQuery,
+          message: payload.searchData.message
+        }
       };
     case searchActionTypes.SEARCH_USERS_SUCCESS:
       return {
         ...state,
-        userSearchData: payload.searchData
+        userSearchData: {
+          searchResults: payload.searchData.searchResults,
+          searchQuery: payload.searchData.searchQuery,
+          message: payload.searchData.message
+        }
       };
     case searchActionTypes.UPDATE_SEARCHED_USER_INFO_SUCCESS:
       return {
@@ -47,7 +55,7 @@ const searchReducer = (state = initialState, { type, payload }) => {
           searchResults: ArrayUtils.updateItemInList(
             state.timezoneEntriesSearchData.searchResults,
             idNames.TIMEZONE_ENTRY_ID,
-            payload.timezoneEntry
+            payload.updatedTimezoneEntry
           )
         }
       };

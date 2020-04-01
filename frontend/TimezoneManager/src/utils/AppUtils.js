@@ -2,6 +2,8 @@ import { Animated, Platform } from 'react-native';
 import { ADMIN, MANAGER } from 'src/constants/userRoles';
 import { filters } from 'src/constants/search';
 import { dimensions } from 'src/styles';
+import { DEFAULT_ERROR, NO_INTERNET } from 'src/constants/messages';
+
 const { rem } = dimensions;
 
 /**
@@ -40,8 +42,16 @@ function checkIfUserHasRightsForFilterOptions(filterOption, userRole) {
   return false;
 }
 
+function getMessageForErrorResponse(error) {
+  if (error.message.toString().includes('Network')) {
+    return NO_INTERNET;
+  }
+  return DEFAULT_ERROR;
+}
+
 export default {
   getIconForPlatform,
   startShake,
-  checkIfUserHasRightsForFilterOptions
+  checkIfUserHasRightsForFilterOptions,
+  getMessageForErrorResponse
 };
