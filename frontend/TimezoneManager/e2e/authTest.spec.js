@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import { authScreenTestIDs } from '../src/constants/testIDs';
 import { authScreenText } from '../src/constants/text';
+import { EMAIL_IN_USE, REGISTRATION_SUCCESS } from '../src/constants/messages';
 
 describe('AuthScreen', () => {
   beforeEach(async () => {
@@ -37,27 +38,49 @@ describe('AuthScreen', () => {
     await expect(element(by.label('Password is invalid'))).toBeVisible();
   });
 
-  // it('registration flow', async () => {
-  //   await element(by.id(authScreenTestIDs.SWITCH_FORM)).tap();
-  //
-  //   await element(by.id(authScreenTestIDs.FIRST_NAME_INPUT)).tap();
-  //   await element(by.id(authScreenTestIDs.FIRST_NAME_INPUT)).typeText('Marko');
-  //   await element(by.id(authScreenTestIDs.LAST_NAME_INPUT)).tap();
-  //   await element(by.id(authScreenTestIDs.LAST_NAME_INPUT)).typeText('Troskot');
-  //   await element(by.id(authScreenTestIDs.LAST_NAME_INPUT)).tapReturnKey();
-  //   await element(by.id(authScreenTestIDs.EMAIL_INPUT)).typeText('marko@gmail.com');
-  //   await element(by.id(authScreenTestIDs.MATCHING_PASSWORD_INPUT)).tap();
-  //   await element(by.id(authScreenTestIDs.MATCHING_PASSWORD_INPUT)).typeText('123456');
-  //   await element(by.id(authScreenTestIDs.PASSWORD_INPUT)).tap();
-  //   await element(by.id(authScreenTestIDs.PASSWORD_INPUT)).replaceText('123456');
-  //
-  //   await element(by.id(authScreenTestIDs.SUBMIT_REGISTER)).tap();
-  // });
+  it('registration flow', async done => {
+    await element(by.id(authScreenTestIDs.SWITCH_FORM)).tap();
 
-  // it('authentication flow', async () => {
-  //   await element(by.id(authScreenTestIDs.LOGIN_EMAIL_INPUT)).typeText('marko@hotmail.com');
-  //   await element(by.id(authScreenTestIDs.LOGIN_PASSWORD_INPUT)).typeText('password');
-  //   await element(by.id(authScreenTestIDs.LOGIN_PASSWORD_INPUT)).tapReturnKey();
-  //   await expect(element(by.label('Currently no entries'))).toBeVisible();
-  // });
+    await element(by.id(authScreenTestIDs.FIRST_NAME_INPUT)).tap();
+    await element(by.id(authScreenTestIDs.FIRST_NAME_INPUT)).typeText('Marko');
+    await element(by.id(authScreenTestIDs.LAST_NAME_INPUT)).tap();
+    await element(by.id(authScreenTestIDs.LAST_NAME_INPUT)).typeText('Troskot');
+    await element(by.id(authScreenTestIDs.LAST_NAME_INPUT)).tapReturnKey();
+    await element(by.id(authScreenTestIDs.EMAIL_INPUT)).typeText('marko@gmail.com');
+    await element(by.id(authScreenTestIDs.PASSWORD_INPUT)).tap();
+    await element(by.id(authScreenTestIDs.PASSWORD_INPUT)).typeText('123456');
+    await device.disableSynchronization();
+    await element(by.id(authScreenTestIDs.MATCHING_PASSWORD_INPUT)).tap();
+    await element(by.id(authScreenTestIDs.MATCHING_PASSWORD_INPUT)).typeText('123456');
+    //TAP REGISTER
+    await element(by.id(authScreenTestIDs.SUBMIT_REGISTER)).tap();
+    await waitFor(element(by.label(REGISTRATION_SUCCESS)))
+      .toBeVisible()
+      .withTimeout(1000);
+    //should successfully register
+    await expect(element(by.label(REGISTRATION_SUCCESS))).toBeVisible();
+    //TAP REGISTER AGAIN
+    await element(by.id(authScreenTestIDs.SUBMIT_REGISTER)).tap();
+    //should display email in use
+    await waitFor(element(by.label(EMAIL_IN_USE)))
+      .toBeVisible()
+      .withTimeout(1000);
+    await expect(element(by.label(EMAIL_IN_USE))).toBeVisible();
+    done();
+  });
+
+  it('authentication flow', async done => {
+    await waitFor(element(by.id(authScreenTestIDs.LOGIN_EMAIL_INPUT)))
+      .toBeVisible()
+      .withTimeout(2000);
+    await element(by.id(authScreenTestIDs.LOGIN_EMAIL_INPUT)).typeText('marko@gmail.com');
+    await element(by.id(authScreenTestIDs.LOGIN_PASSWORD_INPUT)).typeText('123456');
+    await device.disableSynchronization();
+    await element(by.id(authScreenTestIDs.LOGIN_PASSWORD_INPUT)).tapReturnKey();
+    await waitFor(element(by.label('Currently no entries')))
+      .toBeVisible()
+      .withTimeout(2000);
+    await expect(element(by.label('Currently no entries'))).toBeVisible();
+    done();
+  });
 });
