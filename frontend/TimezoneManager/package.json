@@ -54,6 +54,7 @@
     "@react-native-community/eslint-plugin": "^1.0.0",
     "babel-jest": "24.9.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "detox": "^16.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.3",
@@ -100,5 +101,18 @@
       "<rootDir>/src/store/sagas/rootSaga",
       "<rootDir>/src/store/reducers/rootReducer"
     ]
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/TimezoneManager.app",
+        "build": "xcodebuild -workspace ios/TimezoneManager.xcworkspace -scheme TimezoneManager -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone X"
+        }
+      }
+    },
+    "test-runner": "jest"
   }
 }
