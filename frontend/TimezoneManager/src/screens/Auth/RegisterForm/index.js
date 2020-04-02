@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import loginStyles from 'src/screens/Auth/styles';
 import appStyles from 'src/styles/appStyles';
 import { errorPropTypes } from 'src/constants/propTypes';
+import { authScreenTestIDs } from 'src/constants/testIDs';
 
 const RegisterForm = ({
   submitButtonText,
@@ -14,7 +15,8 @@ const RegisterForm = ({
   handleInput,
   handleRegister,
   isLoading,
-  isEdit
+  isEdit,
+  submitButtonTestID
 }) => {
   const textInputRef1 = useRef(null);
   const textInputRef2 = useRef(null);
@@ -30,6 +32,7 @@ const RegisterForm = ({
       <View style={loginStyles.formContainer}>
         <FloatingLabelTextInput
           customContainerStyle={loginStyles.firstNameInputView}
+          testID={authScreenTestIDs.FIRST_NAME_INPUT}
           value={firstName}
           error={errors.firstName}
           floatingLabel={'First Name'}
@@ -42,6 +45,7 @@ const RegisterForm = ({
         <FloatingLabelTextInput
           textInputRef={textInputRef1}
           customContainerStyle={loginStyles.lastNameInputView}
+          testID={authScreenTestIDs.LAST_NAME_INPUT}
           value={lastName}
           error={errors.lastName}
           floatingLabel={'Last Name'}
@@ -54,6 +58,7 @@ const RegisterForm = ({
       </View>
       <FloatingLabelTextInput
         textInputRef={textInputRef2}
+        testID={authScreenTestIDs.EMAIL_INPUT}
         value={emailAddress}
         error={errors.emailAddress}
         floatingLabel={'Email Address'}
@@ -66,6 +71,7 @@ const RegisterForm = ({
         <>
           <FloatingLabelTextInput
             textInputRef={textInputRef3}
+            testID={authScreenTestIDs.PASSWORD_INPUT}
             floatingLabel={'Password'}
             value={password}
             error={errors.password}
@@ -77,6 +83,7 @@ const RegisterForm = ({
           />
           <FloatingLabelTextInput
             textInputRef={textInputRef4}
+            testID={authScreenTestIDs.MATCHING_PASSWORD_INPUT}
             floatingLabel={'Matching Password'}
             value={matchingPassword}
             error={errors.matchingPassword}
@@ -89,6 +96,7 @@ const RegisterForm = ({
         </>
       )}
       <CustomButton
+        testID={submitButtonTestID}
         onPress={handleRegister}
         isLoading={isLoading}
         loaderStyle={[appStyles.submitButton, { backgroundColor: 'transparent' }]}
@@ -114,7 +122,8 @@ RegisterForm.propTypes = {
   handleInput: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  isEdit: PropTypes.bool.isRequired
+  isEdit: PropTypes.bool.isRequired,
+  submitButtonTestID: PropTypes.string.isRequired
 };
 
 export default React.memo(RegisterForm);

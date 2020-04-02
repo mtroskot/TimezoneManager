@@ -22,7 +22,8 @@ const CustomButton = props => {
     onPress,
     animationProps,
     disabled,
-    isLoading
+    isLoading,
+    testID
   } = props;
 
   const buttonText = text ? <Text style={[styles.text, textStyle]}>{text}</Text> : null;
@@ -95,7 +96,7 @@ const CustomButton = props => {
   );
 
   return (
-    <TouchableOpacity style={tOpacityStyle} onPress={onPress} disabled={disabled}>
+    <TouchableOpacity style={tOpacityStyle} onPress={onPress} disabled={disabled} testID={testID}>
       {iconTextOrder}
     </TouchableOpacity>
   );
@@ -129,7 +130,12 @@ CustomButton.propTypes = {
     duration: PropTypes.number
   }),
   disabled: PropTypes.bool,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  testID: PropTypes.string
+};
+
+CustomButton.defaultProps = {
+  testID: 'CustomButton'
 };
 
 export default React.memo(CustomButton);

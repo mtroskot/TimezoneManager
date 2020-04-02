@@ -5,16 +5,27 @@ import { CustomButton, FloatingLabelTextInput } from 'src/components';
 import loginStyles from 'src/screens/Auth/styles';
 import appStyles from 'src/styles/appStyles';
 import { errorPropTypes } from 'src/constants/propTypes';
+import { authScreenTestIDs } from 'src/constants/testIDs';
 
-const LoginForm = ({ loginForm, errors, handleInput, handleLogin, isLoading }) => {
+const LoginForm = ({
+  loginForm,
+  errors,
+  handleInput,
+  handleLogin,
+  isLoading,
+  headerText,
+  submitButtonText,
+  submitButtonTestID
+}) => {
   const textInputRef = useRef(null);
   const { emailAddress, password } = loginForm;
   return (
     <View>
       <View style={loginStyles.headerView}>
-        <Text style={appStyles.headerText}>Welcome Back</Text>
+        <Text style={appStyles.headerText}>{headerText}</Text>
       </View>
       <FloatingLabelTextInput
+        testID={authScreenTestIDs.LOGIN_EMAIL_INPUT}
         value={emailAddress}
         error={errors.emailAddress}
         floatingLabel={'Email Address'}
@@ -24,6 +35,7 @@ const LoginForm = ({ loginForm, errors, handleInput, handleLogin, isLoading }) =
         onSubmitEditing={() => textInputRef.current.focus()}
       />
       <FloatingLabelTextInput
+        testID={authScreenTestIDs.LOGIN_PASSWORD_INPUT}
         textInputRef={textInputRef}
         value={password}
         error={errors.password}
@@ -35,10 +47,11 @@ const LoginForm = ({ loginForm, errors, handleInput, handleLogin, isLoading }) =
         onSubmitEditing={handleLogin}
       />
       <CustomButton
+        testID={submitButtonTestID}
         onPress={handleLogin}
         isLoading={isLoading}
         loaderStyle={[appStyles.submitButton, { backgroundColor: 'transparent' }]}
-        text={'Login'}
+        text={submitButtonText}
         tOpacityStyle={appStyles.submitButton}
         textStyle={appStyles.buttonText}
       />
@@ -48,13 +61,16 @@ const LoginForm = ({ loginForm, errors, handleInput, handleLogin, isLoading }) =
 
 LoginForm.propTypes = {
   errors: PropTypes.objectOf(errorPropTypes).isRequired,
+  headerText: PropTypes.string.isRequired,
   loginForm: PropTypes.exact({
     emailAddress: PropTypes.string,
     password: PropTypes.string
   }).isRequired,
   handleInput: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  submitButtonText: PropTypes.string.isRequired,
+  submitButtonTestID: PropTypes.string.isRequired
 };
 
 export default React.memo(LoginForm);

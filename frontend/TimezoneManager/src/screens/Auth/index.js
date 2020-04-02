@@ -11,6 +11,8 @@ import { userActionTypes } from 'src/constants/actionTypes';
 import { ValidationUtils } from 'src/utils';
 import { screenNames } from 'src/constants/navigation';
 import PropTypes from 'prop-types';
+import { authScreenTestIDs } from 'src/constants/testIDs';
+import { authScreenText } from 'src/constants/text';
 import appStyles from 'src/styles/appStyles';
 import styles from 'src/screens/Auth/styles';
 
@@ -129,10 +131,22 @@ const Auth = props => {
   }
 
   //RENDER
-  const registerHeaderText = isEdit ? 'Update user account' : 'Create an Account';
-  const registerSubmitText = isEdit ? 'Update Account' : 'Create Account';
+  const registerHeaderText = isEdit ? authScreenText.UPDATE_HEADER : authScreenText.REGISTER_HEADER;
+  const registerSubmitText = isEdit ? authScreenText.UPDATE_ACCOUNT : authScreenText.CREATE_ACCOUNT;
+  const registerUpdateButtonTestID = isEdit ? authScreenTestIDs.SUBMIT_USER_UPDATE : authScreenTestIDs.SUBMIT_REGISTER;
   const form = showLoginForm ? (
-    <LoginForm {...{ loginForm, errors, handleInput: handleLoginInput, handleLogin, isLoading }} />
+    <LoginForm
+      {...{
+        loginForm,
+        headerText: authScreenText.LOGIN_HEADER,
+        errors,
+        handleInput: handleLoginInput,
+        handleLogin,
+        isLoading,
+        submitButtonText: authScreenText.LOGIN,
+        submitButtonTestID: authScreenTestIDs.SUBMIT_LOGIN
+      }}
+    />
   ) : (
     <RegisterForm
       {...{
@@ -143,12 +157,13 @@ const Auth = props => {
         isEdit,
         handleInput: handleRegisterInput,
         handleRegister,
-        isLoading
+        isLoading,
+        submitButtonTestID: registerUpdateButtonTestID
       }}
     />
   );
-  const switchFormText = showLoginForm ? "Don't have an account?" : 'Already have an account?';
-  const switchFormButtonText = !showLoginForm ? 'Login' : 'Create Account';
+  const switchFormText = showLoginForm ? authScreenText.SWITCH_TO_REGISTER : authScreenText.SWITCH_TO_LOGIN;
+  const switchFormButtonText = !showLoginForm ? authScreenText.LOGIN : authScreenText.CREATE_ACCOUNT;
   return (
     <SafeAreaView style={appStyles.safeArea}>
       <KeyboardAvoidAndDismissView viewStyle={styles.container}>
@@ -157,6 +172,7 @@ const Auth = props => {
           <View style={styles.switchFormContainer}>
             <Text style={styles.switchFormText}>{switchFormText}</Text>
             <CustomButton
+              testID={authScreenTestIDs.SWITCH_FORM}
               onPress={onSwitchForm}
               text={switchFormButtonText}
               textStyle={[appStyles.buttonText, { color: '#EAA79E' }]}

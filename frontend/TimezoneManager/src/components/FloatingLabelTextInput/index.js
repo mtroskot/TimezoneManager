@@ -129,4 +129,8 @@ FloatingLabelTextInput.propTypes = {
   })
 };
 
+FloatingLabelTextInput.defaultProps = {
+  testID: 'FloatingLabelTextInput'
+};
+
 export default React.memo(FloatingLabelTextInput);
