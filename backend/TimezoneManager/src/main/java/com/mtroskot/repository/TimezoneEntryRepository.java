@@ -15,8 +15,8 @@ public interface TimezoneEntryRepository extends CrudRepository<TimezoneEntry, L
 	@Query(value = "SELECT * FROM TIMEZONE_ENTRY WHERE LOWER(name) LIKE LOWER(concat('%',:input,'%')) OR LOWER(city_Name) LIKE LOWER(concat('%',:input,'%'))", nativeQuery = true)
 	Iterable<TimezoneEntry> findAllByNameOrCityName(String input);
 
-	@Query(value = "SELECT * FROM TIMEZONE_ENTRY WHERE user_Id = :userId AND LOWER(name) LIKE LOWER(concat('%',:input,'%'))"
-			+ " OR LOWER(city_Name) LIKE LOWER(concat('%',:input,'%'))", nativeQuery = true)
+	@Query(value = "SELECT * FROM TIMEZONE_ENTRY WHERE user_Id = :userId AND ( LOWER(name) LIKE LOWER(concat('%',:input,'%'))"
+			+ " OR LOWER(city_Name) LIKE LOWER(concat('%',:input,'%')) )", nativeQuery = true)
 	Iterable<TimezoneEntry> findAllByUserAndNameOrCityName(Long userId, String input);
 
 }
