@@ -44,6 +44,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit false 1`] = 
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="FIRST_NAME_INPUT"
       value=""
     />
     <Memo(FloatingLabelTextInput)
@@ -59,6 +60,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit false 1`] = 
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="LAST_NAME_INPUT"
       textInputRef={
         Object {
           "current": null,
@@ -73,6 +75,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit false 1`] = 
     onSubmitEditing={[Function]}
     placeholderTextColor="#949EA0"
     returnKeyType="next"
+    testID="EMAIL_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -87,6 +90,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit false 1`] = 
     placeholderTextColor="#949EA0"
     returnKeyType="next"
     secureTextEntry={true}
+    testID="PASSWORD_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -101,6 +105,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit false 1`] = 
     placeholderTextColor="#949EA0"
     returnKeyType="go"
     secureTextEntry={true}
+    testID="MATCHING_PASSWORD_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -195,6 +200,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit true 1`] = `
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="FIRST_NAME_INPUT"
       value=""
     />
     <Memo(FloatingLabelTextInput)
@@ -210,6 +216,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit true 1`] = `
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="LAST_NAME_INPUT"
       textInputRef={
         Object {
           "current": null,
@@ -224,6 +231,7 @@ exports[`RegisterForm wrapper renders correctly, form empty, isEdit true 1`] = `
     onSubmitEditing={[Function]}
     placeholderTextColor="#949EA0"
     returnKeyType="go"
+    testID="EMAIL_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -324,6 +332,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit false 1`] =
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="FIRST_NAME_INPUT"
       value=""
     />
     <Memo(FloatingLabelTextInput)
@@ -345,6 +354,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit false 1`] =
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="LAST_NAME_INPUT"
       textInputRef={
         Object {
           "current": null,
@@ -365,6 +375,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit false 1`] =
     onSubmitEditing={[Function]}
     placeholderTextColor="#949EA0"
     returnKeyType="next"
+    testID="EMAIL_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -385,6 +396,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit false 1`] =
     placeholderTextColor="#949EA0"
     returnKeyType="next"
     secureTextEntry={true}
+    testID="PASSWORD_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -405,6 +417,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit false 1`] =
     placeholderTextColor="#949EA0"
     returnKeyType="go"
     secureTextEntry={true}
+    testID="MATCHING_PASSWORD_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -505,6 +518,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit true 1`] = 
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="FIRST_NAME_INPUT"
       value=""
     />
     <Memo(FloatingLabelTextInput)
@@ -526,6 +540,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit true 1`] = 
       onSubmitEditing={[Function]}
       placeholderTextColor="#949EA0"
       returnKeyType="next"
+      testID="LAST_NAME_INPUT"
       textInputRef={
         Object {
           "current": null,
@@ -546,6 +561,7 @@ exports[`RegisterForm wrapper renders correctly, form filled, isEdit true 1`] = 
     onSubmitEditing={[Function]}
     placeholderTextColor="#949EA0"
     returnKeyType="go"
+    testID="EMAIL_INPUT"
     textInputRef={
       Object {
         "current": null,

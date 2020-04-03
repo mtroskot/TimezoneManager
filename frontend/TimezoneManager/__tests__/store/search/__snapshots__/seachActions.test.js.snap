@@ -9,6 +9,15 @@ Array [
 ]
 `;
 
+exports[`Search actions tests dispatches clearAllTimezoneEntriesSearch action 1`] = `
+Array [
+  Object {
+    "payload": Object {},
+    "type": "CLEAR_ALL_TIMEZONE_ENTRIES_SEARCH",
+  },
+]
+`;
+
 exports[`Search actions tests dispatches clearTimezoneEntriesSearch action 1`] = `
 Array [
   Object {
@@ -27,12 +36,34 @@ Array [
 ]
 `;
 
+exports[`Search actions tests dispatches searchAllTimezoneEntries action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "cancelToken": "cancelToken",
+      "searchInput": "searchInput",
+    },
+    "type": "SEARCH_ALL_TIMEZONE_ENTRIES",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches searchAllTimezoneEntriesSuccess action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "searchData": "searchData",
+    },
+    "type": "SEARCH_ALL_TIMEZONE_ENTRIES_SUCCESS",
+  },
+]
+`;
+
 exports[`Search actions tests dispatches searchTimezoneEntries action 1`] = `
 Array [
   Object {
     "payload": Object {
       "cancelToken": "cancelToken",
-      "fromAllUsers": "fromAllUsers",
       "searchInput": "searchInput",
     },
     "type": "SEARCH_TIMEZONE_ENTRIES",

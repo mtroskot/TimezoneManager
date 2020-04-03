@@ -12,6 +12,11 @@ export const initialState = {
     searchResults: [],
     searchQuery: '',
     message: ''
+  },
+  allTimezoneEntriesSearchData: {
+    searchResults: [],
+    searchQuery: '',
+    message: ''
   }
 };
 
@@ -21,6 +26,15 @@ const searchReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         timezoneEntriesSearchData: {
+          searchResults: payload.searchData.searchResults,
+          searchQuery: payload.searchData.searchQuery,
+          message: payload.searchData.message
+        }
+      };
+    case searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES_SUCCESS:
+      return {
+        ...state,
+        allTimezoneEntriesSearchData: {
           searchResults: payload.searchData.searchResults,
           searchQuery: payload.searchData.searchQuery,
           message: payload.searchData.message
@@ -57,6 +71,14 @@ const searchReducer = (state = initialState, { type, payload }) => {
             idNames.TIMEZONE_ENTRY_ID,
             payload.updatedTimezoneEntry
           )
+        },
+        allTimezoneEntriesSearchData: {
+          ...state.allTimezoneEntriesSearchData,
+          searchResults: ArrayUtils.updateItemInList(
+            state.allTimezoneEntriesSearchData.searchResults,
+            idNames.TIMEZONE_ENTRY_ID,
+            payload.updatedTimezoneEntry
+          )
         }
       };
     case userActionTypes.DELETE_USER_SUCCESS:
@@ -81,13 +103,22 @@ const searchReducer = (state = initialState, { type, payload }) => {
             idNames.TIMEZONE_ENTRY_ID,
             payload.timezoneEntryId
           )
+        },
+        allTimezoneEntriesSearchData: {
+          ...state.allTimezoneEntriesSearchData,
+          searchResults: ArrayUtils.removeItemFromList(
+            state.allTimezoneEntriesSearchData.searchResults,
+            idNames.TIMEZONE_ENTRY_ID,
+            payload.timezoneEntryId
+          )
         }
       };
     case searchActionTypes.CLEAR_ALL_SEARCHES:
       return {
         ...state,
         userSearchData: initialState.userSearchData,
-        timezoneEntriesSearchData: initialState.timezoneEntriesSearchData
+        timezoneEntriesSearchData: initialState.timezoneEntriesSearchData,
+        allTimezoneEntriesSearchData: initialState.allTimezoneEntriesSearchData
       };
     case searchActionTypes.CLEAR_USERS_SEARCH:
       return {
@@ -98,6 +129,11 @@ const searchReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         timezoneEntriesSearchData: initialState.timezoneEntriesSearchData
+      };
+    case searchActionTypes.CLEAR_ALL_TIMEZONE_ENTRIES_SEARCH:
+      return {
+        ...state,
+        allTimezoneEntriesSearchData: initialState.allTimezoneEntriesSearchData
       };
     default:
       return state;

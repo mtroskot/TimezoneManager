@@ -16,14 +16,13 @@ describe('Search actions tests', () => {
   it('dispatches searchTimezoneEntries action', () => {
     const searchInput = 'searchInput';
     const cancelToken = 'cancelToken';
-    const fromAllUsers = 'fromAllUsers';
     const expectedActions = [
       {
         type: searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
-        payload: { searchInput, cancelToken, fromAllUsers }
+        payload: { searchInput, cancelToken }
       }
     ];
-    store.dispatch(searchActions.searchTimezoneEntries(searchInput, cancelToken, fromAllUsers));
+    store.dispatch(searchActions.searchTimezoneEntries(searchInput, cancelToken));
     expect(store.getActions()).toEqual(expectedActions);
     expect(store.getActions()).toMatchSnapshot();
   });
@@ -37,6 +36,33 @@ describe('Search actions tests', () => {
       }
     ];
     store.dispatch(searchActions.searchTimezoneEntriesSuccess(searchData));
+    expect(store.getActions()).toEqual(expectedActions);
+    expect(store.getActions()).toMatchSnapshot();
+  });
+
+  it('dispatches searchAllTimezoneEntries action', () => {
+    const searchInput = 'searchInput';
+    const cancelToken = 'cancelToken';
+    const expectedActions = [
+      {
+        type: searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES,
+        payload: { searchInput, cancelToken }
+      }
+    ];
+    store.dispatch(searchActions.searchAllTimezoneEntries(searchInput, cancelToken));
+    expect(store.getActions()).toEqual(expectedActions);
+    expect(store.getActions()).toMatchSnapshot();
+  });
+
+  it('dispatches searchAllTimezoneEntriesSuccess action', () => {
+    const searchData = 'searchData';
+    const expectedActions = [
+      {
+        type: searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES_SUCCESS,
+        payload: { searchData }
+      }
+    ];
+    store.dispatch(searchActions.searchAllTimezoneEntriesSuccess(searchData));
     expect(store.getActions()).toEqual(expectedActions);
     expect(store.getActions()).toMatchSnapshot();
   });
@@ -101,6 +127,18 @@ describe('Search actions tests', () => {
       }
     ];
     store.dispatch(searchActions.clearTimezoneEntriesSearch());
+    expect(store.getActions()).toEqual(expectedActions);
+    expect(store.getActions()).toMatchSnapshot();
+  });
+
+  it('dispatches clearAllTimezoneEntriesSearch action', () => {
+    const expectedActions = [
+      {
+        type: searchActionTypes.CLEAR_ALL_TIMEZONE_ENTRIES_SEARCH,
+        payload: {}
+      }
+    ];
+    store.dispatch(searchActions.clearAllTimezoneEntriesSearch());
     expect(store.getActions()).toEqual(expectedActions);
     expect(store.getActions()).toMatchSnapshot();
   });

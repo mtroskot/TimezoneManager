@@ -1,9 +1,11 @@
 import { Animated, Platform } from 'react-native';
+import axios from 'axios';
 import { ADMIN, MANAGER } from 'src/constants/userRoles';
 import { filters } from 'src/constants/search';
 import { dimensions } from 'src/styles';
-import { DEFAULT_ERROR, NO_INTERNET } from 'src/constants/messages';
-
+import { DEFAULT_ERROR, NO_INTERNET, TIMEOUT } from 'src/constants/messages';
+import store from 'src/store';
+import { togglePopupMessage } from 'src/store/ui/uiActions';
 const { rem } = dimensions;
 
 /**
@@ -42,16 +44,21 @@ function checkIfUserHasRightsForFilterOptions(filterOption, userRole) {
   return false;
 }
 
-function getMessageForErrorResponse(error) {
-  if (error.message.toString().includes('Network')) {
-    return NO_INTERNET;
+function handleErrorMessage(error, position = 'top') {
+  if (!axios.isCancel(error)) {
+    if (error.message.toString().includes('Network')) {
+      store.dispatch(togglePopupMessage(NO_INTERNET, position));
+    } else if (error.message.toString().includes('timeout')) {
+      store.dispatch(togglePopupMessage(TIMEOUT, position));
+    } else {
+      store.dispatch(togglePopupMessage(DEFAULT_ERROR, position));
+    }
   }
-  return DEFAULT_ERROR;
 }
 
 export default {
   getIconForPlatform,
   startShake,
   checkIfUserHasRightsForFilterOptions,
-  getMessageForErrorResponse
+  handleErrorMessage
 };

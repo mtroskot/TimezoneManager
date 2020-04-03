@@ -29,6 +29,7 @@ exports[`LoginForm wrapper renders correctly, form empty 1`] = `
     onSubmitEditing={[Function]}
     placeholderTextColor="#949EA0"
     returnKeyType="next"
+    testID="LOGIN_EMAIL_INPUT"
     value=""
   />
   <Memo(FloatingLabelTextInput)
@@ -38,6 +39,7 @@ exports[`LoginForm wrapper renders correctly, form empty 1`] = `
     placeholderTextColor="#949EA0"
     returnKeyType="go"
     secureTextEntry={true}
+    testID="LOGIN_PASSWORD_INPUT"
     textInputRef={
       Object {
         "current": null,
@@ -123,6 +125,7 @@ exports[`LoginForm wrapper renders correctly, form filled 1`] = `
     onSubmitEditing={[Function]}
     placeholderTextColor="#949EA0"
     returnKeyType="next"
+    testID="LOGIN_EMAIL_INPUT"
     value="emailAddress"
   />
   <Memo(FloatingLabelTextInput)
@@ -138,6 +141,7 @@ exports[`LoginForm wrapper renders correctly, form filled 1`] = `
     placeholderTextColor="#949EA0"
     returnKeyType="go"
     secureTextEntry={true}
+    testID="LOGIN_PASSWORD_INPUT"
     textInputRef={
       Object {
         "current": null,

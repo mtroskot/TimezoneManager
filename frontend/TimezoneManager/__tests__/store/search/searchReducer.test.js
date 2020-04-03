@@ -3,19 +3,7 @@ import * as searchActions from 'src/store/search/searchActions';
 import * as timezoneActions from 'src/store/timezone/timezoneActions';
 import * as userActions from 'src/store/user/userActions';
 import { idNames } from 'src/constants/idKeyNames';
-
-const initialState = {
-  userSearchData: {
-    searchResults: [],
-    searchQuery: '',
-    message: ''
-  },
-  timezoneEntriesSearchData: {
-    searchResults: [],
-    searchQuery: '',
-    message: ''
-  }
-};
+import { initialState } from 'src/store/search/searchReducer';
 
 describe('INITIAL STATE', () => {
   const beforeActionState = initialState;
@@ -41,6 +29,28 @@ describe('INITIAL STATE', () => {
         searchResults: payload.searchData.searchResults,
         searchQuery: payload.searchData.searchQuery,
         message: payload.searchData.message
+      },
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
+    };
+    expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
+    expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
+  });
+
+  it('2.1returns searchAllTimezoneEntriesSuccess action state', () => {
+    const searchData = {
+      searchResults: [],
+      searchQuery: 'Abc',
+      message: 'No results'
+    };
+    const action = searchActions.searchAllTimezoneEntriesSuccess(searchData);
+    const { payload } = action;
+    const expectedState = {
+      userSearchData: beforeActionState.userSearchData,
+      timezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: {
+        searchResults: payload.searchData.searchResults,
+        searchQuery: payload.searchData.searchQuery,
+        message: payload.searchData.message
       }
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
@@ -61,7 +71,8 @@ describe('INITIAL STATE', () => {
         searchQuery: payload.searchData.searchQuery,
         message: payload.searchData.message
       },
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -77,7 +88,8 @@ describe('INITIAL STATE', () => {
     const action = searchActions.updateSearchedUserInfoSuccess(updatedUserInfo);
     const expectedState = {
       userSearchData: beforeActionState.userSearchData,
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -93,7 +105,8 @@ describe('INITIAL STATE', () => {
     const action = timezoneActions.updateTimezoneEntrySuccess(updatedTimezoneEntry);
     const expectedState = {
       userSearchData: beforeActionState.userSearchData,
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -104,7 +117,8 @@ describe('INITIAL STATE', () => {
     const action = userActions.deleteUserSuccess(userId);
     const expectedState = {
       userSearchData: beforeActionState.userSearchData,
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -115,7 +129,8 @@ describe('INITIAL STATE', () => {
     const action = timezoneActions.deleteTimezoneEntrySuccess(timezoneEntryId);
     const expectedState = {
       userSearchData: beforeActionState.userSearchData,
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -133,6 +148,11 @@ describe('INITIAL STATE', () => {
         searchResults: [],
         searchQuery: '',
         message: ''
+      },
+      allTimezoneEntriesSearchData: {
+        searchResults: [],
+        searchQuery: '',
+        message: ''
       }
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
@@ -147,11 +167,8 @@ describe('INITIAL STATE', () => {
         searchQuery: '',
         message: ''
       },
-      timezoneEntriesSearchData: {
-        searchResults: [],
-        searchQuery: '',
-        message: ''
-      }
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -160,12 +177,24 @@ describe('INITIAL STATE', () => {
   it('10returns clearTimezoneEntriesSearch action state', () => {
     const action = searchActions.clearTimezoneEntriesSearch();
     const expectedState = {
-      userSearchData: {
+      userSearchData: beforeActionState.userSearchData,
+      timezoneEntriesSearchData: {
         searchResults: [],
         searchQuery: '',
         message: ''
       },
-      timezoneEntriesSearchData: {
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
+    };
+    expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
+    expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
+  });
+
+  it('11returns clearTimezoneEntriesSearch action state', () => {
+    const action = searchActions.clearAllTimezoneEntriesSearch();
+    const expectedState = {
+      userSearchData: beforeActionState.userSearchData,
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: {
         searchResults: [],
         searchQuery: '',
         message: ''
@@ -194,6 +223,16 @@ describe('LOADED STATE', () => {
       ],
       searchQuery: 'Abc',
       message: 'message'
+    },
+    allTimezoneEntriesSearchData: {
+      searchResults: [
+        { [idNames.TIMEZONE_ENTRY_ID]: 2, name: 'Foo', cityName: 'Bar', differenceToGMT: '+2' },
+        { [idNames.TIMEZONE_ENTRY_ID]: 3, name: 'Fch', cityName: 'Abc', differenceToGMT: '+10' },
+        { [idNames.TIMEZONE_ENTRY_ID]: 4, name: 'US', cityName: 'NY', differenceToGMT: '+1' },
+        { [idNames.TIMEZONE_ENTRY_ID]: 5, name: 'HR', cityName: 'ZD', differenceToGMT: '-10' }
+      ],
+      searchQuery: 'Abc',
+      message: 'message'
     }
   };
 
@@ -218,6 +257,28 @@ describe('LOADED STATE', () => {
         searchResults: payload.searchData.searchResults,
         searchQuery: payload.searchData.searchQuery,
         message: payload.searchData.message
+      },
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
+    };
+    expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
+    expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
+  });
+
+  it('2.1returns searchTimezoneEntriesSuccess action state', () => {
+    const searchData = {
+      searchResults: [],
+      searchQuery: 'Abcdef',
+      message: 'No results'
+    };
+    const action = searchActions.searchAllTimezoneEntriesSuccess(searchData);
+    const { payload } = action;
+    const expectedState = {
+      userSearchData: beforeActionState.userSearchData,
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: {
+        searchResults: payload.searchData.searchResults,
+        searchQuery: payload.searchData.searchQuery,
+        message: payload.searchData.message
       }
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
@@ -238,7 +299,8 @@ describe('LOADED STATE', () => {
         searchQuery: payload.searchData.searchQuery,
         message: payload.searchData.message
       },
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -262,7 +324,8 @@ describe('LOADED STATE', () => {
         searchQuery: beforeActionState.userSearchData.searchQuery,
         message: beforeActionState.userSearchData.message
       },
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -286,6 +349,16 @@ describe('LOADED STATE', () => {
         ],
         searchQuery: beforeActionState.timezoneEntriesSearchData.searchQuery,
         message: beforeActionState.timezoneEntriesSearchData.message
+      },
+      allTimezoneEntriesSearchData: {
+        searchResults: [
+          payload.updatedTimezoneEntry,
+          { [idNames.TIMEZONE_ENTRY_ID]: 3, name: 'Fch', cityName: 'Abc', differenceToGMT: '+10' },
+          { [idNames.TIMEZONE_ENTRY_ID]: 4, name: 'US', cityName: 'NY', differenceToGMT: '+1' },
+          { [idNames.TIMEZONE_ENTRY_ID]: 5, name: 'HR', cityName: 'ZD', differenceToGMT: '-10' }
+        ],
+        searchQuery: beforeActionState.allTimezoneEntriesSearchData.searchQuery,
+        message: beforeActionState.allTimezoneEntriesSearchData.message
       }
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
@@ -303,7 +376,8 @@ describe('LOADED STATE', () => {
         searchQuery: beforeActionState.userSearchData.searchQuery,
         message: beforeActionState.userSearchData.message
       },
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -316,6 +390,15 @@ describe('LOADED STATE', () => {
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
         searchResults: [{ [idNames.TIMEZONE_ENTRY_ID]: 3, name: 'Fch', cityName: 'Abc', differenceToGMT: '+10' }],
+        searchQuery: beforeActionState.timezoneEntriesSearchData.searchQuery,
+        message: beforeActionState.timezoneEntriesSearchData.message
+      },
+      allTimezoneEntriesSearchData: {
+        searchResults: [
+          { [idNames.TIMEZONE_ENTRY_ID]: 3, name: 'Fch', cityName: 'Abc', differenceToGMT: '+10' },
+          { [idNames.TIMEZONE_ENTRY_ID]: 4, name: 'US', cityName: 'NY', differenceToGMT: '+1' },
+          { [idNames.TIMEZONE_ENTRY_ID]: 5, name: 'HR', cityName: 'ZD', differenceToGMT: '-10' }
+        ],
         searchQuery: beforeActionState.timezoneEntriesSearchData.searchQuery,
         message: beforeActionState.timezoneEntriesSearchData.message
       }
@@ -336,6 +419,11 @@ describe('LOADED STATE', () => {
         searchResults: [],
         searchQuery: '',
         message: ''
+      },
+      allTimezoneEntriesSearchData: {
+        searchResults: [],
+        searchQuery: '',
+        message: ''
       }
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
@@ -350,7 +438,8 @@ describe('LOADED STATE', () => {
         searchQuery: '',
         message: ''
       },
-      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
     };
     expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
@@ -361,6 +450,22 @@ describe('LOADED STATE', () => {
     const expectedState = {
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
+        searchResults: [],
+        searchQuery: '',
+        message: ''
+      },
+      allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
+    };
+    expect(searchReducer(beforeActionState, action)).toEqual(expectedState);
+    expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
+  });
+
+  it('11returns clearTimezoneEntriesSearch action state', () => {
+    const action = searchActions.clearAllTimezoneEntriesSearch();
+    const expectedState = {
+      userSearchData: beforeActionState.userSearchData,
+      timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
+      allTimezoneEntriesSearchData: {
         searchResults: [],
         searchQuery: '',
         message: ''

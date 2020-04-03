@@ -96,7 +96,12 @@ const CustomButton = props => {
   );
 
   return (
-    <TouchableOpacity style={tOpacityStyle} onPress={onPress} disabled={disabled} testID={testID}>
+    <TouchableOpacity
+      style={tOpacityStyle}
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+      hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}>
       {iconTextOrder}
     </TouchableOpacity>
   );

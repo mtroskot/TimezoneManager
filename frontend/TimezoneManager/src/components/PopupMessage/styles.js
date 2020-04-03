@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   topPosition: {
-    top: Platform.OS === 'ios' ? Header.HEIGHT + 30 : Header.HEIGHT
+    top: Platform.OS === 'ios' ? Header.HEIGHT + 30 * rem : Header.HEIGHT
   },
   bottomPosition: {
-    bottom: Platform.OS === 'ios' ? 90 : 60
+    bottom: Platform.OS === 'ios' ? 90 * rem : 60 * rem
   }
 });
 
