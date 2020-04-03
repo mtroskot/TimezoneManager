@@ -18,6 +18,11 @@ function isString(str) {
   return typeof str === 'string';
 }
 
+/**
+ * Returns initials of name
+ * @param name {String} The name to get initials
+ * @returns {String}
+ */
 function getNameInitials(name) {
   const splitName = name.split(' ');
   return splitName.length === 1 ? splitName[0][0] : `${splitName[0][0]} ${splitName[splitName.length - 1][0]}`;
@@ -25,8 +30,8 @@ function getNameInitials(name) {
 
 /**
  * Converts number or string to GMT string
- * @param diff Number or String
- * @returns {string}
+ * @param diff {Number|String}
+ * @returns {String}
  */
 function convertGMTDIffToString(diff) {
   const gmtDIff = parseInt(String(diff).replace('+', ''), 10);
@@ -37,6 +42,11 @@ function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
 
+/**
+ * Converts camel case string to words.
+ * @param str {String}
+ * @returns {String}
+ */
 function camelCaseToWords(str) {
   let newString = '';
   for (let i = 0; i < str.length; i++) {

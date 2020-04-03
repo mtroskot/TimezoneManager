@@ -27,6 +27,7 @@ const Dropdown = ({
   if (!showDropdown) {
     return null;
   }
+
   function getItemLayout(data, index) {
     return { length: data.length, offset: itemHeight * index, index };
   }

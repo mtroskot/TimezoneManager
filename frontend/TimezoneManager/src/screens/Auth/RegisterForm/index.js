@@ -6,6 +6,7 @@ import loginStyles from 'src/screens/Auth/styles';
 import appStyles from 'src/styles/appStyles';
 import { errorPropTypes } from 'src/constants/propTypes';
 import { authScreenTestIDs } from 'src/constants/testIDs';
+
 const RegisterForm = ({
   submitButtonText,
   headerText,

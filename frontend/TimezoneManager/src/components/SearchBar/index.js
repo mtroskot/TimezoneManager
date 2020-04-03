@@ -8,8 +8,7 @@ import styles from 'src/components/SearchBar/styles';
 import { dimensions } from 'src/styles';
 const { rem } = dimensions;
 
-const SearchBar = props => {
-  const { searchInput, handleInput, placeholder, viewStyle, clearInput } = props;
+const SearchBar = ({ searchInput, handleInput, placeholder, viewStyle, clearInput }) => {
   const searchInputEmpty = StringUtils.isEmpty(searchInput);
   return (
     <View style={[styles.textInputView, viewStyle]}>

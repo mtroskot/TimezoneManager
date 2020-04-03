@@ -1,8 +1,8 @@
 /**
- *
- * @param array
- * @param idName String The name of the id
- * @param item
+ * Updates item in list. Item is found by id.
+ * @param array {Array} The array which contains the item
+ * @param idName {String} The name of the id of the item to be update
+ * @param item {Object} The item to update
  * @returns {Array}
  */
 function updateItemInList(array, idName, item) {
@@ -15,10 +15,10 @@ function updateItemInList(array, idName, item) {
 }
 
 /**
- *
- * @param array
- * @param idName String The name of the id
- * @param itemId
+ * Removes item from list. Item is found by id
+ * @param array {Array} The array which contains the item
+ * @param idName {String} The name of the id
+ * @param itemId {String} The name of the id of the item to be removed
  * @returns {Array}
  */
 function removeItemFromList(array, idName, itemId) {

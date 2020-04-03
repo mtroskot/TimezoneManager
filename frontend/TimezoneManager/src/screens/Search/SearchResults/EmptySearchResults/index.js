@@ -4,15 +4,13 @@ import { Loader } from 'src/components';
 import PropTypes from 'prop-types';
 import styles from 'src/screens/Search/SearchResults/EmptySearchResults/styles';
 
-const EmptySearchResults = ({ isSearching, searchMessage, loadingText }) => {
-  return (
-    <View style={styles.emptyContainer}>
-      <View style={styles.container}>
-        {isSearching ? <Loader text={loadingText} /> : <Text style={styles.infoText}>{searchMessage}</Text>}
-      </View>
+const EmptySearchResults = ({ isSearching, searchMessage, loadingText }) => (
+  <View style={styles.emptyContainer}>
+    <View style={styles.container}>
+      {isSearching ? <Loader text={loadingText} /> : <Text style={styles.infoText}>{searchMessage}</Text>}
     </View>
-  );
-};
+  </View>
+);
 
 EmptySearchResults.propTypes = {
   isSearching: PropTypes.bool.isRequired,

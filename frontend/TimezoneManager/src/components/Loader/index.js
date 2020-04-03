@@ -3,15 +3,12 @@ import { ActivityIndicator, Text, View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from 'src/components/Loader/styles';
 
-const Loader = props => {
-  const { text, size, color, viewStyle, textStyle } = props;
-  return (
-    <View style={[styles.container, viewStyle]}>
-      <ActivityIndicator size={size} color={color} />
-      {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
-    </View>
-  );
-};
+const Loader = ({ text, size, color, viewStyle, textStyle }) => (
+  <View style={[styles.container, viewStyle]}>
+    <ActivityIndicator size={size} color={color} />
+    {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
+  </View>
+);
 
 Loader.propTypes = {
   text: PropTypes.string,
