@@ -33,7 +33,7 @@ import com.mtroskot.model.request.UpdateUserInfoRequest;
 import com.mtroskot.service.UserService;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Transactional
