@@ -57,8 +57,20 @@ public interface UserService {
 	 */
 	Boolean existsByEmailAddressIgnoreCase(String emailAddress);
 
+	/**
+	 * Deletes user from database by id.
+	 * 
+	 * @param userId
+	 */
 	void delete(Long userId);
 
+	/**
+	 * Changes user role
+	 * 
+	 * @param user     The user whose roles will be updated
+	 * @param roleType The roleType which the user will have after update
+	 * @return User The udapted user
+	 */
 	User changeUserRole(User user, RoleType roleType);
 
 }
