@@ -1,6 +1,6 @@
 /**
- * Checks if @param obj exists
- * @param obj
+ * Checks if @param obj is present
+ * @param obj {Object}
  * @returns {boolean}
  */
 function exists(obj) {
@@ -9,7 +9,7 @@ function exists(obj) {
 
 /**
  * Checks if parameter is object
- * @param param
+ * @param param {Object}
  * @returns {boolean}
  */
 function isObject(param) {

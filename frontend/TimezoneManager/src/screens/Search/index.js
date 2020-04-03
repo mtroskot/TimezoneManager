@@ -86,7 +86,8 @@ const Search = props => {
   }
 
   /**
-   *
+   * Switches filter option. Before switching checks if user has permission to use selected filterValue
+   * and if at least one switch is active after change.
    * @param switchValue Bool
    * @param filterValue String
    */
@@ -107,6 +108,10 @@ const Search = props => {
     setFilterOptions(newFilterOptions);
   }
 
+  /**
+   * Finds selected entry for edit and passes it as prop to edit screen.
+   * @param itemId {Number|String} The id of selected entry for edit
+   */
   function onEdit(itemId) {
     if (!entriesSelected) {
       const user = search.userSearchData.searchResults.find(item => item[idNames.USER_ID] === itemId);
@@ -126,6 +131,10 @@ const Search = props => {
     }
   }
 
+  /**
+   * Prompts user whether he wants to delete the entry
+   * @param itemId {Number|String}  The id of selected entry for delete
+   */
   function onDelete(itemId) {
     Alert.alert(
       'Item delete',

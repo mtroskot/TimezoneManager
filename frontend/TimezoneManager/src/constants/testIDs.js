@@ -1,4 +1,4 @@
-export const authScreenTestIDs = {
+export const authScreenTestIDs = Object.freeze({
   SWITCH_FORM: 'SWITCH_FORM',
   SUBMIT_LOGIN: 'SUBMIT_LOGIN',
   SUBMIT_REGISTER: 'SUBMIT_REGISTER',
@@ -10,4 +10,4 @@ export const authScreenTestIDs = {
   PASSWORD_INPUT: 'PASSWORD_INPUT',
   LOGIN_PASSWORD_INPUT: 'LOGIN_PASSWORD_INPUT',
   MATCHING_PASSWORD_INPUT: 'MATCHING_PASSWORD_INPUT'
-};
+});

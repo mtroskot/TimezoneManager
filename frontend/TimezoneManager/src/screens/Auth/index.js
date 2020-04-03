@@ -124,6 +124,9 @@ const Auth = props => {
     return isEmailValid && isPasswordValid;
   }
 
+  /**
+   * Switches between Login form and Register form
+   */
   function onSwitchForm() {
     setShowLoginForm(!showLoginForm);
     setErrors({});

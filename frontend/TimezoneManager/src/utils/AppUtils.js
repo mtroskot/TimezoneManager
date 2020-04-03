@@ -10,8 +10,8 @@ const { rem } = dimensions;
 
 /**
  * Returns the prefix, based on platform, needed for icon
- * @param iconName String The name of the icon
- * @param platformPrefix String If entered both platform will display same icon
+ * @param iconName {String} The name of the icon
+ * @param platformPrefix {String} If entered both platform will display same icon
  * @returns {String}
  */
 function getIconForPlatform(iconName, platformPrefix) {
@@ -22,6 +22,10 @@ function getIconForPlatform(iconName, platformPrefix) {
   return prefix + iconName;
 }
 
+/**
+ * Starts shaking animation
+ * @param shakeAnimation {Animated.Value} The animated value
+ */
 function startShake(shakeAnimation) {
   Animated.loop(
     Animated.sequence([
@@ -31,6 +35,12 @@ function startShake(shakeAnimation) {
   ).start();
 }
 
+/**
+ * Checks if user has sufficient permissions to user filter option
+ * @param filterOption The selected filter option
+ * @param userRole The role of user
+ * @returns {boolean}
+ */
 function checkIfUserHasRightsForFilterOptions(filterOption, userRole) {
   if (userRole === ADMIN) {
     return true;
@@ -44,6 +54,11 @@ function checkIfUserHasRightsForFilterOptions(filterOption, userRole) {
   return false;
 }
 
+/**
+ * Checks if the error should be displayed and which message should be displayed
+ * @param error The error
+ * @param position The position where the message should appear
+ */
 function handleErrorMessage(error, position = 'top') {
   if (!axios.isCancel(error)) {
     if (error.message.toString().includes('Network')) {
