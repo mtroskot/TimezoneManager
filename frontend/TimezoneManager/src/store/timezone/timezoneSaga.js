@@ -35,7 +35,7 @@ export function* addNewTimezoneEntrySaga({ type, payload }) {
     }
   } catch (error) {
     console.log('addNewTimezoneEntrySaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }
@@ -54,7 +54,7 @@ export function* updateTimezoneEntrySaga({ type, payload }) {
     yield call(NavigationService.navigate, screenNames.SEARCH);
   } catch (error) {
     console.log('updateTimezoneEntrySaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }
@@ -72,7 +72,7 @@ export function* deleteTimezoneEntrySaga({ type, payload }) {
     yield put(deleteTimezoneEntrySuccess(timezoneEntryId));
   } catch (error) {
     console.log('deleteTimezoneEntrySaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }
@@ -93,7 +93,7 @@ export function* fetchTimezoneEntriesSaga({ type, payload }) {
   } catch (error) {
     console.log('fetchTimezoneEntriesSaga error', error);
     if (timezoneEntries.length !== 0) {
-      yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+      yield call(AppUtils.handleErrorMessage, error);
     } else {
       yield put(addErrorAction(type));
     }

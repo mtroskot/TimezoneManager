@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Keyboard } from 'react-native';
+import { KeyboardAvoidAndDismissView } from 'src/components';
 import TimezoneForm from 'src/screens/AddNewTimezone/TimezoneForm';
 import { ValidationUtils } from 'src/utils';
 import { gmtDifferenceOptions } from 'src/constants/date';
@@ -10,7 +11,6 @@ import { checkIfLoadingSelector } from 'src/store/ui/uiSelectors';
 import { timezoneActionTypes } from 'src/constants/actionTypes';
 import { addTimezoneEntry, updateTimezoneEntry } from 'src/store/timezone/timezoneActions';
 import { connect } from 'react-redux';
-import KeyboardAvoidAndDismissView from 'src/components/KeyboardAvoidAndDismissView';
 
 const initialTimezoneState = Object.freeze({
   id: null,
@@ -43,7 +43,7 @@ const AddNewTimezone = props => {
   const [errors, setErrors] = useState({});
   const [dropdown, setDropdown] = useState({
     showDropdown: false,
-    initialScrollIndex: gmtDifferenceOptions.indexOf('0')
+    initialScrollIndex: gmtDifferenceOptions.indexOf(timezoneEntryForEdit?.differenceToGMT || '0')
   });
 
   //METHODS

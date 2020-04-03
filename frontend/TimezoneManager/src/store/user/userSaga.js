@@ -33,7 +33,7 @@ export function* registerUserSaga({ type, payload }) {
     }
   } catch (error) {
     console.log('registerUserSaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }
@@ -63,7 +63,7 @@ export function* authenticateUserSaga({ type, payload }) {
     }
   } catch (error) {
     console.log('authenticateUserSaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }
@@ -82,7 +82,7 @@ export function* changeUserRoleSaga({ type, payload }) {
     yield put(changeUserRoleSuccess(ParseUtils.parseRoles(response.data)));
   } catch (error) {
     console.log('changeUserRoleSaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }
@@ -109,7 +109,7 @@ export function* updateUserInfoSaga({ type, payload }) {
     yield call(NavigationService.navigate, screenNames.SEARCH);
   } catch (error) {
     console.log('updateUserInfoSaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }
@@ -132,7 +132,7 @@ export function* deleteUserSaga({ type, payload }) {
     yield put(deleteUserSuccess(userId));
   } catch (error) {
     console.log('deleteUserSaga error', error);
-    yield put(togglePopupMessage(AppUtils.getMessageForErrorResponse(error), 'top'));
+    yield call(AppUtils.handleErrorMessage, error);
   } finally {
     yield put(stopAction(type));
   }

@@ -27,6 +27,7 @@ const FloatingLabelTextInput = ({
   textInputStyle,
   customContainerStyle,
   iconProps,
+  onTextBoxPress,
   ...restProps
 }) => {
   const [floatAnim] = useState(new Animated.Value(0));
@@ -60,7 +61,11 @@ const FloatingLabelTextInput = ({
   };
 
   return (
-    <View style={[styles.outerContainer, customContainerStyle]}>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={[styles.outerContainer, customContainerStyle]}
+      onPress={onTextBoxPress}
+      disabled={!onTextBoxPress}>
       <View style={[styles.container, error ? styles.errorContainer : null]}>
         <View style={styles.inlineView}>
           <View style={styles.subContainer}>
@@ -101,7 +106,7 @@ const FloatingLabelTextInput = ({
         </View>
       </View>
       {renderError(error, floatingLabel || label)}
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -113,6 +118,7 @@ FloatingLabelTextInput.propTypes = {
       return new Error(`FloatingLabel or Label is required in ${componentName}`);
     }
   },
+  onTextBoxPress: PropTypes.func,
   onSubmitEditing: PropTypes.func,
   textInputRef: PropTypes.shape({ current: PropTypes.any }),
   floatingLabel: PropTypes.string,

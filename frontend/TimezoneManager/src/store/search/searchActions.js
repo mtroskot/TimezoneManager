@@ -1,15 +1,29 @@
 import { searchActionTypes } from 'src/constants/actionTypes';
 
-export function searchTimezoneEntries(searchInput, cancelToken, fromAllUsers) {
+export function searchTimezoneEntries(searchInput, cancelToken) {
   return {
     type: searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
-    payload: { searchInput, cancelToken, fromAllUsers }
+    payload: { searchInput, cancelToken }
   };
 }
 
 export const searchTimezoneEntriesSuccess = searchData => {
   return {
     type: searchActionTypes.SEARCH_TIMEZONE_ENTRIES_SUCCESS,
+    payload: { searchData }
+  };
+};
+
+export function searchAllTimezoneEntries(searchInput, cancelToken) {
+  return {
+    type: searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES,
+    payload: { searchInput, cancelToken }
+  };
+}
+
+export const searchAllTimezoneEntriesSuccess = searchData => {
+  return {
+    type: searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES_SUCCESS,
     payload: { searchData }
   };
 };
@@ -45,6 +59,13 @@ export const clearAllSearches = () => {
 export const clearTimezoneEntriesSearch = () => {
   return {
     type: searchActionTypes.CLEAR_TIMEZONE_ENTRIES_SEARCH,
+    payload: {}
+  };
+};
+
+export const clearAllTimezoneEntriesSearch = () => {
+  return {
+    type: searchActionTypes.CLEAR_ALL_TIMEZONE_ENTRIES_SEARCH,
     payload: {}
   };
 };
