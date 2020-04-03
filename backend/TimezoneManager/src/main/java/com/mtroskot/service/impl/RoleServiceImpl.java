@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mtroskot.model.entity.auth.Role;
@@ -19,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-	@Autowired
 	private final RoleRepository roleRepository;
 
 	@Override
