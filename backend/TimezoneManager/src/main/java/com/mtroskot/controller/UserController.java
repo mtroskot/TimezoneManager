@@ -37,16 +37,34 @@ public class UserController {
 
 	private final UserService userService;
 
+	/**
+	 * Returns all users from database
+	 * 
+	 * @return Iterable<User>
+	 */
 	@GetMapping("/all")
 	public Iterable<User> findAllUsers() {
 		return userService.findAll();
 	}
 
+	/**
+	 * Filters all users by first name,last name, email
+	 * 
+	 * @param input The search input
+	 * @return Iterable<User>
+	 */
 	@GetMapping("/filter")
 	public Iterable<User> filterUsers(@RequestParam("input") @NotBlank String input) {
 		return userService.findAllByFirstNameOrLastNameOrEmailAddress(input);
 	}
 
+	/**
+	 * Updates user in database.
+	 * 
+	 * @param updateUserInfoRequest The request which holds updated user
+	 *                              information.
+	 * @return ResponseEntity<User> The updated user
+	 */
 	@PutMapping(consumes = "application/json")
 	public ResponseEntity<User> updateUser(@Valid @RequestBody UpdateUserInfoRequest updateUserInfoRequest) {
 		try {
@@ -64,6 +82,12 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Deletes user from database.
+	 * 
+	 * @param userId The id of user being deleted
+	 * @return ResponseEntity<String>
+	 */
 	@DeleteMapping()
 	public ResponseEntity<String> deleteUser(@RequestParam("userId") @Positive Long userId) {
 		try {
@@ -77,6 +101,13 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Changes user role
+	 * 
+	 * @param userId   The id of user whose roles will be updated
+	 * @param roleType The roleType which the user will have after update
+	 * @return ResponseEntity<Set<Role>>
+	 */
 	@PutMapping("/changeRole")
 	public ResponseEntity<Set<Role>> changeUserRole(@RequestParam("userId") @Positive Long userId,
 			@RequestParam("role") @NotNull RoleType roleType) {

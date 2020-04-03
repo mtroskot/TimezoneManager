@@ -77,9 +77,16 @@ public class AuthController {
 				HttpStatus.OK);
 	}
 
+	/**
+	 * Logs out user by deleting his refresh token in database.
+	 * 
+	 * @param logoutRequest The request which holds user refresh token
+	 * @param user          The user being singed out
+	 * @return ResponseEntity<String>
+	 */
 	@PreAuthorize("hasAuthority('USER')")
 	@PostMapping(path = "/logout", consumes = "application/json")
-	public ResponseEntity<JwtAuthenticationResponse> logoutUser(@Valid @RequestBody LogoutRequest logoutRequest,
+	public ResponseEntity<String> logoutUser(@Valid @RequestBody LogoutRequest logoutRequest,
 			@AuthenticationPrincipal User user) {
 		Optional<RefreshToken> validRefreshTokenByUserId = refreshTokenService
 				.getValidRefreshTokenByUserId(logoutRequest.getRefreshToken(), user.getId());
@@ -88,7 +95,7 @@ public class AuthController {
 			refreshToken.setInvalidated(true);
 			refreshTokenService.save(refreshToken);
 		}
-		return new ResponseEntity<JwtAuthenticationResponse>(HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	/**
@@ -96,7 +103,7 @@ public class AuthController {
 	 * details need for registration.
 	 * 
 	 * @param signUpRequest The object containing registration details.
-	 * @return ResponseEntity<?>
+	 * @return ResponseEntity<User>
 	 */
 	@PostMapping(path = "/register", consumes = "application/json")
 	public ResponseEntity<User> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
@@ -116,6 +123,15 @@ public class AuthController {
 		return new ResponseEntity<User>(userService.save(user, encodePassword), HttpStatus.CREATED);
 	}
 
+	/**
+	 * Returns a new refresh and access token for user.
+	 * 
+	 * @param refreshJwtTokenRequest The request which holds old access and refresh
+	 *                               token
+	 * @param userId                 The id of user which has requested new access
+	 *                               and refresh token
+	 * @return ResponseEntity<JwtAuthenticationResponse>
+	 */
 	@PostMapping(path = "/refresh", consumes = "application/json")
 	public ResponseEntity<JwtAuthenticationResponse> refreshJwtToken(
 			@Valid @RequestBody RefreshJwtTokenRequest refreshJwtTokenRequest, @RequestParam("userId") Long userId) {

@@ -19,8 +19,20 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	 */
 	Boolean existsByEmailAddressIgnoreCase(String emailAddress);
 
+	/**
+	 * Finds user by his email address
+	 * 
+	 * @param emailAddress The email address of user
+	 * @return Optional<User>
+	 */
 	Optional<User> findByEmailAddress(String emailAddress);
 
+	/**
+	 * Finds all user by email address, firstName, lastName
+	 * 
+	 * @param input The search input
+	 * @return Iterable<User>
+	 */
 	@Query(value = "SELECT * FROM user WHERE LOWER(first_Name) LIKE LOWER(concat('%',:input,'%')) or LOWER(last_Name) LIKE LOWER(concat('%',:input,'%')) "
 			+ "OR LOWER(email_Address) LIKE LOWER(concat('%',:input,'%'))", nativeQuery = true)
 	Iterable<User> findByLikeEmailAddressOrFirstNameOrLastName(String input);
