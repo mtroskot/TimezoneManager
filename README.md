@@ -1,4 +1,4 @@
-#Toptal Technical Screening
+# Toptal Technical Screening
 
-###backend and frontend folder contain each separate READMEs
+### backend and frontend folder contain each separate READMEs
 
