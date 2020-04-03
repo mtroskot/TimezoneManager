@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from 'react-native-dotenv';
 const CancelToken = axios.CancelToken;
+import { ObjectUtils } from 'src/utils';
 import store from 'src/store';
 import { accessTokenSelector, userSelector } from 'src/store/user/userSelectors';
 import { logoutUser, refreshTokenSuccess } from 'src/store/user/userActions';
@@ -26,6 +27,7 @@ const defaultOptions = {
  */
 async function callApi({ url, includeAuthorizationHeader = true, options }) {
   let source = CancelToken.source();
+  // Android ignores timeout, setTimeout is used for canceling the request
   setTimeout(() => {
     source.cancel();
   }, 6000);
@@ -49,7 +51,7 @@ axios.interceptors.response.use(
   },
   function(error) {
     const originalRequest = error.config;
-    if (!error.message.toString().includes('Network')) {
+    if (ObjectUtils.exists(error.response)) {
       if (error.response.status === 401 && originalRequest.url.includes('auth/refresh')) {
         store.dispatch(logoutUser());
         return Promise.reject(error);

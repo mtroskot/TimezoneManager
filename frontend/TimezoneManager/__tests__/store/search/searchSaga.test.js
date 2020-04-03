@@ -1,35 +1,44 @@
 import { call, put, select, takeLeading } from '@redux-saga/core/effects';
-import { startAction, stopAction, togglePopupMessage } from 'src/store/ui/uiActions';
-import { DEFAULT_ERROR, NO_INTERNET, NO_RESULTS } from 'src/constants/messages';
+import { startAction, stopAction } from 'src/store/ui/uiActions';
+import { NO_RESULTS } from 'src/constants/messages';
 import {
+  clearAllTimezoneEntriesSearch,
   clearTimezoneEntriesSearch,
   clearUsersSearch,
+  searchAllTimezoneEntries,
+  searchAllTimezoneEntriesSuccess,
   searchTimezoneEntries,
   searchTimezoneEntriesSuccess,
   searchUsers,
   searchUsersSuccess
 } from 'src/store/search/searchActions';
-import { timezoneEntriesSearchDataSelector, userSearchDataSelector } from 'src/store/search/searchSelectors';
+import {
+  allTimezoneEntriesSearchDataSelector,
+  timezoneEntriesSearchDataSelector,
+  userSearchDataSelector
+} from 'src/store/search/searchSelectors';
 import ApiService, { timezoneRequests, userRequests } from 'src/services/api';
 import {
+  searchAllTimezoneEntriesSaga,
   searchTimezoneEntriesSaga,
   searchUsersSaga,
+  watchAllSearchTimezoneEntriesSaga,
   watchSearchTimezoneEntriesSaga,
   watchSearchUsersSaga
 } from 'src/store/search/searchSaga';
 import { searchActionTypes } from 'src/constants/actionTypes';
 import { MANAGER, USER } from 'src/constants/userRoles';
+import { AppUtils } from 'src/utils';
 
 jest.mock('src/store', () => {
   return {};
 });
 
 describe('searchTimezoneEntriesSaga test', () => {
-  it('should successfully fetch only user timezoneEntries, searchQuery !== searchInput', () => {
+  it('should successfully fetch user timezoneEntries, searchQuery !== searchInput', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const fromAllUsers = false;
-    const action = searchTimezoneEntries(searchInput, cancelToken, fromAllUsers);
+    const action = searchTimezoneEntries(searchInput, cancelToken);
 
     const gen = searchTimezoneEntriesSaga(action);
     expect(gen.next().value).toEqual(select(timezoneEntriesSearchDataSelector));
@@ -51,16 +60,53 @@ describe('searchTimezoneEntriesSaga test', () => {
     expect(gen.next().done).toBe(true);
   });
 
-  it('should successfully fetch all timezoneEntries, searchQuery !== searchInput', () => {
+  it('should not start search because searchQuery === searchInput', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const fromAllUsers = true;
-    const action = searchTimezoneEntries(searchInput, cancelToken, fromAllUsers);
+    const action = searchTimezoneEntries(searchInput, cancelToken);
 
     const gen = searchTimezoneEntriesSaga(action);
     expect(gen.next().value).toEqual(select(timezoneEntriesSearchDataSelector));
+    const timezoneEntriesSearchData = { searchQuery: 'abc' };
+    expect(gen.next(timezoneEntriesSearchData).value).toEqual(put(stopAction(action.type)));
+    expect(gen.next().done).toBe(true);
+  });
+
+  it('should catch error if occurs', () => {
+    const searchInput = 'abc';
+    const cancelToken = 'token';
+    const action = searchTimezoneEntries(searchInput, cancelToken);
+
+    const gen = searchTimezoneEntriesSaga(action);
+    gen.next();
+    const error = new Error('msg');
+    expect(gen.throw(error).value).toEqual(call(AppUtils.handleErrorMessage, error));
+    expect(gen.next().value).toEqual(put(stopAction(action.type)));
+    expect(gen.next().done).toBe(true);
+  });
+});
+
+describe('watchSearchTimezoneEntriesSaga test', () => {
+  const gen = watchSearchTimezoneEntriesSaga();
+  // exactly the same as implementation
+  const expected = takeLeading(searchActionTypes.SEARCH_TIMEZONE_ENTRIES, searchTimezoneEntriesSaga);
+  const actual = gen.next().value;
+
+  it('Should fire on SEARCH_TIMEZONE_ENTRIES', () => {
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('searchAllTimezoneEntriesSaga test', () => {
+  it('should successfully fetch all timezoneEntries, searchQuery !== searchInput', () => {
+    const searchInput = 'abc';
+    const cancelToken = 'token';
+    const action = searchAllTimezoneEntries(searchInput, cancelToken);
+
+    const gen = searchAllTimezoneEntriesSaga(action);
+    expect(gen.next().value).toEqual(select(allTimezoneEntriesSearchDataSelector));
     const timezoneEntriesSearchData = { searchQuery: 'a' };
-    expect(gen.next(timezoneEntriesSearchData).value).toEqual(put(clearTimezoneEntriesSearch()));
+    expect(gen.next(timezoneEntriesSearchData).value).toEqual(put(clearAllTimezoneEntriesSearch()));
     expect(gen.next().value).toEqual(put(startAction(action.type)));
 
     expect(gen.next().value).toEqual(
@@ -72,57 +118,41 @@ describe('searchTimezoneEntriesSaga test', () => {
       searchQuery: searchInput,
       message: ''
     };
-    expect(gen.next(response).value).toEqual(put(searchTimezoneEntriesSuccess(searchData)));
+    expect(gen.next(response).value).toEqual(put(searchAllTimezoneEntriesSuccess(searchData)));
     expect(gen.next().value).toEqual(put(stopAction(action.type)));
     expect(gen.next().done).toBe(true);
   });
 
-  it('should not start search because  searchQuery === searchInput', () => {
+  it('should not start search because searchQuery === searchInput', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const fromAllUsers = true;
-    const action = searchTimezoneEntries(searchInput, cancelToken, fromAllUsers);
+    const action = searchAllTimezoneEntries(searchInput, cancelToken);
 
-    const gen = searchTimezoneEntriesSaga(action);
-    expect(gen.next().value).toEqual(select(timezoneEntriesSearchDataSelector));
+    const gen = searchAllTimezoneEntriesSaga(action);
+    expect(gen.next().value).toEqual(select(allTimezoneEntriesSearchDataSelector));
     const timezoneEntriesSearchData = { searchQuery: 'abc' };
     expect(gen.next(timezoneEntriesSearchData).value).toEqual(put(stopAction(action.type)));
     expect(gen.next().done).toBe(true);
   });
 
-  it('should catch error if occurs,in app error', () => {
+  it('should catch error if occurs', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const fromAllUsers = true;
-    const action = searchTimezoneEntries(searchInput, cancelToken, fromAllUsers);
+    const action = searchAllTimezoneEntries(searchInput, cancelToken);
 
-    const gen = searchTimezoneEntriesSaga(action);
+    const gen = searchAllTimezoneEntriesSaga(action);
     gen.next();
     const error = new Error('msg');
-    expect(gen.throw(error).value).toEqual(put(togglePopupMessage(DEFAULT_ERROR, 'top')));
-    expect(gen.next().value).toEqual(put(stopAction(action.type)));
-    expect(gen.next().done).toBe(true);
-  });
-
-  it('should catch error if occurs, network error', () => {
-    const searchInput = 'abc';
-    const cancelToken = 'token';
-    const fromAllUsers = true;
-    const action = searchTimezoneEntries(searchInput, cancelToken, fromAllUsers);
-
-    const gen = searchTimezoneEntriesSaga(action);
-    gen.next();
-    const error = new Error('Network');
-    expect(gen.throw(error).value).toEqual(put(togglePopupMessage(NO_INTERNET, 'top')));
+    expect(gen.throw(error).value).toEqual(call(AppUtils.handleErrorMessage, error));
     expect(gen.next().value).toEqual(put(stopAction(action.type)));
     expect(gen.next().done).toBe(true);
   });
 });
 
-describe('watchSearchTimezoneEntriesSaga test', () => {
-  const gen = watchSearchTimezoneEntriesSaga();
+describe('watchAllSearchTimezoneEntriesSaga test', () => {
+  const gen = watchAllSearchTimezoneEntriesSaga();
   // exactly the same as implementation
-  const expected = takeLeading(searchActionTypes.SEARCH_TIMEZONE_ENTRIES, searchTimezoneEntriesSaga);
+  const expected = takeLeading(searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES, searchAllTimezoneEntriesSaga);
   const actual = gen.next().value;
 
   it('Should fire on SEARCH_TIMEZONE_ENTRIES', () => {
@@ -199,7 +229,7 @@ describe('searchUsersSaga test', () => {
     const gen = searchUsersSaga(action);
     gen.next();
     const error = new Error('msg');
-    expect(gen.throw(error).value).toEqual(put(togglePopupMessage(DEFAULT_ERROR, 'top')));
+    expect(gen.throw(error).value).toEqual(call(AppUtils.handleErrorMessage, error));
     expect(gen.next().value).toEqual(put(stopAction(action.type)));
     expect(gen.next().done).toBe(true);
   });
@@ -212,7 +242,7 @@ describe('searchUsersSaga test', () => {
     const gen = searchUsersSaga(action);
     gen.next();
     const error = new Error('Network');
-    expect(gen.throw(error).value).toEqual(put(togglePopupMessage(NO_INTERNET, 'top')));
+    expect(gen.throw(error).value).toEqual(call(AppUtils.handleErrorMessage, error));
     expect(gen.next().value).toEqual(put(stopAction(action.type)));
     expect(gen.next().done).toBe(true);
   });

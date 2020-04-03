@@ -3,7 +3,8 @@ import { Text, View } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import LoginForm from 'src/screens/Auth/LoginForm';
 import RegisterForm from 'src/screens/Auth/RegisterForm';
-import { CustomButton, KeyboardAvoidAndDismissView } from 'src/components';
+import { CustomButton } from 'src/components';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { authenticateUser, registerUser, updateUserInfo } from 'src/store/user/userActions';
 import { checkIfLoadingSelector } from 'src/store/ui/uiSelectors';
@@ -166,7 +167,7 @@ const Auth = props => {
   const switchFormButtonText = !showLoginForm ? authScreenText.LOGIN : authScreenText.CREATE_ACCOUNT;
   return (
     <SafeAreaView style={appStyles.safeArea}>
-      <KeyboardAvoidAndDismissView viewStyle={styles.container}>
+      <KeyboardAwareScrollView keyboardShouldPersistTaps={'handled'}>
         {form}
         {!isLoading && !isEdit && (
           <View style={styles.switchFormContainer}>
@@ -179,7 +180,7 @@ const Auth = props => {
             />
           </View>
         )}
-      </KeyboardAvoidAndDismissView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

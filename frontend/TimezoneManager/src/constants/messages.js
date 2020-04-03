@@ -1,4 +1,5 @@
 export const NO_INTERNET = 'No internet connection';
+export const TIMEOUT = 'Request timed out';
 export const DEFAULT_ERROR = 'Something went wrong';
 export const LOGIN_FAIL = 'Invalid email/password';
 export const EMAIL_IN_USE = 'Email Address already in use';

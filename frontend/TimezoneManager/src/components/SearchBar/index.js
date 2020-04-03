@@ -19,6 +19,7 @@ const SearchBar = props => {
         placeholder={placeholder}
         placeholderTextColor="#949EA0"
         onChangeText={handleInput}
+        hitSlop={{ top: 20, bottom: 20 }}
       />
       <CustomButton
         iconStyle={styles.iconStyle}

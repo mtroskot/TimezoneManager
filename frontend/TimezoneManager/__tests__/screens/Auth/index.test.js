@@ -18,7 +18,7 @@ describe('AuthScreen wrapper', () => {
       .dive()
       .dive();
     expect(wrapper.find('SafeAreaView')).toHaveLength(1);
-    expect(wrapper.find('Memo(KeyboardAvoidAndDismissView)')).toHaveLength(1);
+    expect(wrapper.find('KeyboardAwareScrollViewMock')).toHaveLength(1);
     expect(wrapper.find('Memo(LoginForm)')).toHaveLength(1);
     expect(wrapper.find('Memo(RegisterForm)')).toHaveLength(0);
     expect(wrapper.find('Memo(CustomButton)')).toHaveLength(1);
@@ -49,7 +49,7 @@ describe('AuthScreen wrapper', () => {
       .dive()
       .dive();
     expect(wrapper.find('SafeAreaView')).toHaveLength(1);
-    expect(wrapper.find('Memo(KeyboardAvoidAndDismissView)')).toHaveLength(1);
+    expect(wrapper.find('KeyboardAwareScrollViewMock')).toHaveLength(1);
     expect(wrapper.find('Memo(LoginForm)')).toHaveLength(1);
 
     expect(wrapper.find('Memo(LoginForm)').prop('loginForm')).toEqual({ emailAddress: '', password: '' });
@@ -77,7 +77,7 @@ describe('AuthScreen wrapper', () => {
       .dive()
       .dive();
     expect(wrapper.find('SafeAreaView')).toHaveLength(1);
-    expect(wrapper.find('Memo(KeyboardAvoidAndDismissView)')).toHaveLength(1);
+    expect(wrapper.find('KeyboardAwareScrollViewMock')).toHaveLength(1);
     expect(wrapper.find('Memo(LoginForm)')).toHaveLength(0);
     expect(wrapper.find('Memo(RegisterForm)')).toHaveLength(1);
     expect(wrapper.find('Memo(RegisterForm)').prop('registerForm')).toEqual({
@@ -114,7 +114,7 @@ describe('AuthScreen wrapper', () => {
       .dive()
       .dive();
     expect(wrapper.find('SafeAreaView')).toHaveLength(1);
-    expect(wrapper.find('Memo(KeyboardAvoidAndDismissView)')).toHaveLength(1);
+    expect(wrapper.find('KeyboardAwareScrollViewMock')).toHaveLength(1);
     expect(wrapper.find('Memo(LoginForm)')).toHaveLength(0);
     expect(wrapper.find('Memo(RegisterForm)')).toHaveLength(1);
     expect(wrapper.find('Memo(RegisterForm)').prop('registerForm')).toEqual({

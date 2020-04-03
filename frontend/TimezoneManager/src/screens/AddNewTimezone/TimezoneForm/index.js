@@ -50,6 +50,7 @@ const TimezoneForm = ({
           value={differenceToGMT}
           placeholderTextColor="#949EA0"
           editable={false}
+          onTextBoxPress={toggleDropdown}
           iconProps={{
             name: !dropdown.showDropdown ? icons.DOWN_ARROW : icons.UP_ARROW,
             prefix: 'ios-',

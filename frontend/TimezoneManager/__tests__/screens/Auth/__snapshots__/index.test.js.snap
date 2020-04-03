@@ -8,18 +8,21 @@ exports[`AuthScreen wrapper AuthScreen renders correctly, Login form shown, isLo
     }
   }
 >
-  <Memo(KeyboardAvoidAndDismissView)
-    viewStyle={
-      Object {
-        "backgroundColor": "#F2F2F2",
-        "flex": 1,
-      }
-    }
+  <KeyboardAwareScrollViewMock
+    enableAutomaticScroll={true}
+    enableOnAndroid={false}
+    enableResetScrollToCoords={true}
+    extraHeight={75}
+    extraScrollHeight={0}
+    keyboardOpeningTime={250}
+    keyboardShouldPersistTaps="handled"
+    viewIsInsideTabBar={false}
   >
     <Memo(LoginForm)
       errors={Object {}}
       handleInput={[Function]}
       handleLogin={[Function]}
+      headerText="Welcome Back"
       isLoading={false}
       loginForm={
         Object {
@@ -27,6 +30,8 @@ exports[`AuthScreen wrapper AuthScreen renders correctly, Login form shown, isLo
           "password": "",
         }
       }
+      submitButtonTestID="SUBMIT_LOGIN"
+      submitButtonText="Login"
     />
     <View
       style={
@@ -50,6 +55,7 @@ exports[`AuthScreen wrapper AuthScreen renders correctly, Login form shown, isLo
       </Text>
       <Memo(CustomButton)
         onPress={[Function]}
+        testID="SWITCH_FORM"
         text="Create Account"
         textStyle={
           Array [
@@ -66,6 +72,6 @@ exports[`AuthScreen wrapper AuthScreen renders correctly, Login form shown, isLo
         }
       />
     </View>
-  </Memo(KeyboardAvoidAndDismissView)>
+  </KeyboardAwareScrollViewMock>
 </SafeAreaView>
 `;

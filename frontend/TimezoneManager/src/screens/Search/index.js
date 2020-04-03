@@ -5,7 +5,12 @@ import FilterOptions from 'src/screens/Search/FilterOptions';
 import SearchResults from 'src/screens/Search/SearchResults';
 import SafeAreaView from 'react-native-safe-area-view';
 import { searchSelector } from 'src/store/search/searchSelectors';
-import { clearAllSearches, searchTimezoneEntries, searchUsers } from 'src/store/search/searchActions';
+import {
+  clearAllSearches,
+  searchAllTimezoneEntries,
+  searchTimezoneEntries,
+  searchUsers
+} from 'src/store/search/searchActions';
 import { deleteTimezoneEntry } from 'src/store/timezone/timezoneActions';
 import { deleteUser } from 'src/store/user/userActions';
 import { connect } from 'react-redux';
@@ -39,11 +44,14 @@ const Search = props => {
   const [filterOptions, setFilterOptions] = useState(filterOptionsInitialState);
   const [showFilterOptions, setShowFilterOptions] = useState(false);
   const selectedOption = filterOptions.find(option => option.selected === true);
-  const areEntriesSelected = selectedOption.label.includes('entries');
+  const entriesSelected = selectedOption.label.includes('entries');
+  const allEntriesSelected = selectedOption.value === filters.ALL_ENTRIES;
 
   //LIFECYCLE METHODS
   HooksUtils.useDidMountUnmount(
-    () => {},
+    () => {
+      props.clearAllSearches();
+    },
     () => {
       props.clearAllSearches();
     }
@@ -54,10 +62,13 @@ const Search = props => {
     let handler = null;
     if (StringUtils.isNotEmpty(searchInput)) {
       handler = setTimeout(() => {
-        const fromAllUsers = selectedOption.value === filters.ALL_ENTRIES;
-        areEntriesSelected
-          ? props.searchTimezoneEntries(searchInput, source.token, fromAllUsers)
-          : props.searchUsers(searchInput, source.token);
+        if (entriesSelected) {
+          allEntriesSelected
+            ? props.searchAllTimezoneEntries(searchInput, source.token)
+            : props.searchTimezoneEntries(searchInput, source.token);
+        } else {
+          props.searchUsers(searchInput, source.token);
+        }
       }, 500);
     } else if (StringUtils.isEmpty(searchInput)) {
       props.clearAllSearches();
@@ -70,7 +81,6 @@ const Search = props => {
   }, [searchInput, filterOptions]);
 
   //METHODS
-
   function toggleFilterOptions() {
     setShowFilterOptions(!showFilterOptions);
   }
@@ -98,13 +108,20 @@ const Search = props => {
   }
 
   function onEdit(itemId) {
-    if (!areEntriesSelected) {
+    if (!entriesSelected) {
       const user = search.userSearchData.searchResults.find(item => item[idNames.USER_ID] === itemId);
       NavigationService.push(screenNames.AUTH_EDIT, { user });
     } else {
-      const timezoneEntry = search.timezoneEntriesSearchData.searchResults.find(
-        item => item[idNames.TIMEZONE_ENTRY_ID] === itemId
-      );
+      let timezoneEntry = null;
+      if (allEntriesSelected) {
+        timezoneEntry = search.allTimezoneEntriesSearchData.searchResults.find(
+          item => item[idNames.TIMEZONE_ENTRY_ID] === itemId
+        );
+      } else {
+        timezoneEntry = search.timezoneEntriesSearchData.searchResults.find(
+          item => item[idNames.TIMEZONE_ENTRY_ID] === itemId
+        );
+      }
       NavigationService.push(screenNames.TIMEZONE_EDIT, { timezoneEntry });
     }
   }
@@ -126,17 +143,25 @@ const Search = props => {
   }
 
   function deleteItem(itemId) {
-    areEntriesSelected ? props.deleteTimezoneEntry(itemId) : props.deleteUser(itemId);
+    entriesSelected ? props.deleteTimezoneEntry(itemId) : props.deleteUser(itemId);
   }
 
   //RENDER
-  const data = areEntriesSelected
-    ? search.timezoneEntriesSearchData.searchResults
-    : search.userSearchData.searchResults;
-  const loadingText = areEntriesSelected ? 'Searching entries' : 'Searching users';
-  const searchMessage = areEntriesSelected ? search.timezoneEntriesSearchData.message : search.userSearchData.message;
-  const renderItem = areEntriesSelected ? FlatListUtils.renderEntries : FlatListUtils.renderAvatars;
-  const idName = areEntriesSelected ? idNames.TIMEZONE_ENTRY_ID : idNames.USER_ID;
+  let data = search.timezoneEntriesSearchData.searchResults;
+  if (entriesSelected && allEntriesSelected) {
+    data = search.allTimezoneEntriesSearchData.searchResults;
+  } else if (!entriesSelected) {
+    data = search.userSearchData.searchResults;
+  }
+  const loadingText = entriesSelected ? 'Searching entries' : 'Searching users';
+  let searchMessage = search.timezoneEntriesSearchData.message;
+  if (entriesSelected && allEntriesSelected) {
+    searchMessage = search.allTimezoneEntriesSearchData.message;
+  } else if (!entriesSelected) {
+    searchMessage = search.userSearchData.message;
+  }
+  const renderItem = entriesSelected ? FlatListUtils.renderEntries : FlatListUtils.renderAvatars;
+  const idName = entriesSelected ? idNames.TIMEZONE_ENTRY_ID : idNames.USER_ID;
   return (
     <SafeAreaView style={appStyles.safeArea}>
       <KeyboardAvoidAndDismissView viewStyle={styles.container}>
@@ -180,10 +205,12 @@ Search.propTypes = {
   updatingItemId: PropTypes.number,
   search: PropTypes.exact({
     userSearchData: userSearchDataPropTypes.isRequired,
-    timezoneEntriesSearchData: timezoneEntriesSearchDataPropTypes.isRequired
+    timezoneEntriesSearchData: timezoneEntriesSearchDataPropTypes.isRequired,
+    allTimezoneEntriesSearchData: timezoneEntriesSearchDataPropTypes.isRequired
   }).isRequired,
   deleteTimezoneEntry: PropTypes.func.isRequired,
   searchTimezoneEntries: PropTypes.func.isRequired,
+  searchAllTimezoneEntries: PropTypes.func.isRequired,
   searchUsers: PropTypes.func.isRequired,
   clearAllSearches: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired
@@ -193,6 +220,7 @@ const mapStateToProps = state => ({
   userRole: mainUserRoleSelector(state),
   isSearching: checkIfLoadingSelector(state)([
     searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
+    searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES,
     searchActionTypes.SEARCH_USERS
   ]),
   deletingItemId: updatingItemIdSelector(state)([
@@ -211,7 +239,8 @@ const mapDispatchToProps = {
   searchTimezoneEntries,
   searchUsers,
   clearAllSearches,
-  deleteUser
+  deleteUser,
+  searchAllTimezoneEntries
 };
 
 export default connect(

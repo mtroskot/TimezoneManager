@@ -13,13 +13,15 @@ describe('LoginForm wrapper', () => {
       errors: {},
       handleInput: jest.fn(),
       handleLogin: jest.fn(),
-      isLoading: false
+      isLoading: false,
+      headerText: 'Welcome Back',
+      submitButtonText: 'Login'
     };
 
     const wrapper = shallow(<LoginForm {...props} />);
     expect(wrapper.first().type()).toEqual(View);
     expect(wrapper.find('Text')).toHaveLength(1);
-    expect(wrapper.find('Text').props().children).toEqual('Welcome Back');
+    expect(wrapper.find('Text').props().children).toEqual(props.headerText);
     expect(wrapper.find('Memo(FloatingLabelTextInput)')).toHaveLength(2);
     //first text input
     expect(
@@ -84,7 +86,7 @@ describe('LoginForm wrapper', () => {
         .find('Memo(CustomButton)')
         .at(0)
         .prop('text')
-    ).toEqual('Login');
+    ).toEqual(props.submitButtonText);
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -101,13 +103,15 @@ describe('LoginForm wrapper', () => {
       },
       handleInput: jest.fn(),
       handleLogin: jest.fn(),
-      isLoading: true
+      isLoading: true,
+      headerText: 'Welcome Back',
+      submitButtonText: 'Login'
     };
 
     const wrapper = shallow(<LoginForm {...props} />);
     expect(wrapper.first().type()).toEqual(View);
     expect(wrapper.find('Text')).toHaveLength(1);
-    expect(wrapper.find('Text').props().children).toEqual('Welcome Back');
+    expect(wrapper.find('Text').props().children).toEqual(props.headerText);
     expect(wrapper.find('Memo(FloatingLabelTextInput)')).toHaveLength(2);
     //first text input
     expect(
@@ -172,7 +176,7 @@ describe('LoginForm wrapper', () => {
         .find('Memo(CustomButton)')
         .at(0)
         .prop('text')
-    ).toEqual('Login');
+    ).toEqual(props.submitButtonText);
 
     expect(wrapper).toMatchSnapshot();
   });
