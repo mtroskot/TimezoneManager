@@ -11,12 +11,12 @@ import {
 import {
   watchAddNewTimezoneEntrySaga,
   watchDeleteTimezoneEntrySaga,
-  watchFetchTimezoneEntriesSaga,
+  watchFetchUserTimezoneEntriesSaga,
   watchUpdateTimezoneEntrySaga
 } from 'src/store/timezone/timezoneSaga';
 import {
-  watchAllSearchTimezoneEntriesSaga,
-  watchSearchTimezoneEntriesSaga,
+  watchSearchAllTimezoneEntriesSaga,
+  watchSearchUserTimezoneEntriesSaga,
   watchSearchUsersSaga
 } from 'src/store/search/searchSaga';
 /* eslint-disable max-len*/
@@ -24,7 +24,7 @@ import {
 export default function* rootSaga() {
     yield all([
         watchAuthenticateUserSaga(), watchRegisterUserSaga(), watchLogoutSaga(), watchChangeUserRoleSaga(), watchAuthAutoSignInSaga(), watchDeleteUserSaga(), watchUpdateUserInfoSaga(),
-        watchAddNewTimezoneEntrySaga(), watchFetchTimezoneEntriesSaga(), watchDeleteTimezoneEntrySaga(), watchUpdateTimezoneEntrySaga(),
-        watchSearchTimezoneEntriesSaga(), watchAllSearchTimezoneEntriesSaga(), watchSearchUsersSaga()
+        watchAddNewTimezoneEntrySaga(), watchFetchUserTimezoneEntriesSaga(), watchDeleteTimezoneEntrySaga(), watchUpdateTimezoneEntrySaga(),
+        watchSearchUserTimezoneEntriesSaga(), watchSearchAllTimezoneEntriesSaga(), watchSearchUsersSaga()
     ]);
 }

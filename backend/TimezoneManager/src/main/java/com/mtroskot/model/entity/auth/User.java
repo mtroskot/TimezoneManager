@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -36,6 +37,7 @@ import lombok.ToString;
 @Entity
 @JsonIgnoreProperties({ "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled",
 		"hibernateLazyInitializer", "handler" })
+@Table(name = "USERS")
 public class User extends BaseEntity implements UserDetails {
 
 	private static final long serialVersionUID = -2374365502157937877L;
@@ -61,7 +63,7 @@ public class User extends BaseEntity implements UserDetails {
 
 	@Setter(AccessLevel.NONE)
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@JoinTable(name = "USER_ROLES", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<Role> roles;
 
 	@JsonIgnore

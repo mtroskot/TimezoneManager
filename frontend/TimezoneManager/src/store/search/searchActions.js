@@ -1,9 +1,9 @@
 import { searchActionTypes } from 'src/constants/actionTypes';
 
-export function searchTimezoneEntries(searchInput, cancelToken) {
+export function searchTimezoneEntries(searchInput, searchTypes, cancelToken) {
   return {
     type: searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
-    payload: { searchInput, cancelToken }
+    payload: { searchInput, searchTypes, cancelToken }
   };
 }
 
@@ -14,10 +14,10 @@ export const searchTimezoneEntriesSuccess = searchData => {
   };
 };
 
-export function searchAllTimezoneEntries(searchInput, cancelToken) {
+export function searchAllTimezoneEntries(searchInput, searchTypes, cancelToken) {
   return {
     type: searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES,
-    payload: { searchInput, cancelToken }
+    payload: { searchInput, searchTypes, cancelToken }
   };
 }
 
@@ -28,10 +28,10 @@ export const searchAllTimezoneEntriesSuccess = searchData => {
   };
 };
 
-export function searchUsers(searchInput, cancelToken) {
+export function searchUsers(searchInput, searchTypes, cancelToken) {
   return {
     type: searchActionTypes.SEARCH_USERS,
-    payload: { searchInput, cancelToken }
+    payload: { searchInput, searchTypes, cancelToken }
   };
 }
 

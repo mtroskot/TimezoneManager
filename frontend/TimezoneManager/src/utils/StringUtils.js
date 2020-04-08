@@ -1,3 +1,5 @@
+import ObjectUtils from 'src/utils/ObjectUtils';
+
 function isEmpty(str) {
   return str === null || str === undefined || str.trim() === '';
 }
@@ -62,6 +64,22 @@ function camelCaseToWords(str) {
   return newString;
 }
 
+/**
+ * Converts array of params to request paramter string
+ * @param  {Array} params
+ * @returns {String}
+ */
+function buildRequestParams(...params) {
+  let str = '';
+  for (let i = 0; i < params.length; i++) {
+    const el = params[i];
+    if (ObjectUtils.exists(el.value)) {
+      str += str.length === 0 ? `${el.key}=${el.value}` : `&${el.key}=${el.value}`;
+    }
+  }
+  return str;
+}
+
 const StringUtils = {
   isEmpty,
   isNotEmpty,
@@ -71,7 +89,8 @@ const StringUtils = {
   getNameInitials,
   convertGMTDIffToString,
   capitalizeFirstLetter,
-  camelCaseToWords
+  camelCaseToWords,
+  buildRequestParams
 };
 
 export default StringUtils;

@@ -10,6 +10,9 @@ import com.mtroskot.model.entity.auth.User;
 import com.mtroskot.model.entity.timezone.TimezoneEntry;
 import com.mtroskot.repository.TimezoneEntryRepository;
 import com.mtroskot.service.TimezoneEntryService;
+import com.mtroskot.specifications.SearchCriteria;
+import com.mtroskot.specifications.SearchCriteria.Operation;
+import com.mtroskot.specifications.TimezoneEntrySpecifications;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +26,33 @@ public class TimezoneEntryServiceImpl implements TimezoneEntryService {
 	@Override
 	public Iterable<TimezoneEntry> findAll() {
 		return timezoneEntryRepository.findAll();
+	}
+
+	@Override
+	public Iterable<TimezoneEntry> filterTimezoneEntries(String cityName, String name, String differenceToGMT) {
+		TimezoneEntrySpecifications spec1 = new TimezoneEntrySpecifications(
+				new SearchCriteria("cityName", Operation.LIKE_IGNORE_CASE, cityName));
+		TimezoneEntrySpecifications spec2 = new TimezoneEntrySpecifications(
+				new SearchCriteria("name", Operation.LIKE_IGNORE_CASE, name));
+		TimezoneEntrySpecifications spec3 = new TimezoneEntrySpecifications(
+				new SearchCriteria("differenceToGMT", Operation.EQUAL, differenceToGMT));
+
+		return timezoneEntryRepository.findAll(spec1.or(spec2).or(spec3));
+	}
+
+	@Override
+	public Iterable<TimezoneEntry> filterUserTimezoneEntries(User user, String cityName, String name,
+			String differenceToGMT) {
+		TimezoneEntrySpecifications spec1 = new TimezoneEntrySpecifications(
+				new SearchCriteria("user", Operation.EQUAL, user));
+		TimezoneEntrySpecifications spec2 = new TimezoneEntrySpecifications(
+				new SearchCriteria("cityName", Operation.LIKE_IGNORE_CASE, cityName));
+		TimezoneEntrySpecifications spec3 = new TimezoneEntrySpecifications(
+				new SearchCriteria("name", Operation.LIKE_IGNORE_CASE, name));
+		TimezoneEntrySpecifications spec4 = new TimezoneEntrySpecifications(
+				new SearchCriteria("differenceToGMT", Operation.EQUAL, differenceToGMT));
+
+		return timezoneEntryRepository.findAll(spec1.and(spec2.or(spec3).or(spec4)));
 	}
 
 	@Override
@@ -41,18 +71,8 @@ public class TimezoneEntryServiceImpl implements TimezoneEntryService {
 	}
 
 	@Override
-	public Iterable<TimezoneEntry> findAllByUser(User user) {
-		return timezoneEntryRepository.findAllByUser(user);
-	}
-
-	@Override
-	public Iterable<TimezoneEntry> findAllByUserAndNameOrCityName(Long userId, String input) {
-		return timezoneEntryRepository.findAllByUserAndNameOrCityName(userId, input);
-	}
-
-	@Override
-	public Iterable<TimezoneEntry> findAllByNameOrCityName(String input) {
-		return timezoneEntryRepository.findAllByNameOrCityName(input);
+	public Iterable<TimezoneEntry> findByUser(User user) {
+		return timezoneEntryRepository.findByUser(user);
 	}
 
 }

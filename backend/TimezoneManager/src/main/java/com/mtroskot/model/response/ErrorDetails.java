@@ -1,4 +1,4 @@
-package com.mtroskot.model.entity.error;
+package com.mtroskot.model.response;
 
 import java.util.Arrays;
 import java.util.List;

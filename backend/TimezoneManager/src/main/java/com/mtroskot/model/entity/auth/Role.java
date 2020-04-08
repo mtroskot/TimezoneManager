@@ -3,6 +3,7 @@ package com.mtroskot.model.entity.auth;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "type", callSuper = false)
 @Entity
+@Table(name = "ROLES")
 public class Role extends BaseEntity implements GrantedAuthority {
 
 	private static final long serialVersionUID = -8452950149466222837L;

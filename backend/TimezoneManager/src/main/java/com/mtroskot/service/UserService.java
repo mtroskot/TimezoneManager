@@ -19,7 +19,7 @@ public interface UserService {
 	 * 
 	 * @return Iterable<User>
 	 */
-	Iterable<User> findAllByFirstNameOrLastNameOrEmailAddress(String input);
+	Iterable<User> filterUsers(String emailAddress, String firstName, String lastName);
 
 	/**
 	 * Finds user by userId.

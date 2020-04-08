@@ -16,7 +16,7 @@ public interface RefreshTokenRepository extends CrudRepository<RefreshToken, Lon
 	 * @param userId The id of user for which we are searching the token
 	 * @return Optional<RefreshToken>
 	 */
-	@Query(value = "SELECT * FROM REFRESH_TOKEN WHERE token= :token AND user_id = :userId AND invalidated=false", nativeQuery = true)
+	@Query(value = "SELECT rt FROM RefreshToken rt WHERE rt.token= :token AND rt.user.id = :userId AND rt.invalidated=false")
 	Optional<RefreshToken> getValidRefreshTokenByUserId(String token, Long userId);
 
 }

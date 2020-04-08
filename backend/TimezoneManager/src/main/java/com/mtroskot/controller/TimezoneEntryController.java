@@ -1,7 +1,6 @@
 package com.mtroskot.controller;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 import org.springframework.http.HttpStatus;
@@ -11,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,9 +42,21 @@ public class TimezoneEntryController {
 	 * @return Iterable<TimezoneEntry>
 	 */
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@GetMapping("/all")
+	@GetMapping
 	public Iterable<TimezoneEntry> findAllTimezoneEntris() {
 		return timezoneEntryService.findAll();
+	}
+
+	/**
+	 * Returns all {@link TimezoneEntry} from database.
+	 * 
+	 * @return Iterable<TimezoneEntry>
+	 */
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@GetMapping("/{timezoneEntryId}")
+	public TimezoneEntry findTimezoneEntryById(@PathVariable("timezoneEntryId") Long timezoneEntryId) {
+		return timezoneEntryService.findById(timezoneEntryId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found"));
 	}
 
 	/**
@@ -54,34 +66,12 @@ public class TimezoneEntryController {
 	 * @return Iterable<TimezoneEntry>
 	 */
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@GetMapping("/filter")
-	public Iterable<TimezoneEntry> filterAllByName(@RequestParam("name") @NotBlank String name) {
-		return timezoneEntryService.findAllByNameOrCityName(name);
-	}
-
-	/**
-	 * Returns all {@link TimezoneEntry} from database for given user.
-	 * 
-	 * @param user The user whose entries we want to retrieve.
-	 * @return Iterable<TimezoneEntry>
-	 */
-	@GetMapping("/user")
-	public Iterable<TimezoneEntry> findTimezoneEntriesFromUser(@AuthenticationPrincipal User user) {
-		return timezoneEntryService.findAllByUser(user);
-	}
-
-	/**
-	 * Filters all {@link TimezoneEntry} from given user by entry name or entry
-	 * cityName
-	 * 
-	 * @param name The name used for filtering entries
-	 * @param user The user whose entries we are filtering
-	 * @return Iterable<TimezoneEntry>
-	 */
-	@GetMapping("/user/filter")
-	public Iterable<TimezoneEntry> filterUserEntriesByName(@RequestParam("name") @NotBlank String name,
-			@AuthenticationPrincipal User user) {
-		return timezoneEntryService.findAllByUserAndNameOrCityName(user.getId(), name);
+	@GetMapping("/search")
+	public Iterable<TimezoneEntry> filterTimezoneEntries(
+			@RequestParam(name = "cityName", required = false) String cityName,
+			@RequestParam(name = "name", required = false) String name,
+			@RequestParam(name = "gmt", required = false) String gmt) {
+		return timezoneEntryService.filterTimezoneEntries(cityName, name, gmt);
 	}
 
 	/**
@@ -112,7 +102,7 @@ public class TimezoneEntryController {
 	 * @param user                 The user which requested entry update
 	 * @return ResponseEntity<TimezoneEntry> The updated entry
 	 */
-	@PutMapping(path = "", consumes = "application/json")
+	@PutMapping(consumes = "application/json")
 	public ResponseEntity<TimezoneEntry> updateTimezoneEntry(@Valid @RequestBody TimezoneEntry updatedTimezoneEntry,
 			@AuthenticationPrincipal User user) {
 		try {
@@ -142,8 +132,8 @@ public class TimezoneEntryController {
 	 * @param user            The user which requested entry delete
 	 * @return ResponseEntity<String>
 	 */
-	@DeleteMapping()
-	public ResponseEntity<String> deleteTimezoneEntry(@RequestParam("timezoneEntryId") @Positive Long timezoneEntryId,
+	@DeleteMapping("/{timezoneEntryId}")
+	public ResponseEntity<String> deleteTimezoneEntry(@PathVariable("timezoneEntryId") @Positive Long timezoneEntryId,
 			@AuthenticationPrincipal User user) {
 		try {
 			TimezoneEntry timezoneEntry = timezoneEntryService.findById(timezoneEntryId)

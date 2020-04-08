@@ -73,6 +73,13 @@ public class SetupDataLoader {
 				TimezoneEntry timezoneEntry = new TimezoneEntry("US", "New York", "+6", user1);
 				timezoneEntryService.save(timezoneEntry);
 
+				TimezoneEntry timezoneEntry2 = new TimezoneEntry("US", "New Orleans", "+5", user3);
+				timezoneEntryService.save(timezoneEntry2);
+				TimezoneEntry timezoneEntry3 = new TimezoneEntry("HR", "Zadar", "+2", user3);
+				timezoneEntryService.save(timezoneEntry3);
+				TimezoneEntry timezoneEntry4 = new TimezoneEntry("DE", "Berlin", "+1", user3);
+				timezoneEntryService.save(timezoneEntry4);
+
 			}
 		};
 	}

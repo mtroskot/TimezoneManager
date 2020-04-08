@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.mtroskot.exception.AppException;
 import com.mtroskot.model.entity.auth.Role;
-import com.mtroskot.model.entity.auth.User;
 import com.mtroskot.model.entity.auth.Role.RoleType;
+import com.mtroskot.model.entity.auth.User;
 import com.mtroskot.repository.UserRepository;
 import com.mtroskot.service.RoleService;
 import com.mtroskot.service.UserService;
+import com.mtroskot.specifications.SearchCriteria;
+import com.mtroskot.specifications.SearchCriteria.Operation;
+import com.mtroskot.specifications.UserSpecifications;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +43,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public Iterable<User> filterUsers(String emailAddress, String firstName, String lastName) {
+		UserSpecifications spec1 = new UserSpecifications(
+				new SearchCriteria("emailAddress", Operation.LIKE, emailAddress));
+		UserSpecifications spec2 = new UserSpecifications(new SearchCriteria("firstName", Operation.LIKE_IGNORE_CASE, firstName));
+		UserSpecifications spec3 = new UserSpecifications(new SearchCriteria("lastName", Operation.LIKE_IGNORE_CASE, lastName));
+
+		return userRepository.findAll(spec1.or(spec2).or(spec3));
+	}
+
+	@Override
 	public Optional<User> findByEmailAddress(String emailAddress) {
 		return userRepository.findByEmailAddress(emailAddress);
 	}
@@ -60,11 +73,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void delete(Long userId) {
 		userRepository.deleteById(userId);
-	}
-
-	@Override
-	public Iterable<User> findAllByFirstNameOrLastNameOrEmailAddress(String input) {
-		return userRepository.findByLikeEmailAddressOrFirstNameOrLastName(input);
 	}
 
 	@Override

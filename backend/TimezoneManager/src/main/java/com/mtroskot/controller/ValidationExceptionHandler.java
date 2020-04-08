@@ -23,7 +23,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.mtroskot.model.entity.error.ErrorDetails;
+import com.mtroskot.model.response.ErrorDetails;
 
 @RestControllerAdvice
 public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {

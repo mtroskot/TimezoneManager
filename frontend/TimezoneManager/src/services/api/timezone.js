@@ -1,11 +1,6 @@
-const prefix = 'timezoneEntries';
+import { StringUtils } from 'src/utils';
 
-const getUserTimezoneEntries = () => ({
-  url: `${prefix}/user`,
-  options: {
-    method: 'GET'
-  }
-});
+const prefix = 'timezoneEntries';
 
 const saveTimezoneEntry = timezoneEntry => {
   const { name, cityName, differenceToGMT } = timezoneEntry;
@@ -21,21 +16,17 @@ const saveTimezoneEntry = timezoneEntry => {
   };
 };
 
-const filterAllTimezoneEntries = (input, cancelToken) => ({
-  url: `${prefix}/filter?name=${input}`,
-  options: {
-    method: 'GET',
-    cancelToken
-  }
-});
-
-const filterUserTimezoneEntries = (input, cancelToken) => ({
-  url: `${prefix}/user/filter?name=${input}`,
-  options: {
-    method: 'GET',
-    cancelToken
-  }
-});
+const filterTimezoneEntries = (cityName, name, gmt, cancelToken) => {
+  const params = [{ key: 'cityName', value: cityName }, { key: 'name', value: name }, { key: 'gmt', value: gmt }];
+  const requestParams = StringUtils.buildRequestParams(params);
+  return {
+    url: `${prefix}/search?${requestParams}`,
+    options: {
+      method: 'GET',
+      cancelToken
+    }
+  };
+};
 
 const updateTimezoneEntry = updatedTimezoneEntry => {
   const { id, name, cityName, differenceToGMT } = updatedTimezoneEntry;
@@ -59,10 +50,8 @@ const deleteTimezoneEntry = timezoneEntryId => ({
 });
 
 export default {
-  getUserTimezoneEntries,
   saveTimezoneEntry,
-  filterAllTimezoneEntries,
-  filterUserTimezoneEntries,
+  filterTimezoneEntries,
   updateTimezoneEntry,
   deleteTimezoneEntry
 };

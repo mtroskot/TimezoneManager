@@ -16,10 +16,11 @@ import {
 } from 'src/store/timezone/timezoneActions';
 import { timezoneActionTypes } from 'src/constants/actionTypes';
 import { NavigationService } from 'src/services';
-import ApiService, { timezoneRequests } from 'src/services/api';
+import ApiService, { timezoneRequests, userRequests } from 'src/services/api';
 import { AppUtils } from 'src/utils';
 import { screenNames } from 'src/constants/navigation';
 import { timezoneEntriesSelector } from 'src/store/timezone/timezoneSelectors';
+import { userInfoSelector } from 'src/store/user/userSelectors';
 import { idNames } from 'src/constants/idKeyNames';
 
 export function* addNewTimezoneEntrySaga({ type, payload }) {
@@ -82,13 +83,14 @@ export function* watchDeleteTimezoneEntrySaga() {
   yield takeLeading(timezoneActionTypes.DELETE_TIMEZONE_ENTRY, deleteTimezoneEntrySaga);
 }
 
-export function* fetchTimezoneEntriesSaga({ type, payload }) {
+export function* fetchUserTimezoneEntriesSaga({ type, payload }) {
   const timezoneEntries = yield select(timezoneEntriesSelector);
   try {
     const { refreshing } = payload;
+    const user = yield select(userInfoSelector);
     yield put(clearErrorActions());
     yield put(refreshing ? refreshActionStart(type) : startAction(type));
-    const response = yield call(ApiService.callApi, timezoneRequests.getUserTimezoneEntries());
+    const response = yield call(ApiService.callApi, userRequests.getUserTimezoneEntries(user.id));
     yield put(fetchTimezoneEntriesSuccess(response.data));
   } catch (error) {
     console.log('fetchTimezoneEntriesSaga error', error);
@@ -102,6 +104,6 @@ export function* fetchTimezoneEntriesSaga({ type, payload }) {
   }
 }
 
-export function* watchFetchTimezoneEntriesSaga() {
-  yield takeLeading(timezoneActionTypes.FETCH_TIMEZONE_ENTRIES, fetchTimezoneEntriesSaga);
+export function* watchFetchUserTimezoneEntriesSaga() {
+  yield takeLeading(timezoneActionTypes.FETCH_TIMEZONE_ENTRIES, fetchUserTimezoneEntriesSaga);
 }

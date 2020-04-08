@@ -15,37 +15,33 @@ public interface TimezoneEntryService {
 	Iterable<TimezoneEntry> findAll();
 
 	/**
-	 * Finds all {@link TimezoneEntry} from user
-	 * 
-	 * @param user The user whose {@link TimezoneEntry} we are retrieving
-	 * @return Iterable<TimezoneEntry>
-	 */
-	Iterable<TimezoneEntry> findAllByUser(User user);
-
-	/**
-	 * Finds all {@link TimezoneEntry} from user by entry name or entry city name
-	 * 
-	 * @param userId The id of user
-	 * @param input  The search input
-	 * @return Iterable<TimezoneEntry>
-	 */
-	Iterable<TimezoneEntry> findAllByUserAndNameOrCityName(Long userId, String input);
-
-	/**
-	 * Finds all {@link TimezoneEntry} by entry name or entry city name
-	 * 
-	 * @param input The search input
-	 * @return Iterable<TimezoneEntry>
-	 */
-	Iterable<TimezoneEntry> findAllByNameOrCityName(String input);
-
-	/**
 	 * Finds {@link TimezoneEntry} by id
 	 * 
 	 * @param id The id of {@link TimezoneEntry} being searched
 	 * @return Optional<TimezoneEntry>
 	 */
 	Optional<TimezoneEntry> findById(Long id);
+
+	/**
+	 * Filters all {@link TimezoneEntry} in database
+	 * 
+	 * @return Iterable<TimezoneEntry>
+	 */
+	Iterable<TimezoneEntry> filterTimezoneEntries(String cityName, String name, String gmt);
+
+	/**
+	 * Returns all user {@link TimezoneEntry} from database
+	 * 
+	 * @return Iterable<TimezoneEntry>
+	 */
+	Iterable<TimezoneEntry> findByUser(User user);
+
+	/**
+	 * Filters all {@link TimezoneEntry} in database
+	 * 
+	 * @return Iterable<TimezoneEntry>
+	 */
+	Iterable<TimezoneEntry> filterUserTimezoneEntries(User user, String cityName, String name, String gmt);
 
 	/**
 	 * Saves {@link TimezoneEntry}
