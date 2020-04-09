@@ -1,7 +1,5 @@
 import { Animated, Platform } from 'react-native';
 import axios from 'axios';
-import { ADMIN, MANAGER } from 'src/constants/userRoles';
-import { filters } from 'src/constants/search';
 import { dimensions } from 'src/styles';
 import { DEFAULT_ERROR, NO_INTERNET, TIMEOUT } from 'src/constants/messages';
 import store from 'src/store';
@@ -36,25 +34,6 @@ function startShake(shakeAnimation) {
 }
 
 /**
- * Checks if user has sufficient permissions to user filter option
- * @param filterOption The selected filter option
- * @param userRole The role of user
- * @returns {boolean}
- */
-function checkIfUserHasRightsForFilterOptions(filterOption, userRole) {
-  if (userRole === ADMIN) {
-    return true;
-  }
-  if (filterOption === filters.USERS && userRole === MANAGER) {
-    return true;
-  }
-  if (filterOption === filters.OWN_ENTRIES) {
-    return true;
-  }
-  return false;
-}
-
-/**
  * Checks if the error should be displayed and which message should be displayed
  * @param error The error
  * @param position The position where the message should appear
@@ -74,6 +53,5 @@ function handleErrorMessage(error, position = 'top') {
 export default {
   getIconForPlatform,
   startShake,
-  checkIfUserHasRightsForFilterOptions,
   handleErrorMessage
 };

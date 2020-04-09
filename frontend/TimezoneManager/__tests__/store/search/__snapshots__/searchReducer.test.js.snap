@@ -7,6 +7,66 @@ Object {
     "searchQuery": "",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -27,6 +87,66 @@ Object {
     "searchQuery": "Abc",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -40,12 +160,72 @@ Object {
 }
 `;
 
-exports[`INITIAL STATE 2returns searchTimezoneEntriesSuccess action state 1`] = `
+exports[`INITIAL STATE 2returns searchUserTimezoneEntriesSuccess action state 1`] = `
 Object {
   "allTimezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
     "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "No results",
@@ -67,6 +247,66 @@ Object {
     "searchQuery": "",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -86,6 +326,66 @@ Object {
     "message": "",
     "searchQuery": "",
     "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "",
@@ -107,6 +407,66 @@ Object {
     "searchQuery": "",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -126,6 +486,66 @@ Object {
     "message": "",
     "searchQuery": "",
     "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "",
@@ -147,6 +567,66 @@ Object {
     "searchQuery": "",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -166,6 +646,66 @@ Object {
     "message": "",
     "searchQuery": "",
     "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "",
@@ -187,6 +727,66 @@ Object {
     "searchQuery": "",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -207,6 +807,66 @@ Object {
     "searchQuery": "",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -226,6 +886,66 @@ Object {
     "message": "",
     "searchQuery": "",
     "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "",
@@ -272,6 +992,66 @@ Object {
       },
     ],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "message",
     "searchQuery": "Abc",
@@ -311,13 +1091,73 @@ Object {
 }
 `;
 
-exports[`LOADED STATE 2.1returns searchTimezoneEntriesSuccess action state 1`] = `
+exports[`LOADED STATE 2.1returns searchAllTimezoneEntriesSuccess action state 1`] = `
 Object {
   "allTimezoneEntriesSearchData": Object {
     "message": "No results",
     "searchQuery": "Abcdef",
     "searchResults": Array [],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "message",
     "searchQuery": "Abc",
@@ -357,7 +1197,7 @@ Object {
 }
 `;
 
-exports[`LOADED STATE 2returns searchTimezoneEntriesSuccess action state 1`] = `
+exports[`LOADED STATE 2returns searchUserTimezoneEntriesSuccess action state 1`] = `
 Object {
   "allTimezoneEntriesSearchData": Object {
     "message": "message",
@@ -388,6 +1228,66 @@ Object {
         "name": "HR",
       },
     ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "No results",
@@ -447,6 +1347,66 @@ Object {
       },
     ],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "message",
     "searchQuery": "Abc",
@@ -504,6 +1464,66 @@ Object {
         "name": "HR",
       },
     ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "message",
@@ -576,6 +1596,66 @@ Object {
       },
     ],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "message",
     "searchQuery": "Abc",
@@ -647,6 +1727,66 @@ Object {
       },
     ],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "message",
     "searchQuery": "Abc",
@@ -706,6 +1846,66 @@ Object {
       },
     ],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "message",
     "searchQuery": "Abc",
@@ -745,6 +1945,66 @@ Object {
     "message": "",
     "searchQuery": "",
     "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "",
@@ -790,6 +2050,66 @@ Object {
         "name": "HR",
       },
     ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "message",
@@ -849,6 +2169,66 @@ Object {
       },
     ],
   },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
   "timezoneEntriesSearchData": Object {
     "message": "",
     "searchQuery": "",
@@ -881,6 +2261,66 @@ Object {
     "message": "",
     "searchQuery": "",
     "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
   },
   "timezoneEntriesSearchData": Object {
     "message": "message",

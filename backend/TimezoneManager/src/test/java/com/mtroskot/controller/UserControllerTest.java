@@ -32,6 +32,7 @@ import com.mtroskot.model.entity.auth.User;
 import com.mtroskot.model.request.UpdateUserInfoRequest;
 import com.mtroskot.security.JwtAuthenticationEntryPoint;
 import com.mtroskot.security.JwtTokenProvider;
+import com.mtroskot.service.TimezoneEntryService;
 import com.mtroskot.service.UserService;
 
 @RunWith(SpringRunner.class)
@@ -43,6 +44,8 @@ public class UserControllerTest {
 	private ObjectMapper objectMapper;
 	@MockBean
 	private UserService userService;
+	@MockBean
+	private TimezoneEntryService timezoneEntryService;
 
 	@MockBean
 	private AuthenticationManager authenticationManager;
@@ -60,7 +63,7 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
 	public void findAllUsersTest1() throws Exception {
-		mockMvc.perform(get("/users/all").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(403));
+		mockMvc.perform(get("/users").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(403));
 	}
 
 	/* user has required authorities */
@@ -73,7 +76,7 @@ public class UserControllerTest {
 
 		Mockito.when(userService.findAll()).thenReturn(userList);
 
-		mockMvc.perform(get("/users/all").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
+		mockMvc.perform(get("/users").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
 				.andExpect(content().json(objectMapper.writeValueAsString(userList)));
 	}
 
@@ -87,16 +90,16 @@ public class UserControllerTest {
 
 		Mockito.when(userService.findAll()).thenReturn(userList);
 
-		mockMvc.perform(get("/users/all").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
+		mockMvc.perform(get("/users").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
 				.andExpect(content().json(objectMapper.writeValueAsString(userList)));
 	}
 
-	// FILTER ALL USERS
+	// FILTER USERS
 	/* user hasn't required authorities */
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
 	public void filterUsersTest1() throws Exception {
-		mockMvc.perform(get("/users/filter?input=abc").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(get("/users/search?firstName=abc").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(403));
 	}
 
@@ -108,19 +111,20 @@ public class UserControllerTest {
 		User user2 = new User("user2@user.com", "User2", "User2", "password");
 		List<User> userList = Arrays.asList(user1, user2);
 
-		Mockito.when(userService.findAllByFirstNameOrLastNameOrEmailAddress(ArgumentMatchers.anyString()))
-				.thenReturn(userList);
+		Mockito.when(userService.filterUsers(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+				ArgumentMatchers.anyString())).thenReturn(userList);
 
-		mockMvc.perform(get("/users/filter?input=abc").characterEncoding("UTF-8")).andDo(print())
-				.andExpect(status().is(200)).andExpect(content().json(objectMapper.writeValueAsString(userList)));
+		mockMvc.perform(get("/users/search?firstName=abc&lastName=abc&emailAddress=abc").characterEncoding("UTF-8"))
+				.andDo(print()).andExpect(status().is(200))
+				.andExpect(content().json(objectMapper.writeValueAsString(userList)));
 	}
 
-	/* user has required authorities, BAD_REQUEST */
+	/* user has required authorities,no filters */
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void filterUsersTest3() throws Exception {
 
-		mockMvc.perform(get("/users/filter").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(400));
+		mockMvc.perform(get("/users/search").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200));
 	}
 
 	// UPDATE USER
@@ -174,7 +178,7 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
 	public void deleteUserTest1() throws Exception {
-		mockMvc.perform(delete("/users?userId=5").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(delete("/users/5").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(403));
 	}
 
@@ -185,7 +189,7 @@ public class UserControllerTest {
 		User user1 = new User("user1@user.com", "User1", "User1", "password");
 		Mockito.when(userService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user1));
 
-		mockMvc.perform(delete("/users?userId=5").contentType("application/json").characterEncoding("UTF-8"))
+		mockMvc.perform(delete("/users/5").contentType("application/json").characterEncoding("UTF-8"))
 				.andDo(print()).andExpect(status().is(200));
 	}
 
@@ -195,7 +199,7 @@ public class UserControllerTest {
 	public void deleteUserTest3() throws Exception {
 		Mockito.when(userService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.ofNullable(null));
 
-		mockMvc.perform(delete("/users?userId=5").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(delete("/users/5").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(404));
 	}
 
@@ -204,14 +208,14 @@ public class UserControllerTest {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void deleteUserTest4() throws Exception {
 
-		mockMvc.perform(delete("/users?userId=a").contentType("application/json").characterEncoding("UTF-8"))
+		mockMvc.perform(delete("/users/a").contentType("application/json").characterEncoding("UTF-8"))
 				.andDo(print()).andExpect(status().is(400));
 	}
 
 	// CHANGE USER ROLE
 	/* user has required authorities,valid request */
 	@Test
-	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
+	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void changeUserRoleTest1() throws Exception {
 		User user1 = new User("user1@user.com", "User1", "User1", "password");
 		Mockito.when(userService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user1));
@@ -221,19 +225,18 @@ public class UserControllerTest {
 		Mockito.when(userService.changeUserRole(ArgumentMatchers.any(User.class), ArgumentMatchers.any(RoleType.class)))
 				.thenReturn(updatedUser);
 
-		mockMvc.perform(put("/users/changeRole?userId=5&role=ADMIN").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(put("/users/5/changeRole?role=ADMIN").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(200))
 				.andExpect(content().json(objectMapper.writeValueAsString(updatedUser.getRoles())));
 	}
 
-	
 	/* user has required authorities,user not found */
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void changeUserRoleTest2() throws Exception {
 		Mockito.when(userService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.ofNullable(null));
 
-		mockMvc.perform(put("/users/changeRole?userId=5&role=ADMIN").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(put("/users/5/changeRole?role=ADMIN").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(404));
 	}
 
@@ -242,7 +245,7 @@ public class UserControllerTest {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void changeUserRoleTest3() throws Exception {
 
-		mockMvc.perform(put("/users/changeRole?userId=5&role=NOT_EXISTING_ROLE").contentType("application/json")
+		mockMvc.perform(put("/users/5/changeRole?role=NOT_EXISTING_ROLE").contentType("application/json")
 				.characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(400));
 	}
 }

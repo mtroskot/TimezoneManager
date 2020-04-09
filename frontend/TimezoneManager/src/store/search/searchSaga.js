@@ -6,32 +6,40 @@ import {
   clearTimezoneEntriesSearch,
   clearUsersSearch,
   searchAllTimezoneEntriesSuccess,
-  searchTimezoneEntriesSuccess,
+  searchUserTimezoneEntriesSuccess,
   searchUsersSuccess
 } from 'src/store/search/searchActions';
 import { searchActionTypes } from 'src/constants/actionTypes';
 import {
   allTimezoneEntriesSearchDataSelector,
+  filterOptionsSelector,
   timezoneEntriesSearchDataSelector,
   userSearchDataSelector
 } from 'src/store/search/searchSelectors';
 import { userInfoSelector } from 'src/store/user/userSelectors';
 import ApiService, { timezoneRequests, userRequests } from 'src/services/api';
+import { dropdowns, filters } from 'src/constants/search';
 import { AppUtils, ParseUtils } from 'src/utils';
 
 export function* searchUserTimezoneEntriesSaga({ type, payload }) {
   try {
-    const { searchInput, searchTypes, cancelToken } = payload;
+    const { searchInput, filtersChanged, cancelToken } = payload;
     const timezoneEntriesSearchData = yield select(timezoneEntriesSearchDataSelector);
-    if (timezoneEntriesSearchData.searchQuery === searchInput) {
+    if (timezoneEntriesSearchData.searchQuery === searchInput && !filtersChanged) {
       return;
     }
     yield put(clearTimezoneEntriesSearch());
     yield put(startAction(type));
     const user = yield select(userInfoSelector);
-    const cityName = searchTypes.includes('cityName') ? searchInput : null;
-    const name = searchTypes.includes('name') ? searchInput : null;
-    const gmt = searchTypes.includes('gmt') ? searchInput : null;
+    const ownEntriesFilterOptions = yield select(state => filterOptionsSelector(state, dropdowns.OWN_ENTRIES));
+    // prettier-ignore
+    /* eslint-disable max-len */
+    const cityName = ownEntriesFilterOptions.some(filter => filter.value === filters.CITY_NAME && filter.selected === true) ? searchInput : null;
+    // prettier-ignore
+    const name = ownEntriesFilterOptions.some(filter => filter.value === filters.ENTRY_NAME && filter.selected === true) ? searchInput : null;
+    // prettier-ignore
+    const gmt = ownEntriesFilterOptions.some(filter => filter.value === filters.GMT && filter.selected === true) ? searchInput.replace('+','%2B') : null;
+    /* eslint-enable max-len */
     const response = yield call(
       ApiService.callApi,
       userRequests.filterUserTimezoneEntries(user.id, cityName, name, gmt, cancelToken)
@@ -42,7 +50,7 @@ export function* searchUserTimezoneEntriesSaga({ type, payload }) {
       searchQuery: searchInput,
       message: matchingTimezoneEntries.length > 0 ? '' : NO_RESULTS
     };
-    yield put(searchTimezoneEntriesSuccess(searchData));
+    yield put(searchUserTimezoneEntriesSuccess(searchData));
   } catch (error) {
     console.log('searchTimezoneEntriesSaga error', error);
     yield call(AppUtils.handleErrorMessage, error);
@@ -57,16 +65,22 @@ export function* watchSearchUserTimezoneEntriesSaga() {
 
 export function* searchAllTimezoneEntriesSaga({ type, payload }) {
   try {
-    const { searchInput, searchTypes, cancelToken } = payload;
+    const { searchInput, filtersChanged, cancelToken } = payload;
     const allTimezoneEntriesSearchData = yield select(allTimezoneEntriesSearchDataSelector);
-    if (allTimezoneEntriesSearchData.searchQuery === searchInput) {
+    if (allTimezoneEntriesSearchData.searchQuery === searchInput && !filtersChanged) {
       return;
     }
     yield put(clearAllTimezoneEntriesSearch());
     yield put(startAction(type));
-    const cityName = searchTypes.includes('cityName') ? searchInput : null;
-    const name = searchTypes.includes('name') ? searchInput : null;
-    const gmt = searchTypes.includes('gmt') ? searchInput : null;
+    const allEntriesFilterOptions = yield select(state => filterOptionsSelector(state, dropdowns.ALL_ENTRIES));
+    // prettier-ignore
+    /* eslint-disable max-len */
+    const cityName = allEntriesFilterOptions.some(filter => filter.value === filters.CITY_NAME && filter.selected === true) ? searchInput : null;
+    // prettier-ignore
+    const name = allEntriesFilterOptions.some(filter => filter.value === filters.ENTRY_NAME && filter.selected === true) ? searchInput : null;
+    // prettier-ignore
+    const gmt = allEntriesFilterOptions.some(filter => filter.value === filters.GMT && filter.selected === true) ? searchInput : null;
+    /* eslint-enable max-len */
     const response = yield call(
       ApiService.callApi,
       timezoneRequests.filterTimezoneEntries(cityName, name, gmt, cancelToken)
@@ -93,15 +107,21 @@ export function* watchSearchAllTimezoneEntriesSaga() {
 export function* searchUsersSaga({ type, payload }) {
   try {
     const userSearchData = yield select(userSearchDataSelector);
-    const { searchInput, searchTypes, cancelToken } = payload;
-    if (userSearchData.searchQuery === searchInput) {
+    const { searchInput, filtersChanged, cancelToken } = payload;
+    if (userSearchData.searchQuery === searchInput && !filtersChanged) {
       return;
     }
     yield put(clearUsersSearch());
     yield put(startAction(type));
-    const firstName = searchTypes.includes('firstName') ? searchInput : null;
-    const lastName = searchTypes.includes('lastName') ? searchInput : null;
-    const emailAddress = searchTypes.includes('emailAddress') ? searchInput : null;
+    const userFilterOptions = yield select(state => filterOptionsSelector(state, dropdowns.USERS));
+    // prettier-ignore
+    /* eslint-disable max-len */
+    const firstName = userFilterOptions.some(filter => filter.value === filters.FIRST_NAME && filter.selected === true) ? searchInput : null;
+    // prettier-ignore
+    const lastName = userFilterOptions.some(filter => filter.value === filters.LAST_NAME && filter.selected === true) ? searchInput : null;
+    // prettier-ignore
+    const emailAddress = userFilterOptions.some(filter => filter.value === filters.EMAIL_ADDRESS && filter.selected === true) ? searchInput : null;
+    /* eslint-enable max-len */
     const response = yield call(
       ApiService.callApi,
       userRequests.filterUsers(firstName, lastName, emailAddress, cancelToken)

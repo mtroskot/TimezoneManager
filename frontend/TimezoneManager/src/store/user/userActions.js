@@ -1,25 +1,19 @@
 import { userActionTypes } from 'src/constants/actionTypes';
 
-export function authenticateUser(emailAddress, password) {
-  return {
-    type: userActionTypes.AUTH_USER,
-    payload: { emailAddress, password }
-  };
-}
+export const authenticateUser = (emailAddress, password) => ({
+  type: userActionTypes.AUTH_USER,
+  payload: { emailAddress, password }
+});
 
-export const authenticateUserSuccess = (user, accessToken, refreshToken) => {
-  return {
-    type: userActionTypes.AUTH_USER_SUCCESS,
-    payload: { user, accessToken, refreshToken }
-  };
-};
+export const authenticateUserSuccess = (user, accessToken, refreshToken) => ({
+  type: userActionTypes.AUTH_USER_SUCCESS,
+  payload: { user, accessToken, refreshToken }
+});
 
-export function registerUser(registerData) {
-  return {
-    type: userActionTypes.REGISTER_USER,
-    payload: { registerData }
-  };
-}
+export const registerUser = registerData => ({
+  type: userActionTypes.REGISTER_USER,
+  payload: { registerData }
+});
 
 export const logoutUser = () => ({
   type: userActionTypes.LOGOUT,
@@ -46,37 +40,27 @@ export const authAutoSignIn = navigation => ({
   payload: { navigation }
 });
 
-export function updateUserInfo(updateUserInfoForm) {
-  return {
-    type: userActionTypes.UPDATE_USER_INFO,
-    payload: { updateUserInfoForm }
-  };
-}
+export const updateUserInfo = updateUserInfoForm => ({
+  type: userActionTypes.UPDATE_USER_INFO,
+  payload: { updateUserInfoForm }
+});
 
-export function updateUserInfoSuccess(updatedUserInfo) {
-  return {
-    type: userActionTypes.UPDATE_USER_INFO_SUCCESS,
-    payload: { updatedUserInfo }
-  };
-}
+export const updateUserInfoSuccess = updatedUserInfo => ({
+  type: userActionTypes.UPDATE_USER_INFO_SUCCESS,
+  payload: { updatedUserInfo }
+});
 
-export function deleteUser(userId) {
-  return {
-    type: userActionTypes.DELETE_USER,
-    payload: { userId }
-  };
-}
+export const deleteUser = userId => ({
+  type: userActionTypes.DELETE_USER,
+  payload: { userId }
+});
 
-export function deleteUserSuccess(userId) {
-  return {
-    type: userActionTypes.DELETE_USER_SUCCESS,
-    payload: { userId }
-  };
-}
+export const deleteUserSuccess = userId => ({
+  type: userActionTypes.DELETE_USER_SUCCESS,
+  payload: { userId }
+});
 
-export function refreshTokenSuccess(accessToken, refreshToken) {
-  return {
-    type: userActionTypes.REFRESH_TOKEN_SUCCESS,
-    payload: { accessToken, refreshToken }
-  };
-}
+export const refreshTokenSuccess = (accessToken, refreshToken) => ({
+  type: userActionTypes.REFRESH_TOKEN_SUCCESS,
+  payload: { accessToken, refreshToken }
+});

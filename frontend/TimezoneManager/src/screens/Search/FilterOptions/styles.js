@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { dimensions } from 'src/styles';
 const { rem } = dimensions;
 
@@ -17,6 +17,15 @@ const styles = StyleSheet.create({
   },
   switch: {
     marginVertical: 2 * rem
+  },
+  dropdownForm: {
+    width: '80%',
+    zIndex: Platform.OS === 'ios' ? 2 : null
+  },
+  dropdown: {
+    width: '90%',
+    alignSelf: 'center',
+    bottom: 10 * rem
   }
 });
 

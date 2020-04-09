@@ -51,7 +51,7 @@ public class UserControllerIntegration {
 	@WithAnonymousUser
 	public void findAllUsersTest() throws Exception {
 
-		mockMvc.perform(get("/users/all").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(401));
+		mockMvc.perform(get("/users").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(401));
 	}
 
 	/* user hasn't required authorities */
@@ -59,7 +59,7 @@ public class UserControllerIntegration {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
 	public void findAllUsersTest1() throws Exception {
 
-		mockMvc.perform(get("/users/all").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(403));
+		mockMvc.perform(get("/users").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(403));
 	}
 
 	/* user has required authorities */
@@ -69,7 +69,7 @@ public class UserControllerIntegration {
 		List<User> userList = (List<User>) userService.findAll();
 		assertEquals("List size is 3", 3, userList.size());
 
-		mockMvc.perform(get("/users/all").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
+		mockMvc.perform(get("/users").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
 				.andExpect(content().json(objectMapper.writeValueAsString(userList)));
 
 		List<User> userListAfter = (List<User>) userService.findAll();
@@ -82,17 +82,17 @@ public class UserControllerIntegration {
 	public void findAllUsersTest3() throws Exception {
 		List<User> userList = (List<User>) userService.findAll();
 
-		mockMvc.perform(get("/users/all").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
+		mockMvc.perform(get("/users").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200))
 				.andExpect(content().json(objectMapper.writeValueAsString(userList)));
 	}
 
-	// FILTER ALL USERS
+	// FILTER USERS
 	/* anonymous user */
 	@Test
 	@WithAnonymousUser
 	public void filterUsersTest() throws Exception {
 
-		mockMvc.perform(get("/users/filter?input=abc").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(get("/users/search?firstName=abc").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(401));
 	}
 
@@ -101,7 +101,7 @@ public class UserControllerIntegration {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
 	public void filterUsersTest1() throws Exception {
 
-		mockMvc.perform(get("/users/filter?input=abc").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(get("/users/search?firstName=abc").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(403));
 	}
 
@@ -109,27 +109,27 @@ public class UserControllerIntegration {
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "USER", "MANAGER" })
 	public void filterUsersTest2() throws Exception {
-		String input = "drazen";
-		List<User> userList = (List<User>) userService.findAllByFirstNameOrLastNameOrEmailAddress(input);
+		String firstName = "drazen";
+		List<User> userList = (List<User>) userService.filterUsers(null, firstName, null);
 		assertEquals("List size is 1", 1, userList.size());
 		assertEquals("List contains user", true,
 				userList.contains(userService.findByEmailAddress("drazen@hotmail.com").get()));
 
-		mockMvc.perform(get("/users/filter?input=" + input).characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(get("/users/search?firstName=" + firstName).characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(200)).andExpect(content().json(objectMapper.writeValueAsString(userList)));
 
-		List<User> userListAfter = (List<User>) userService.findAllByFirstNameOrLastNameOrEmailAddress(input);
+		List<User> userListAfter = (List<User>) userService.filterUsers(null, firstName, null);
 		assertEquals("List size is 1", 1, userListAfter.size());
 		assertEquals("List contains user", true,
 				userListAfter.contains(userService.findByEmailAddress("drazen@hotmail.com").get()));
 	}
 
-	/* user has required authorities, BAD_REQUEST */
+	/* user has required authorities, no filters */
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void filterUsersTest3() throws Exception {
 
-		mockMvc.perform(get("/users/filter").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(400));
+		mockMvc.perform(get("/users/search").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(200));
 	}
 
 	// UPDATE USER
@@ -197,16 +197,14 @@ public class UserControllerIntegration {
 	@Test
 	@WithAnonymousUser
 	public void deleteUserTest() throws Exception {
-		mockMvc.perform(delete("/users?userId=5").characterEncoding("UTF-8")).andDo(print())
-				.andExpect(status().is(401));
+		mockMvc.perform(delete("/users/5").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(401));
 	}
 
 	/* user hasn't required authorities */
 	@Test
 	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
 	public void deleteUserTest1() throws Exception {
-		mockMvc.perform(delete("/users?userId=5").characterEncoding("UTF-8")).andDo(print())
-				.andExpect(status().is(403));
+		mockMvc.perform(delete("/users/5").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(403));
 	}
 
 	/* user has required authorities,valid request */
@@ -217,8 +215,7 @@ public class UserControllerIntegration {
 		assertEquals("User before delete is present", beforeDelete.isPresent(), true);
 
 		Long userIdForDelete = beforeDelete.get().getId();
-		mockMvc.perform(
-				delete("/users?userId=" + userIdForDelete).contentType("application/json").characterEncoding("UTF-8"))
+		mockMvc.perform(delete("/users/" + userIdForDelete).contentType("application/json").characterEncoding("UTF-8"))
 				.andDo(print()).andExpect(status().is(200));
 
 		Optional<User> afterDelete = userService.findByEmailAddress("marko@hotmail.com");
@@ -231,8 +228,7 @@ public class UserControllerIntegration {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void deleteUserTest3() throws Exception {
 
-		mockMvc.perform(delete("/users?userId=50").characterEncoding("UTF-8")).andDo(print())
-				.andExpect(status().is(404));
+		mockMvc.perform(delete("/users/50").characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(404));
 	}
 
 	/* user has required authorities, BAD_REQUEST */
@@ -240,8 +236,8 @@ public class UserControllerIntegration {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void deleteUserTest4() throws Exception {
 
-		mockMvc.perform(delete("/users?userId=a").contentType("application/json").characterEncoding("UTF-8"))
-				.andDo(print()).andExpect(status().is(400));
+		mockMvc.perform(delete("/users/a").contentType("application/json").characterEncoding("UTF-8")).andDo(print())
+				.andExpect(status().is(400));
 	}
 
 	// CHANGE USER ROLE
@@ -250,13 +246,13 @@ public class UserControllerIntegration {
 	@WithAnonymousUser
 	public void changeUserRoleTest() throws Exception {
 
-		mockMvc.perform(put("/users/changeRole?userId=5&role=ADMIN").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(put("/users/5/changeRole?role=ADMIN").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(401));
 	}
 
 	/* user has required authorities,valid request */
 	@Test
-	@WithMockUser(username = "testuser", password = "testpass", authorities = "USER")
+	@WithMockUser(username = "testuser", password = "testpass", authorities = { "USER", "MANAGER" })
 	public void changeUserRoleTest1() throws Exception {
 		User userBeforeUpdate = userService.findByEmailAddress("marko@hotmail.com").get();
 		assertEquals("Before role change user has 3 roles", 3, userBeforeUpdate.getRoles().size());
@@ -264,8 +260,7 @@ public class UserControllerIntegration {
 				userBeforeUpdate.getRoles().containsAll(
 						Arrays.asList(new Role(RoleType.USER), new Role(RoleType.MANAGER), new Role(RoleType.ADMIN))));
 
-		mockMvc.perform(
-				put("/users/changeRole?userId=" + userBeforeUpdate.getId() + "&role=USER").characterEncoding("UTF-8"))
+		mockMvc.perform(put("/users/" + userBeforeUpdate.getId() + "/changeRole?role=USER").characterEncoding("UTF-8"))
 				.andDo(print()).andExpect(status().is(200)).andExpect(content().json(objectMapper.writeValueAsString(
 						userService.findByEmailAddress(userBeforeUpdate.getEmailAddress()).get().getRoles())));
 
@@ -280,7 +275,7 @@ public class UserControllerIntegration {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "USER", "MANAGER" })
 	public void changeUserRoleTest2() throws Exception {
 
-		mockMvc.perform(put("/users/changeRole?userId=50&role=ADMIN").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(put("/users/50/changeRole?role=ADMIN").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(404));
 	}
 
@@ -289,7 +284,7 @@ public class UserControllerIntegration {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void changeUserRoleTest3() throws Exception {
 
-		mockMvc.perform(put("/users/changeRole?userId=50&role=ADMIN").characterEncoding("UTF-8")).andDo(print())
+		mockMvc.perform(put("/users/50/changeRole?role=ADMIN").characterEncoding("UTF-8")).andDo(print())
 				.andExpect(status().is(404));
 	}
 
@@ -298,7 +293,7 @@ public class UserControllerIntegration {
 	@WithMockUser(username = "testuser", password = "testpass", authorities = { "MANAGER", "ADMIN" })
 	public void changeUserRoleTest4() throws Exception {
 
-		mockMvc.perform(put("/users/changeRole?userId=5&role=NOT_EXISTING_ROLE").contentType("application/json")
+		mockMvc.perform(put("/users/5/changeRole?role=NOT_EXISTING_ROLE").contentType("application/json")
 				.characterEncoding("UTF-8")).andDo(print()).andExpect(status().is(400));
 	}
 }

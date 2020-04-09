@@ -23,7 +23,7 @@ public interface TimezoneEntryService {
 	Optional<TimezoneEntry> findById(Long id);
 
 	/**
-	 * Filters all {@link TimezoneEntry} in database
+	 * Filters all {@link TimezoneEntry} in database by inputs
 	 * 
 	 * @return Iterable<TimezoneEntry>
 	 */

@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Iterable<User> filterUsers(String emailAddress, String firstName, String lastName) {
 		UserSpecifications spec1 = new UserSpecifications(
-				new SearchCriteria("emailAddress", Operation.LIKE, emailAddress));
+				new SearchCriteria("emailAddress", Operation.LIKE_IGNORE_CASE, emailAddress));
 		UserSpecifications spec2 = new UserSpecifications(new SearchCriteria("firstName", Operation.LIKE_IGNORE_CASE, firstName));
 		UserSpecifications spec3 = new UserSpecifications(new SearchCriteria("lastName", Operation.LIKE_IGNORE_CASE, lastName));
 

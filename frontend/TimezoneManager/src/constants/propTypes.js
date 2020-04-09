@@ -37,3 +37,19 @@ export const timezoneEntriesSearchDataPropTypes = PropTypes.exact({
   searchQuery: PropTypes.string.isRequired,
   message: PropTypes.string
 });
+
+export const dropdownOptionPropTypes = PropTypes.exact({
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  requiredRole: PropTypes.string.isRequired
+});
+
+export const filterOptionPropTypes = PropTypes.exact({
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired
+});
+
+export const filterOptionsPropTypes = PropTypes.objectOf(
+  PropTypes.arrayOf(filterOptionPropTypes.isRequired).isRequired
+);

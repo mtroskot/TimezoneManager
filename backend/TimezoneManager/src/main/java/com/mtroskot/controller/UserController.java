@@ -50,7 +50,7 @@ public class UserController {
 	}
 
 	/**
-	 * Filters all users by first name,last name, email
+	 * Filters all users by request params
 	 * 
 	 * @param input The search input
 	 * @return Iterable<User>
@@ -140,7 +140,7 @@ public class UserController {
 	}
 
 	/**
-	 * Filters all {@link TimezoneEntry} by entry name or entry cityName
+	 * Filters all user {@link TimezoneEntry} by request params
 	 * 
 	 * @param name The name used for filtering entries
 	 * @return Iterable<TimezoneEntry>

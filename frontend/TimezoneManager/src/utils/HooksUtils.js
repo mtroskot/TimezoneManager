@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef } from 'react';
 
 function useDidMountUnmount(onMount, onUnmount) {
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     onMount();
     if (onUnmount) {
@@ -44,8 +44,17 @@ function useDebounce(callback, deps, timeout = 500, clearCallback) {
   }, deps);
 }
 
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+
 export default {
   useDidMountUnmount,
   useDebounce,
-  useDidUpdate
+  useDidUpdate,
+  usePrevious
 };

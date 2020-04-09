@@ -13,21 +13,22 @@ describe('Search actions tests', () => {
     store.clearActions();
   });
 
-  it('dispatches searchTimezoneEntries action', () => {
+  it('dispatches searchUserTimezoneEntries action', () => {
     const searchInput = 'searchInput';
+    const filtersChanged = false;
     const cancelToken = 'cancelToken';
     const expectedActions = [
       {
         type: searchActionTypes.SEARCH_TIMEZONE_ENTRIES,
-        payload: { searchInput, cancelToken }
+        payload: { searchInput, filtersChanged, cancelToken }
       }
     ];
-    store.dispatch(searchActions.searchTimezoneEntries(searchInput, cancelToken));
+    store.dispatch(searchActions.searchUserTimezoneEntries(searchInput, filtersChanged, cancelToken));
     expect(store.getActions()).toEqual(expectedActions);
     expect(store.getActions()).toMatchSnapshot();
   });
 
-  it('dispatches searchTimezoneEntriesSuccess action', () => {
+  it('dispatches searchUserTimezoneEntriesSuccess action', () => {
     const searchData = 'searchData';
     const expectedActions = [
       {
@@ -35,21 +36,22 @@ describe('Search actions tests', () => {
         payload: { searchData }
       }
     ];
-    store.dispatch(searchActions.searchTimezoneEntriesSuccess(searchData));
+    store.dispatch(searchActions.searchUserTimezoneEntriesSuccess(searchData));
     expect(store.getActions()).toEqual(expectedActions);
     expect(store.getActions()).toMatchSnapshot();
   });
 
   it('dispatches searchAllTimezoneEntries action', () => {
     const searchInput = 'searchInput';
+    const filtersChanged = false;
     const cancelToken = 'cancelToken';
     const expectedActions = [
       {
         type: searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES,
-        payload: { searchInput, cancelToken }
+        payload: { searchInput, filtersChanged, cancelToken }
       }
     ];
-    store.dispatch(searchActions.searchAllTimezoneEntries(searchInput, cancelToken));
+    store.dispatch(searchActions.searchAllTimezoneEntries(searchInput, filtersChanged, cancelToken));
     expect(store.getActions()).toEqual(expectedActions);
     expect(store.getActions()).toMatchSnapshot();
   });
@@ -69,14 +71,15 @@ describe('Search actions tests', () => {
 
   it('dispatches searchUsers action', () => {
     const searchInput = 'searchInput';
+    const filtersChanged = false;
     const cancelToken = 'cancelToken';
     const expectedActions = [
       {
         type: searchActionTypes.SEARCH_USERS,
-        payload: { searchInput, cancelToken }
+        payload: { searchInput, filtersChanged, cancelToken }
       }
     ];
-    store.dispatch(searchActions.searchUsers(searchInput, cancelToken));
+    store.dispatch(searchActions.searchUsers(searchInput, filtersChanged, cancelToken));
     expect(store.getActions()).toEqual(expectedActions);
     expect(store.getActions()).toMatchSnapshot();
   });

@@ -64,7 +64,8 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   viewStyle: undefined,
-  dropdownItemKeyName: undefined
+  dropdownItemKeyName: undefined,
+  initialScrollIndex: 0
 };
 
 export default React.memo(Dropdown);

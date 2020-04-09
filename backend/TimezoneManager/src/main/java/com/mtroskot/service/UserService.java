@@ -15,7 +15,7 @@ public interface UserService {
 	Iterable<User> findAll();
 
 	/**
-	 * Gets all users from database.
+	 * Filters all users in database by inputs.
 	 * 
 	 * @return Iterable<User>
 	 */

@@ -15,15 +15,16 @@ describe('INITIAL STATE', () => {
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
   });
 
-  it('2returns searchTimezoneEntriesSuccess action state', () => {
+  it('2returns searchUserTimezoneEntriesSuccess action state', () => {
     const searchData = {
       searchResults: [],
       searchQuery: 'Abc',
       message: 'No results'
     };
-    const action = searchActions.searchTimezoneEntriesSuccess(searchData);
+    const action = searchActions.searchUserTimezoneEntriesSuccess(searchData);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
         searchResults: payload.searchData.searchResults,
@@ -45,6 +46,7 @@ describe('INITIAL STATE', () => {
     const action = searchActions.searchAllTimezoneEntriesSuccess(searchData);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData,
       allTimezoneEntriesSearchData: {
@@ -66,6 +68,7 @@ describe('INITIAL STATE', () => {
     const action = searchActions.searchUsersSuccess(searchData);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: payload.searchData.searchResults,
         searchQuery: payload.searchData.searchQuery,
@@ -87,6 +90,7 @@ describe('INITIAL STATE', () => {
     };
     const action = searchActions.updateSearchedUserInfoSuccess(updatedUserInfo);
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
       allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
@@ -104,6 +108,7 @@ describe('INITIAL STATE', () => {
     };
     const action = timezoneActions.updateTimezoneEntrySuccess(updatedTimezoneEntry);
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
       allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
@@ -116,6 +121,7 @@ describe('INITIAL STATE', () => {
     const userId = 2;
     const action = userActions.deleteUserSuccess(userId);
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
       allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
@@ -128,6 +134,7 @@ describe('INITIAL STATE', () => {
     const timezoneEntryId = 2;
     const action = timezoneActions.deleteTimezoneEntrySuccess(timezoneEntryId);
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
       allTimezoneEntriesSearchData: beforeActionState.allTimezoneEntriesSearchData
@@ -139,6 +146,7 @@ describe('INITIAL STATE', () => {
   it('8returns clearAllSearches action state', () => {
     const action = searchActions.clearAllSearches();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: [],
         searchQuery: '',
@@ -162,6 +170,7 @@ describe('INITIAL STATE', () => {
   it('9returns clearUsersSearch action state', () => {
     const action = searchActions.clearUsersSearch();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: [],
         searchQuery: '',
@@ -177,6 +186,7 @@ describe('INITIAL STATE', () => {
   it('10returns clearTimezoneEntriesSearch action state', () => {
     const action = searchActions.clearTimezoneEntriesSearch();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
         searchResults: [],
@@ -192,6 +202,7 @@ describe('INITIAL STATE', () => {
   it('11returns clearTimezoneEntriesSearch action state', () => {
     const action = searchActions.clearAllTimezoneEntriesSearch();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
       allTimezoneEntriesSearchData: {
@@ -243,15 +254,16 @@ describe('LOADED STATE', () => {
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
   });
 
-  it('2returns searchTimezoneEntriesSuccess action state', () => {
+  it('2returns searchUserTimezoneEntriesSuccess action state', () => {
     const searchData = {
       searchResults: [],
       searchQuery: 'Abcdef',
       message: 'No results'
     };
-    const action = searchActions.searchTimezoneEntriesSuccess(searchData);
+    const action = searchActions.searchUserTimezoneEntriesSuccess(searchData);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
         searchResults: payload.searchData.searchResults,
@@ -264,7 +276,7 @@ describe('LOADED STATE', () => {
     expect(searchReducer(beforeActionState, action)).toMatchSnapshot();
   });
 
-  it('2.1returns searchTimezoneEntriesSuccess action state', () => {
+  it('2.1returns searchAllTimezoneEntriesSuccess action state', () => {
     const searchData = {
       searchResults: [],
       searchQuery: 'Abcdef',
@@ -273,6 +285,7 @@ describe('LOADED STATE', () => {
     const action = searchActions.searchAllTimezoneEntriesSuccess(searchData);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
       allTimezoneEntriesSearchData: {
@@ -294,6 +307,7 @@ describe('LOADED STATE', () => {
     const action = searchActions.searchUsersSuccess(searchData);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: payload.searchData.searchResults,
         searchQuery: payload.searchData.searchQuery,
@@ -316,6 +330,7 @@ describe('LOADED STATE', () => {
     const action = searchActions.updateSearchedUserInfoSuccess(updatedUserInfo);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: [
           payload.updatedUserInfo,
@@ -341,6 +356,7 @@ describe('LOADED STATE', () => {
     const action = timezoneActions.updateTimezoneEntrySuccess(updatedTimezoneEntry);
     const { payload } = action;
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
         searchResults: [
@@ -369,6 +385,7 @@ describe('LOADED STATE', () => {
     const userId = 2;
     const action = userActions.deleteUserSuccess(userId);
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: [
           { [idNames.USER_ID]: 3, firstName: 'Ante', lastName: 'Mate', emailAddress: 'ante@hotmail.com' }
@@ -387,6 +404,7 @@ describe('LOADED STATE', () => {
     const timezoneEntryId = 2;
     const action = timezoneActions.deleteTimezoneEntrySuccess(timezoneEntryId);
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
         searchResults: [{ [idNames.TIMEZONE_ENTRY_ID]: 3, name: 'Fch', cityName: 'Abc', differenceToGMT: '+10' }],
@@ -410,6 +428,7 @@ describe('LOADED STATE', () => {
   it('8returns clearAllSearches action state', () => {
     const action = searchActions.clearAllSearches();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: [],
         searchQuery: '',
@@ -433,6 +452,7 @@ describe('LOADED STATE', () => {
   it('9returns clearUsersSearch action state', () => {
     const action = searchActions.clearUsersSearch();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: {
         searchResults: [],
         searchQuery: '',
@@ -448,6 +468,7 @@ describe('LOADED STATE', () => {
   it('10returns clearTimezoneEntriesSearch action state', () => {
     const action = searchActions.clearTimezoneEntriesSearch();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: {
         searchResults: [],
@@ -463,6 +484,7 @@ describe('LOADED STATE', () => {
   it('11returns clearTimezoneEntriesSearch action state', () => {
     const action = searchActions.clearAllTimezoneEntriesSearch();
     const expectedState = {
+      ...beforeActionState,
       userSearchData: beforeActionState.userSearchData,
       timezoneEntriesSearchData: beforeActionState.timezoneEntriesSearchData,
       allTimezoneEntriesSearchData: {

@@ -7,26 +7,29 @@ import {
   clearUsersSearch,
   searchAllTimezoneEntries,
   searchAllTimezoneEntriesSuccess,
-  searchTimezoneEntries,
-  searchTimezoneEntriesSuccess,
+  searchUserTimezoneEntries,
+  searchUserTimezoneEntriesSuccess,
   searchUsers,
   searchUsersSuccess
 } from 'src/store/search/searchActions';
 import {
   allTimezoneEntriesSearchDataSelector,
+  filterOptionsSelector,
   timezoneEntriesSearchDataSelector,
   userSearchDataSelector
 } from 'src/store/search/searchSelectors';
+import { userInfoSelector } from 'src/store/user/userSelectors';
 import ApiService, { timezoneRequests, userRequests } from 'src/services/api';
 import {
   searchAllTimezoneEntriesSaga,
-  searchTimezoneEntriesSaga,
+  searchUserTimezoneEntriesSaga,
   searchUsersSaga,
-  watchAllSearchTimezoneEntriesSaga,
-  watchSearchTimezoneEntriesSaga,
+  watchSearchAllTimezoneEntriesSaga,
+  watchSearchUserTimezoneEntriesSaga,
   watchSearchUsersSaga
 } from 'src/store/search/searchSaga';
 import { searchActionTypes } from 'src/constants/actionTypes';
+import { dropdowns, filters } from 'src/constants/search';
 import { MANAGER, USER } from 'src/constants/userRoles';
 import { AppUtils } from 'src/utils';
 
@@ -34,20 +37,34 @@ jest.mock('src/store', () => {
   return {};
 });
 
-describe('searchTimezoneEntriesSaga test', () => {
+describe('searchUserTimezoneEntriesSaga test', () => {
   it('should successfully fetch user timezoneEntries, searchQuery !== searchInput', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchTimezoneEntries(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUserTimezoneEntries(searchInput, filtersChanged, cancelToken);
 
-    const gen = searchTimezoneEntriesSaga(action);
+    const gen = searchUserTimezoneEntriesSaga(action);
     expect(gen.next().value).toEqual(select(timezoneEntriesSearchDataSelector));
     const timezoneEntriesSearchData = { searchQuery: 'a' };
     expect(gen.next(timezoneEntriesSearchData).value).toEqual(put(clearTimezoneEntriesSearch()));
     expect(gen.next().value).toEqual(put(startAction(action.type)));
+    expect(gen.next().value).toEqual(select(userInfoSelector));
+    const userInfo = { id: 5 };
+    expect(JSON.stringify(gen.next(userInfo).value)).toEqual(
+      JSON.stringify(select(state => filterOptionsSelector(state, dropdowns.OWN_ENTRIES)))
+    );
+    const ownEntriesFilterOptions = [
+      { value: filters.CITY_NAME, selected: true },
+      { value: filters.ENTRY_NAME, selected: false },
+      { value: filters.GMT, selected: false }
+    ];
+    const cityName = searchInput;
+    const name = null;
+    const gmt = null;
 
-    expect(gen.next().value).toEqual(
-      call(ApiService.callApi, timezoneRequests.filterUserTimezoneEntries(searchInput, cancelToken))
+    expect(gen.next(ownEntriesFilterOptions).value).toEqual(
+      call(ApiService.callApi, userRequests.filterUserTimezoneEntries(userInfo.id, cityName, name, gmt, cancelToken))
     );
     const response = { data: [] };
     const searchData = {
@@ -55,17 +72,18 @@ describe('searchTimezoneEntriesSaga test', () => {
       searchQuery: searchInput,
       message: NO_RESULTS
     };
-    expect(gen.next(response).value).toEqual(put(searchTimezoneEntriesSuccess(searchData)));
+    expect(gen.next(response).value).toEqual(put(searchUserTimezoneEntriesSuccess(searchData)));
     expect(gen.next().value).toEqual(put(stopAction(action.type)));
     expect(gen.next().done).toBe(true);
   });
 
-  it('should not start search because searchQuery === searchInput', () => {
+  it('should not start search because searchQuery === searchInput && filtersChanged=false', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchTimezoneEntries(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUserTimezoneEntries(searchInput, filtersChanged, cancelToken);
 
-    const gen = searchTimezoneEntriesSaga(action);
+    const gen = searchUserTimezoneEntriesSaga(action);
     expect(gen.next().value).toEqual(select(timezoneEntriesSearchDataSelector));
     const timezoneEntriesSearchData = { searchQuery: 'abc' };
     expect(gen.next(timezoneEntriesSearchData).value).toEqual(put(stopAction(action.type)));
@@ -75,9 +93,10 @@ describe('searchTimezoneEntriesSaga test', () => {
   it('should catch error if occurs', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchTimezoneEntries(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUserTimezoneEntries(searchInput, filtersChanged, cancelToken);
 
-    const gen = searchTimezoneEntriesSaga(action);
+    const gen = searchUserTimezoneEntriesSaga(action);
     gen.next();
     const error = new Error('msg');
     expect(gen.throw(error).value).toEqual(call(AppUtils.handleErrorMessage, error));
@@ -86,10 +105,10 @@ describe('searchTimezoneEntriesSaga test', () => {
   });
 });
 
-describe('watchSearchTimezoneEntriesSaga test', () => {
-  const gen = watchSearchTimezoneEntriesSaga();
+describe('watchSearchUserTimezoneEntriesSaga test', () => {
+  const gen = watchSearchUserTimezoneEntriesSaga();
   // exactly the same as implementation
-  const expected = takeLeading(searchActionTypes.SEARCH_TIMEZONE_ENTRIES, searchTimezoneEntriesSaga);
+  const expected = takeLeading(searchActionTypes.SEARCH_TIMEZONE_ENTRIES, searchUserTimezoneEntriesSaga);
   const actual = gen.next().value;
 
   it('Should fire on SEARCH_TIMEZONE_ENTRIES', () => {
@@ -101,16 +120,28 @@ describe('searchAllTimezoneEntriesSaga test', () => {
   it('should successfully fetch all timezoneEntries, searchQuery !== searchInput', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchAllTimezoneEntries(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchAllTimezoneEntries(searchInput, filtersChanged, cancelToken);
 
     const gen = searchAllTimezoneEntriesSaga(action);
     expect(gen.next().value).toEqual(select(allTimezoneEntriesSearchDataSelector));
     const timezoneEntriesSearchData = { searchQuery: 'a' };
     expect(gen.next(timezoneEntriesSearchData).value).toEqual(put(clearAllTimezoneEntriesSearch()));
     expect(gen.next().value).toEqual(put(startAction(action.type)));
+    expect(JSON.stringify(gen.next().value)).toEqual(
+      JSON.stringify(select(state => filterOptionsSelector(state, dropdowns.ALL_ENTRIES)))
+    );
+    const allEntriesFilterOptions = [
+      { value: filters.CITY_NAME, selected: true },
+      { value: filters.ENTRY_NAME, selected: false },
+      { value: filters.GMT, selected: false }
+    ];
+    const cityName = searchInput;
+    const name = null;
+    const gmt = null;
 
-    expect(gen.next().value).toEqual(
-      call(ApiService.callApi, timezoneRequests.filterAllTimezoneEntries(searchInput, cancelToken))
+    expect(gen.next(allEntriesFilterOptions).value).toEqual(
+      call(ApiService.callApi, timezoneRequests.filterTimezoneEntries(cityName, name, gmt, cancelToken))
     );
     const response = { data: [{ id: 1 }, { id: 2 }] };
     const searchData = {
@@ -123,10 +154,11 @@ describe('searchAllTimezoneEntriesSaga test', () => {
     expect(gen.next().done).toBe(true);
   });
 
-  it('should not start search because searchQuery === searchInput', () => {
+  it('should not start search because searchQuery === searchInput & filtersChanged=false', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchAllTimezoneEntries(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchAllTimezoneEntries(searchInput, filtersChanged, cancelToken);
 
     const gen = searchAllTimezoneEntriesSaga(action);
     expect(gen.next().value).toEqual(select(allTimezoneEntriesSearchDataSelector));
@@ -138,7 +170,8 @@ describe('searchAllTimezoneEntriesSaga test', () => {
   it('should catch error if occurs', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchAllTimezoneEntries(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchAllTimezoneEntries(searchInput, filtersChanged, cancelToken);
 
     const gen = searchAllTimezoneEntriesSaga(action);
     gen.next();
@@ -149,8 +182,8 @@ describe('searchAllTimezoneEntriesSaga test', () => {
   });
 });
 
-describe('watchAllSearchTimezoneEntriesSaga test', () => {
-  const gen = watchAllSearchTimezoneEntriesSaga();
+describe('watchSearchAllTimezoneEntriesSaga test', () => {
+  const gen = watchSearchAllTimezoneEntriesSaga();
   // exactly the same as implementation
   const expected = takeLeading(searchActionTypes.SEARCH_ALL_TIMEZONE_ENTRIES, searchAllTimezoneEntriesSaga);
   const actual = gen.next().value;
@@ -164,15 +197,29 @@ describe('searchUsersSaga test', () => {
   it('should successfully fetch users, no results, searchQuery !== searchInput', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchUsers(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUsers(searchInput, filtersChanged, cancelToken);
 
     const gen = searchUsersSaga(action);
     expect(gen.next().value).toEqual(select(userSearchDataSelector));
     const userSearchData = { searchQuery: 'a' };
     expect(gen.next(userSearchData).value).toEqual(put(clearUsersSearch()));
     expect(gen.next().value).toEqual(put(startAction(action.type)));
+    expect(JSON.stringify(gen.next().value)).toEqual(
+      JSON.stringify(select(state => filterOptionsSelector(state, dropdowns.USERS)))
+    );
+    const userFilterOptions = [
+      { value: filters.FIRST_NAME, selected: true },
+      { value: filters.LAST_NAME, selected: false },
+      { value: filters.EMAIL_ADDRESS, selected: true }
+    ];
+    const firstName = searchInput;
+    const lastName = null;
+    const emailAddress = searchInput;
 
-    expect(gen.next().value).toEqual(call(ApiService.callApi, userRequests.filterUsers(searchInput, cancelToken)));
+    expect(gen.next(userFilterOptions).value).toEqual(
+      call(ApiService.callApi, userRequests.filterUsers(firstName, lastName, emailAddress, cancelToken))
+    );
     const response = { data: [] };
     const searchData = {
       searchResults: response.data,
@@ -187,15 +234,28 @@ describe('searchUsersSaga test', () => {
   it('should successfully fetch users,results found, searchQuery !== searchInput', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchUsers(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUsers(searchInput, filtersChanged, cancelToken);
 
     const gen = searchUsersSaga(action);
     expect(gen.next().value).toEqual(select(userSearchDataSelector));
     const userSearchData = { searchQuery: 'a' };
     expect(gen.next(userSearchData).value).toEqual(put(clearUsersSearch()));
     expect(gen.next().value).toEqual(put(startAction(action.type)));
-
-    expect(gen.next().value).toEqual(call(ApiService.callApi, userRequests.filterUsers(searchInput, cancelToken)));
+    expect(JSON.stringify(gen.next().value)).toEqual(
+      JSON.stringify(select(state => filterOptionsSelector(state, dropdowns.USERS)))
+    );
+    const userFilterOptions = [
+      { value: filters.FIRST_NAME, selected: true },
+      { value: filters.LAST_NAME, selected: false },
+      { value: filters.EMAIL_ADDRESS, selected: true }
+    ];
+    const firstName = searchInput;
+    const lastName = null;
+    const emailAddress = searchInput;
+    expect(gen.next(userFilterOptions).value).toEqual(
+      call(ApiService.callApi, userRequests.filterUsers(firstName, lastName, emailAddress, cancelToken))
+    );
     const response = {
       data: [{ id: 1, roles: [{ type: USER }] }, { id: 2, roles: [{ type: USER }, { type: MANAGER }] }]
     };
@@ -209,10 +269,11 @@ describe('searchUsersSaga test', () => {
     expect(gen.next().done).toBe(true);
   });
 
-  it('should not start search because  searchQuery === searchInput', () => {
+  it('should not start search because  searchQuery === searchInput & filtersChanged=false', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchUsers(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUsers(searchInput, filtersChanged, cancelToken);
 
     const gen = searchUsersSaga(action);
     expect(gen.next().value).toEqual(select(userSearchDataSelector));
@@ -224,7 +285,8 @@ describe('searchUsersSaga test', () => {
   it('should catch error if occurs, in app error', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchUsers(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUsers(searchInput, filtersChanged, cancelToken);
 
     const gen = searchUsersSaga(action);
     gen.next();
@@ -237,7 +299,8 @@ describe('searchUsersSaga test', () => {
   it('should catch error if occurs, network error', () => {
     const searchInput = 'abc';
     const cancelToken = 'token';
-    const action = searchUsers(searchInput, cancelToken);
+    const filtersChanged = false;
+    const action = searchUsers(searchInput, filtersChanged, cancelToken);
 
     const gen = searchUsersSaga(action);
     gen.next();

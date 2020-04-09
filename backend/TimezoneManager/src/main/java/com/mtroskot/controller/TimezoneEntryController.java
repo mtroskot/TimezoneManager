@@ -48,7 +48,7 @@ public class TimezoneEntryController {
 	}
 
 	/**
-	 * Returns all {@link TimezoneEntry} from database.
+	 * Returns {@link TimezoneEntry} by id.
 	 * 
 	 * @return Iterable<TimezoneEntry>
 	 */
@@ -60,7 +60,7 @@ public class TimezoneEntryController {
 	}
 
 	/**
-	 * Filters all {@link TimezoneEntry} by entry name or entry cityName
+	 * Filters all {@link TimezoneEntry} by request params
 	 * 
 	 * @param name The name used for filtering entries
 	 * @return Iterable<TimezoneEntry>

@@ -41,6 +41,7 @@ Array [
   Object {
     "payload": Object {
       "cancelToken": "cancelToken",
+      "filtersChanged": false,
       "searchInput": "searchInput",
     },
     "type": "SEARCH_ALL_TIMEZONE_ENTRIES",
@@ -59,11 +60,12 @@ Array [
 ]
 `;
 
-exports[`Search actions tests dispatches searchTimezoneEntries action 1`] = `
+exports[`Search actions tests dispatches searchUserTimezoneEntries action 1`] = `
 Array [
   Object {
     "payload": Object {
       "cancelToken": "cancelToken",
+      "filtersChanged": false,
       "searchInput": "searchInput",
     },
     "type": "SEARCH_TIMEZONE_ENTRIES",
@@ -71,7 +73,7 @@ Array [
 ]
 `;
 
-exports[`Search actions tests dispatches searchTimezoneEntriesSuccess action 1`] = `
+exports[`Search actions tests dispatches searchUserTimezoneEntriesSuccess action 1`] = `
 Array [
   Object {
     "payload": Object {
@@ -87,6 +89,7 @@ Array [
   Object {
     "payload": Object {
       "cancelToken": "cancelToken",
+      "filtersChanged": false,
       "searchInput": "searchInput",
     },
     "type": "SEARCH_USERS",

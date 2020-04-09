@@ -69,7 +69,7 @@ function camelCaseToWords(str) {
  * @param  {Array} params
  * @returns {String}
  */
-function buildRequestParams(...params) {
+function buildRequestParams(params) {
   let str = '';
   for (let i = 0; i < params.length; i++) {
     const el = params[i];

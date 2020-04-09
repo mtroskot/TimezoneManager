@@ -1,5 +1,6 @@
 import { searchActionTypes, timezoneActionTypes, userActionTypes } from 'src/constants/actionTypes';
 import { ArrayUtils } from 'src/utils';
+import { dropdownOptions, dropdowns, filters } from 'src/constants/search';
 import { idNames } from 'src/constants/idKeyNames';
 
 export const initialState = {
@@ -17,11 +18,32 @@ export const initialState = {
     searchResults: [],
     searchQuery: '',
     message: ''
+  },
+  searchOptions: {
+    selectedOption: dropdownOptions[0],
+    filterOptions: {
+      [dropdowns.OWN_ENTRIES]: [
+        { value: filters.ENTRY_NAME, label: 'Name', selected: true },
+        { value: filters.CITY_NAME, label: 'City name', selected: true },
+        { value: filters.GMT, label: 'GMT', selected: true }
+      ],
+      [dropdowns.USERS]: [
+        { value: filters.FIRST_NAME, label: 'First Name', selected: true },
+        { value: filters.LAST_NAME, label: 'Last Name', selected: true },
+        { value: filters.EMAIL_ADDRESS, label: 'Email Address', selected: true }
+      ],
+      [dropdowns.ALL_ENTRIES]: [
+        { value: filters.ENTRY_NAME, label: 'Name', selected: true },
+        { value: filters.CITY_NAME, label: 'City name', selected: true },
+        { value: filters.GMT, label: 'GMT', selected: true }
+      ]
+    }
   }
 };
 
 const searchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    //SEARCH DATA STATE
     case searchActionTypes.SEARCH_TIMEZONE_ENTRIES_SUCCESS:
       return {
         ...state,
@@ -134,6 +156,26 @@ const searchReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allTimezoneEntriesSearchData: initialState.allTimezoneEntriesSearchData
+      };
+    //SEARCH OPTIONS STATE
+    case searchActionTypes.CHANGE_SELECTED_DROPDOWN:
+      return {
+        ...state,
+        searchOptions: {
+          ...state.searchOptions,
+          selectedOption: { ...payload.selectedDropdown }
+        }
+      };
+    case searchActionTypes.CHANGE_SELECTED_FILTER:
+      return {
+        ...state,
+        searchOptions: {
+          ...state.searchOptions,
+          filterOptions: {
+            ...state.searchOptions.filterOptions,
+            [payload.selectedSearchOption]: payload.newFilterOptions
+          }
+        }
       };
     default:
       return state;

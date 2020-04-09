@@ -117,14 +117,13 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void findAllByFirstNameOrLastNameOrEmailAddressTest() {
+	public void filterUsersTest() {
 		User user1 = new User();
 		User user2 = new User();
 		List<User> userList = Arrays.asList(user1, user2);
-		Mockito.when(userRepository.findByLikeEmailAddressOrFirstNameOrLastName(ArgumentMatchers.anyString()))
-				.thenReturn(userList);
+		Mockito.when(userRepository.findAll(ArgumentMatchers.any())).thenReturn(userList);
 
-		Iterable<User> list = userService.findAllByFirstNameOrLastNameOrEmailAddress("email");
+		Iterable<User> list = userService.filterUsers("email", "firstName", "lastName");
 
 		Assert.assertEquals("List are equal", userList, list);
 	}

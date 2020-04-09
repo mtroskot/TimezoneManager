@@ -19,6 +19,7 @@ module.exports = {
     'jest/no-identical-title': [2],
     'no-unneeded-ternary': [2],
     'sort-imports': [2, { ignoreDeclarationSort: true }],
-    'react-hooks/exhaustive-deps': [1]
+    'react-hooks/exhaustive-deps': [1],
+    'no-shadow': [2, { builtinGlobals: true, hoist: 'functions', allow: [] }]
   }
 };

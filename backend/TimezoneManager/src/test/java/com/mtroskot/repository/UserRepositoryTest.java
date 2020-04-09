@@ -1,7 +1,6 @@
 package com.mtroskot.repository;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,46 +38,32 @@ public class UserRepositoryTest {
 	}
 
 	@Test
-	public void findByLikeEmailAddressOrFirstNameOrLastNameTest1() {
-		List<User> userList = (List<User>) userRepository.findByLikeEmailAddressOrFirstNameOrLastName("ma");
+	public void existsByEmailAddressIgnoreCaseTest1() {
+		Boolean exists = userRepository.existsByEmailAddressIgnoreCase("marko@hotmail.com");
 
-		Assert.assertEquals("List is not empty", true, !userList.isEmpty());
-		Assert.assertEquals("List size is 4", 4, userList.size());
-		Assert.assertEquals("List content", Arrays.asList(user1, user2, user4, user5), userList);
+		Assert.assertEquals("email address exists", true, exists);
 	}
 
 	@Test
-	public void findByLikeEmailAddressOrFirstNameOrLastNameTest2() {
-		List<User> userList = (List<User>) userRepository.findByLikeEmailAddressOrFirstNameOrLastName("Marko");
+	public void existsByEmailAddressIgnoreCaseTest2() {
+		Boolean exists = userRepository.existsByEmailAddressIgnoreCase("marko@gmail.com");
 
-		Assert.assertEquals("List is not empty", true, !userList.isEmpty());
-		Assert.assertEquals("List size is 1", 1, userList.size());
-		Assert.assertEquals("List content", Arrays.asList(user1), userList);
+		Assert.assertEquals("email address exists not", false, exists);
 	}
 
 	@Test
-	public void findByLikeEmailAddressOrFirstNameOrLastNameTest3() {
-		List<User> userList = (List<User>) userRepository.findByLikeEmailAddressOrFirstNameOrLastName("Tralic");
+	public void findByEmailAddressTest1() {
+		Optional<User> user = userRepository.findByEmailAddress("drazen@mail.com");
 
-		Assert.assertEquals("List is not empty", true, !userList.isEmpty());
-		Assert.assertEquals("List size is 1", 1, userList.size());
-		Assert.assertEquals("List content", Arrays.asList(user2), userList);
+		Assert.assertEquals("User found", true, user.isPresent());
+		Assert.assertEquals("User is", user2, user.get());
 	}
 
 	@Test
-	public void findByLikeEmailAddressOrFirstNameOrLastNameTest4() {
-		List<User> userList = (List<User>) userRepository.findByLikeEmailAddressOrFirstNameOrLastName("rccl");
+	public void findByEmailAddressTest2() {
+		Optional<User> user = userRepository.findByEmailAddress("drazen@hotmail.com");
 
-		Assert.assertEquals("List is not empty", true, !userList.isEmpty());
-		Assert.assertEquals("List size is 1", 1, userList.size());
-		Assert.assertEquals("List content", Arrays.asList(user3), userList);
-	}
-
-	@Test
-	public void findByLikeEmailAddressOrFirstNameOrLastNameTest5() {
-		List<User> userList = (List<User>) userRepository.findByLikeEmailAddressOrFirstNameOrLastName("FooBar");
-
-		Assert.assertEquals("List is empty", true, userList.isEmpty());
+		Assert.assertEquals("User not found", true, user.isEmpty());
 	}
 
 }

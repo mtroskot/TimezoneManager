@@ -4,7 +4,6 @@ import {
   changeUserRoleSuccess,
   deleteUserSuccess,
   logoutUser,
-  logoutUserSuccess,
   updateUserInfoSuccess
 } from 'src/store/user/userActions';
 import { updateSearchedUserInfoSuccess } from 'src/store/search/searchActions';
@@ -15,7 +14,6 @@ import { EMAIL_IN_USE, LOGIN_FAIL, REGISTRATION_SUCCESS } from 'src/constants/me
 import ApiService, { authRequests, userRequests } from 'src/services/api';
 import { AppUtils, ParseUtils } from 'src/utils';
 import { screenNames, stackNames } from 'src/constants/navigation';
-import { getPersistor } from 'src/store';
 import { userInfoSelector, userSelector } from 'src/store/user/userSelectors';
 import { idNames } from 'src/constants/idKeyNames';
 
@@ -172,8 +170,6 @@ export function* logoutSaga({ type }) {
   }
 
   try {
-    yield call(getPersistor().purge);
-    yield put(logoutUserSuccess());
     yield call(NavigationService.navigate, stackNames.AUTH_STACK);
   } catch (error) {
     console.log('logoutSaga logoutUser from frontend error', error);
