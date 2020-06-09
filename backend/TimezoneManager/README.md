@@ -1,4 +1,4 @@
-# Toptal Technical Screening
+# Timezone Manager
 
 Assignment was done using Spring Boot, Spring Data JPA, Hibernate, Spring Security. Tests are written using Unit 4. 
 
