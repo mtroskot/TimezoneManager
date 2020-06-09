@@ -18,6 +18,7 @@ import styles from 'src/screens/Clock/styles';
 import { appStyles, dimensions } from 'src/styles';
 import PropTypes from 'prop-types';
 import { timezoneEntryPropTypes } from 'src/constants/propTypes';
+
 const { rem } = dimensions;
 
 let intervalHandler = null;
@@ -48,7 +49,7 @@ const ClockManager = props => {
       const newDate = new Date();
       setDate(newDate);
       setMinutes(DateUtils.convertShortTimeToLongTime(newDate.getMinutes()));
-    }, 1000);
+    }, 100000);
   }
 
   const onRefresh = useCallback(() => {

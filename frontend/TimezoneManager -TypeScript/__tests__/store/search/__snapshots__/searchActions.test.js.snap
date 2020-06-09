@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search actions tests dispatches clearAllSearches action 1`] = `
+Array [
+  Object {
+    "payload": Object {},
+    "type": "CLEAR_ALL_SEARCHES",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches clearAllTimezoneEntriesSearch action 1`] = `
+Array [
+  Object {
+    "payload": Object {},
+    "type": "CLEAR_ALL_TIMEZONE_ENTRIES_SEARCH",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches clearTimezoneEntriesSearch action 1`] = `
+Array [
+  Object {
+    "payload": Object {},
+    "type": "CLEAR_TIMEZONE_ENTRIES_SEARCH",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches clearUsersSearch action 1`] = `
+Array [
+  Object {
+    "payload": Object {},
+    "type": "CLEAR_USERS_SEARCH",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches searchAllTimezoneEntries action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "cancelToken": "cancelToken",
+      "filtersChanged": false,
+      "searchInput": "searchInput",
+    },
+    "type": "SEARCH_ALL_TIMEZONE_ENTRIES",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches searchAllTimezoneEntriesSuccess action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "searchData": "searchData",
+    },
+    "type": "SEARCH_ALL_TIMEZONE_ENTRIES_SUCCESS",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches searchUserTimezoneEntries action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "cancelToken": "cancelToken",
+      "filtersChanged": false,
+      "searchInput": "searchInput",
+    },
+    "type": "SEARCH_TIMEZONE_ENTRIES",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches searchUserTimezoneEntriesSuccess action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "searchData": "searchData",
+    },
+    "type": "SEARCH_TIMEZONE_ENTRIES_SUCCESS",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches searchUsers action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "cancelToken": "cancelToken",
+      "filtersChanged": false,
+      "searchInput": "searchInput",
+    },
+    "type": "SEARCH_USERS",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches searchUsersSuccess action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "searchData": "searchData",
+    },
+    "type": "SEARCH_USERS_SUCCESS",
+  },
+]
+`;
+
+exports[`Search actions tests dispatches updateSearchedUserInfoSuccess action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "updatedUserInfo": "updatedUserInfo",
+    },
+    "type": "UPDATE_SEARCHED_USER_INFO_SUCCESS",
+  },
+]
+`;

@@ -1,0 +1,2362 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`INITIAL STATE 1returns initial state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 2.1returns searchAllTimezoneEntriesSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abc",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 2returns searchUserTimezoneEntriesSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abc",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 3returns searchUsersSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abc",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 4returns updateSearchedUserInfoSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 5returns updateTimezoneEntrySuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 6returns deleteUserSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 7returns deleteTimezoneEntrySuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 8returns clearAllSearches action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 9returns clearUsersSearch action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 10returns clearTimezoneEntriesSearch action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`INITIAL STATE 11returns clearTimezoneEntriesSearch action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 1returns initial state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 2.1returns searchAllTimezoneEntriesSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abcdef",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 2returns searchUserTimezoneEntriesSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abcdef",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 3returns searchUsersSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "No results",
+    "searchQuery": "Abc",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 4returns updateSearchedUserInfoSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 5returns updateTimezoneEntrySuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "NewBar",
+        "differenceToGMT": "-5",
+        "id": 2,
+        "name": "NewFoo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "NewBar",
+        "differenceToGMT": "-5",
+        "id": 2,
+        "name": "NewFoo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 6returns deleteUserSuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 7returns deleteTimezoneEntrySuccess action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 8returns clearAllSearches action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 9returns clearUsersSearch action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+}
+`;
+
+exports[`LOADED STATE 10returns clearTimezoneEntriesSearch action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+      Object {
+        "cityName": "NY",
+        "differenceToGMT": "+1",
+        "id": 4,
+        "name": "US",
+      },
+      Object {
+        "cityName": "ZD",
+        "differenceToGMT": "-10",
+        "id": 5,
+        "name": "HR",
+      },
+    ],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;
+
+exports[`LOADED STATE 11returns clearTimezoneEntriesSearch action state 1`] = `
+Object {
+  "allTimezoneEntriesSearchData": Object {
+    "message": "",
+    "searchQuery": "",
+    "searchResults": Array [],
+  },
+  "searchOptions": Object {
+    "filterOptions": Object {
+      "ALL_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "OWN_ENTRIES": Array [
+        Object {
+          "label": "Name",
+          "selected": true,
+          "value": "ENTRY_NAME",
+        },
+        Object {
+          "label": "City name",
+          "selected": true,
+          "value": "CITY_NAME",
+        },
+        Object {
+          "label": "GMT",
+          "selected": true,
+          "value": "GMT",
+        },
+      ],
+      "USERS": Array [
+        Object {
+          "label": "First Name",
+          "selected": true,
+          "value": "FIRST_NAME",
+        },
+        Object {
+          "label": "Last Name",
+          "selected": true,
+          "value": "LAST_NAME",
+        },
+        Object {
+          "label": "Email Address",
+          "selected": true,
+          "value": "EMAIL_ADDRESS",
+        },
+      ],
+    },
+    "selectedOption": Object {
+      "label": "Own entries",
+      "requiredRole": "USER",
+      "value": "OWN_ENTRIES",
+    },
+  },
+  "timezoneEntriesSearchData": Object {
+    "message": "message",
+    "searchQuery": "Abc",
+    "searchResults": Array [
+      Object {
+        "cityName": "Bar",
+        "differenceToGMT": "+2",
+        "id": 2,
+        "name": "Foo",
+      },
+      Object {
+        "cityName": "Abc",
+        "differenceToGMT": "+10",
+        "id": 3,
+        "name": "Fch",
+      },
+    ],
+  },
+  "userSearchData": Object {
+    "message": "msg",
+    "searchQuery": "Abcd",
+    "searchResults": Array [
+      Object {
+        "emailAddress": "marko@hotmail.com",
+        "firstName": "Marko",
+        "id": 2,
+        "lastName": "Troskot",
+      },
+      Object {
+        "emailAddress": "ante@hotmail.com",
+        "firstName": "Ante",
+        "id": 3,
+        "lastName": "Mate",
+      },
+    ],
+  },
+}
+`;

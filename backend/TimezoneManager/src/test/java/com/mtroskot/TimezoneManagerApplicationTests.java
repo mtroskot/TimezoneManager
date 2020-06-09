@@ -9,5 +9,4 @@ class TimezoneManagerApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

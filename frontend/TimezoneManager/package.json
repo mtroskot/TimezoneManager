@@ -69,7 +69,8 @@
     "metro-react-native-babel-preset": "0.56.4",
     "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "16.9.0",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "rerender-tracker": "^1.0.12"
   },
   "jest": {
     "preset": "react-native",

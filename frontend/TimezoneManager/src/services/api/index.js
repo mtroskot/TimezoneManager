@@ -25,7 +25,7 @@ const defaultOptions = {
  * @param {object} options The request options.
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function callApi({ url, includeAuthorizationHeader = true, options }) {
+async function callApi({ url, options, includeAuthorizationHeader = true }) {
   let source = CancelToken.source();
   // Android ignores timeout, setTimeout is used for canceling the request
   setTimeout(() => {

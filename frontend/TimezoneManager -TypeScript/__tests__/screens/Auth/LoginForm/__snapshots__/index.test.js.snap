@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm wrapper renders correctly, form empty 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "marginVertical": 88.8157894736842,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#334144",
+          "fontFamily": "Ubuntu-Medium",
+          "fontSize": 43.421052631578945,
+          "marginBottom": 19.736842105263158,
+          "textAlign": "center",
+        }
+      }
+    >
+      Welcome Back
+    </Text>
+  </View>
+  <Memo(FloatingLabelTextInput)
+    floatingLabel="Email Address"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="next"
+    testID="LOGIN_EMAIL_INPUT"
+    value=""
+  />
+  <Memo(FloatingLabelTextInput)
+    floatingLabel="Password"
+    onChangeText={[Function]}
+    onSubmitEditing={[MockFunction]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="go"
+    secureTextEntry={true}
+    testID="LOGIN_PASSWORD_INPUT"
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+  <Memo(CustomButton)
+    isLoading={false}
+    loaderStyle={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#EAA79E",
+          "borderRadius": 9.868421052631579,
+          "marginTop": 19.736842105263158,
+          "paddingHorizontal": 39.473684210526315,
+          "paddingVertical": 15,
+          "width": "90%",
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+      ]
+    }
+    onPress={[MockFunction]}
+    tOpacityStyle={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EAA79E",
+        "borderRadius": 9.868421052631579,
+        "marginTop": 19.736842105263158,
+        "paddingHorizontal": 39.473684210526315,
+        "paddingVertical": 15,
+        "width": "90%",
+      }
+    }
+    text="Login"
+    textStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Ubuntu-Medium",
+        "fontSize": 31.57894736842105,
+        "textAlign": "center",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`LoginForm wrapper renders correctly, form filled 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "marginVertical": 88.8157894736842,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#334144",
+          "fontFamily": "Ubuntu-Medium",
+          "fontSize": 43.421052631578945,
+          "marginBottom": 19.736842105263158,
+          "textAlign": "center",
+        }
+      }
+    >
+      Welcome Back
+    </Text>
+  </View>
+  <Memo(FloatingLabelTextInput)
+    error={
+      Object {
+        "display": true,
+        "errorMessage": "errorMessage",
+      }
+    }
+    floatingLabel="Email Address"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="next"
+    testID="LOGIN_EMAIL_INPUT"
+    value="emailAddress"
+  />
+  <Memo(FloatingLabelTextInput)
+    error={
+      Object {
+        "display": true,
+        "errorMessage": "errorMessage",
+      }
+    }
+    floatingLabel="Password"
+    onChangeText={[Function]}
+    onSubmitEditing={[MockFunction]}
+    placeholderTextColor="#949EA0"
+    returnKeyType="go"
+    secureTextEntry={true}
+    testID="LOGIN_PASSWORD_INPUT"
+    textInputRef={
+      Object {
+        "current": null,
+      }
+    }
+    value="password"
+  />
+  <Memo(CustomButton)
+    isLoading={true}
+    loaderStyle={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#EAA79E",
+          "borderRadius": 9.868421052631579,
+          "marginTop": 19.736842105263158,
+          "paddingHorizontal": 39.473684210526315,
+          "paddingVertical": 15,
+          "width": "90%",
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+      ]
+    }
+    onPress={[MockFunction]}
+    tOpacityStyle={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EAA79E",
+        "borderRadius": 9.868421052631579,
+        "marginTop": 19.736842105263158,
+        "paddingHorizontal": 39.473684210526315,
+        "paddingVertical": 15,
+        "width": "90%",
+      }
+    }
+    text="Login"
+    textStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Ubuntu-Medium",
+        "fontSize": 31.57894736842105,
+        "textAlign": "center",
+      }
+    }
+  />
+</View>
+`;
