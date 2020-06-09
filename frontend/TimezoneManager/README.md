@@ -1,4 +1,4 @@
-# Toptal Technical Screening
+# Timezone Manager
 
 Assignment was done using React Native 0.60+, React Navigation v4, Redux, Redux-Saga, Redux-Persist. No Class based components were used only Functional components with Hooks.
 
